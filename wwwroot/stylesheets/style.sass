@@ -1,0 +1,69 @@
+@charset 'utf-8'
+
+
+$full-width: calc(100% - 2px)
+$left-margin: calc(68% - 2px)
+$nav-top-height: 64px
+$left-nav-width: 256px
+$right-view-height: 256px
+$bg-panel: rgba(222,222,222,0.6)
+$border: 1px solid white
+
+body
+	margin: 0px
+	padding: 0px
+
+div
+	border: 1px solid white
+
+.esri-ui-top-left.esri-ui-corner
+	left: $left-nav-width
+	top: $nav-top-height
+
+
+#map-container
+	width: $full-width
+	height: $full-width
+	#compassDiv
+		position: absolute
+		left: $left-nav-width
+		top: 144px
+		margin: 17px
+	#homeDiv
+		position: absolute
+		left: $left-nav-width
+		top: 184px
+		margin: 17px
+		border-top: 1px solid lightgray
+		padding-top: 6px
+
+#nav-top
+	position: absolute
+	top: 0px
+	width: $full-width
+	height: $nav-top-height
+	background: $bg-panel
+	box-shadow: 0px 64px 64px -64px rgba(0,0,0,0.6)
+
+#nav-left
+	position: absolute
+	top: 72px
+	width: $left-nav-width
+	height: calc(100% - 74px)
+	background: $bg-panel
+
+#top-right-view
+	position: absolute
+	width: 32%
+	height: $right-view-height
+	top: $nav-top-height
+	left: $left-margin
+	background: $bg-panel
+
+#bottom-right-view
+	position: absolute
+	width: 32%
+	height: $right-view-height
+	top: calc(100% - 258px)
+	left: $left-margin
+	background: $bg-panel

@@ -1,0 +1,67 @@
+body {
+  margin: 0px;
+  padding: 0px;
+}
+
+div {
+  border: 1px solid white;
+}
+
+.esri-ui-top-left.esri-ui-corner {
+  left: 256px;
+  top: 64px;
+}
+
+#map-container {
+  width: calc(100% - 2px);
+  height: calc(100% - 2px);
+}
+#map-container #compassDiv {
+  position: absolute;
+  left: 256px;
+  top: 144px;
+  margin: 17px;
+}
+#map-container #homeDiv {
+  position: absolute;
+  left: 256px;
+  top: 184px;
+  margin: 17px;
+  border-top: 1px solid lightgray;
+  padding-top: 6px;
+}
+
+#nav-top {
+  position: absolute;
+  top: 0px;
+  width: calc(100% - 2px);
+  height: 64px;
+  background: rgba(222, 222, 222, 0.6);
+  box-shadow: 0px 64px 64px -64px rgba(0, 0, 0, 0.6);
+}
+
+#nav-left {
+  position: absolute;
+  top: 72px;
+  width: 256px;
+  height: calc(100% - 74px);
+  background: rgba(222, 222, 222, 0.6);
+}
+
+#top-right-view {
+  position: absolute;
+  width: 32%;
+  height: 256px;
+  top: 64px;
+  left: calc(68% - 2px);
+  background: rgba(222, 222, 222, 0.6);
+}
+
+#bottom-right-view {
+  position: absolute;
+  width: 32%;
+  height: 256px;
+  top: calc(100% - 258px);
+  left: calc(68% - 2px);
+  background: rgba(222, 222, 222, 0.6);
+}

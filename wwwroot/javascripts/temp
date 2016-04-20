@@ -1,0 +1,81 @@
+require([
+    "esri/Map",
+    "esri/views/MapView",
+    "esri/layers/ArcGISDynamicLayer",
+    "esri/widgets/Legend",
+    "esri/layers/FeatureLayer",
+    "esri/widgets/Attribution",
+    "esri/widgets/Compass",
+    "esri/widgets/Compass/CompassViewModel",
+    "esri/PopupTemplate",
+    "dojo/domReady!"
+], function(esriConfig, Map, MapView, ArcGISDynamicLayer, Legend, PopupTemplate, FeatureLayer, Attribution, Compass, CompassVM) {
+
+    var map = new Map({
+        basemap: "oceans"
+    });
+
+    var view = new MapView({
+        container: "map-container", //reference to the DOM node that will contain the view
+        map: map, //reference to the map object created before the scene
+        zoom: 8, //sets the zoom level based on level of detail (LOD)
+        center: [121.5, 33]
+    });
+
+    /*var zoningLyr = new FeatureLayer("http://localhost:6080/arcgis/rest/services/04202/MapServer/5");
+    map.add(zoningLyr);
+*/
+
+    /*var compass = new Compass({
+        viewModel: new CompassVM({
+            view: view
+        })
+    }, "compassDiv");
+    console.log(compass);
+    compass.startup();
+
+    var legend = new Legend({ view: view }, 'legend');
+    legend.startup();*/
+
+    /**/
+});
+
+    /*var homeBtn = new Home({
+        //Setting widget properties via viewModel is subject to 
+        //change for the 4.0 final release      
+        viewModel: new HomeVM({
+            view: view
+        })
+    }, "homediv");
+    homeBtn.startup(); 
+      var lyr = new ArcGISDynamicLayer("http://localhost:6080/arcgis/rest/services/04202/MapServer");
+    map.add(lyr);*/
+
+    var lyr = new ArcGISDynamicLayer({
+        url: "http://localhost:6080/arcgis/rest/services/04202/MapServer"
+    });
+    map.add(lyr);
+
+
+    /*var authLyr = new FeatureLayer("http://localhost:6080/arcgis/rest/services/04202/MapServer/0");
+    var authLyrSrc = new FeatureLayer("http://localhost:6080/arcgis/rest/services/04202/MapServer/1");
+    var authLyrCata1 = new FeatureLayer("http://localhost:6080/arcgis/rest/services/04202/MapServer/2");
+    var authLyrCata2 = new FeatureLayer("http://localhost:6080/arcgis/rest/services/04202/MapServer/3");
+    var authLyrUse = new FeatureLayer("http://localhost:6080/arcgis/rest/services/04202/MapServer/4");
+    map.add(authLyr);*/
+
+    /*var attrViewModel = new Attribution.AttributionViewModel();
+    var attrWidget = new Attribution({ viewModel: attrViewModel }, 'attributes');*/
+
+
+    /* function ControlLyr() {
+         var authLyr = new FeatureLayer("http://localhost:6080/arcgis/rest/services/04202/MapServer/0");
+         map.add(authLyr);
+     };*/
+
+     
+                /*Promise.resolve(map.remove(authLyr)).then(function() {
+                    authLyr = new FeatureLayer("http://localhost:6080/arcgis/rest/services/04202/MapServer/" + val);
+                    map.add(authLyr);
+                    console.log(map);
+                  })*/

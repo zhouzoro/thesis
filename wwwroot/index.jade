@@ -1,0 +1,27 @@
+doctype html
+html
+	head
+		title the map
+		meta(name='viewport' content='width=device-width, initial-scale=1')
+		link(rel='stylesheet' href='/arcgis_js_api/library/4.0beta3/4.0beta3/esri/css/main.css')
+		link(rel='stylesheet' href='stylesheets/dist/style.min.css')
+	body
+		#map-container
+			#compassDiv
+			#homeDiv
+		#nav-top
+		#nav-left
+			#selectAythLyr 确权区域分类
+				select#aythLyrCata(name='aythLyrCata')
+					option(value=0) 无
+					option(value=1) 配号来源
+					option(value=2) 用海一级类
+					option(value=3) 用海二级类
+					option(value=4) 用海方式
+			#legend
+		#top-right-view
+		#bottom-right-view
+		script(src='/arcgis_js_api/library/4.0beta3/4.0beta3/init.js')
+		//script(src='https://js.arcgis.com/4.0beta3/')
+		script(src='/javascripts/dist/jquery-2.1.4.min.js')
+		script(src='/javascripts/dist/core.babeled.min.js')
