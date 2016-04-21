@@ -46,6 +46,7 @@ div {
   width: 256px;
   height: calc(100% - 74px);
   background: rgba(222, 222, 222, 0.6);
+  overflow: scroll;
 }
 
 #top-right-view {
