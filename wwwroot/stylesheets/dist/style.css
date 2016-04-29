@@ -3,32 +3,56 @@ body {
   padding: 0px;
 }
 
-div {
-  border: 1px solid white;
-}
-
 .esri-ui-top-left.esri-ui-corner {
   left: 256px;
-  top: 64px;
+  top: 92px;
+}
+
+.button {
+  display: inline-block;
+  margin: 4px 8px;
+  padding: 2px 4px;
+  border: 2px solid gray;
+  cursor: pointer;
+}
+
+.button:hover {
+  background: gray;
+  color: white;
 }
 
 #map-container {
   width: calc(100% - 2px);
   height: calc(100% - 2px);
 }
-#map-container #compassDiv {
+#map-container #tools {
   position: absolute;
   left: 256px;
-  top: 144px;
-  margin: 17px;
+  top: 162px;
+  margin: 15px;
 }
-#map-container #homeDiv {
-  position: absolute;
-  left: 256px;
-  top: 184px;
-  margin: 17px;
+#map-container #tools .tool {
+  padding-top: 4px;
+  padding-bottom: 4px;
   border-top: 1px solid lightgray;
-  padding-top: 6px;
+}
+#map-container #searchDiv {
+  position: absolute;
+  left: 324px;
+  top: 106px;
+  padding: 2px;
+  border-radius: 28px;
+  border: 1px solid lightgray;
+  background: rgba(255, 255, 255, 0.7);
+  box-shadow: -4px 4px 12px -4px rgba(55, 55, 55, 0.6);
+}
+#map-container #searchDiv .ui.search .ui.input.icon input {
+  background: rgba(255, 255, 255, 0.8);
+}
+#map-container #searchDiv .ui.search .ui.button.basic {
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.8);
+  position: relative;
 }
 
 #nav-top {
@@ -36,33 +60,92 @@ div {
   top: 0px;
   width: calc(100% - 2px);
   height: 64px;
-  background: rgba(222, 222, 222, 0.6);
-  box-shadow: 0px 64px 64px -64px rgba(0, 0, 0, 0.6);
+  background: linear-gradient(to bottom, white, rgba(255, 255, 255, 0.6));
+  box-shadow: 0px 64px 64px -64px rgba(55, 55, 55, 0.6);
+}
+#nav-top img#logo {
+  display: inline-block;
+  width: 64px;
+}
+#nav-top h1#page-title {
+  display: inline-block;
+  padding: 8px;
+  -webkit-transform: translateY(-24px);
+  transform: translateY(-24px);
+}
+#nav-top .menu {
+  position: absolute;
+  top: 64px;
+  width: calc(100% - 2px);
+  padding: 4px 4px 2px 4px;
+  background: rgba(255, 255, 255, 0.6);
+  text-align: right;
+  .item: hover;
+  .item-opacity: 0.7;
+}
+#nav-top .menu .item {
+  display: inline-block;
+  padding: 2px 16px;
+  border-right: 1px solid #22A7F0;
+}
+#nav-top .menu .item a {
+  cursor: pointer;
+}
+#nav-top .menu .item:first-child {
+  border-left: 1px solid #22A7F0;
 }
 
 #nav-left {
   position: absolute;
-  top: 72px;
+  top: 93px;
   width: 256px;
-  height: calc(100% - 74px);
-  background: rgba(222, 222, 222, 0.6);
-  overflow: scroll;
+  height: calc(100% - 96px);
+  background: rgba(255, 255, 255, 0.6);
+  padding: 16px 8px;
+}
+#nav-left h3#list-title {
+  padding: 4px;
+  border-bottom: 1px solid #22A7F0;
+}
+#nav-left li {
+  padding: 2px;
 }
 
-#top-right-view {
+#top-right-legend {
   position: absolute;
-  width: 32%;
-  height: 256px;
-  top: 64px;
-  left: calc(68% - 2px);
-  background: rgba(222, 222, 222, 0.6);
+  width: 264px;
+  height: 48px;
+  top: 106px;
+  right: 0px;
+  padding: 8px;
+  background: rgba(255, 255, 255, 0.7);
+  overflow: hidden;
+  transition: all 0.3s ease-out;
+  box-shadow: -4px 4px 12px -4px rgba(55, 55, 55, 0.6);
+}
+#top-right-legend .legend-btns {
+  padding-bottom: 8px;
+}
+#top-right-legend .legend-btns .ui.button {
+  border-radius: 24px;
+}
+#top-right-legend .legend-btns .hide-legend {
+  display: none;
+}
+#top-right-legend #label {
+  padding: 8px 4px;
+}
+#top-right-legend #legend {
+  height: calc(100% - 8px);
+  overflow: scroll;
 }
 
 #bottom-right-view {
   position: absolute;
-  width: 32%;
-  height: 256px;
-  top: calc(100% - 258px);
-  left: calc(68% - 2px);
-  background: rgba(222, 222, 222, 0.6);
+  width: 512px;
+  height: 284px;
+  top: calc(100% - 287px);
+  right: 0px;
+  background: rgba(255, 255, 255, 0.6);
+  box-shadow: -4px -4px 12px -4px rgba(55, 55, 55, 0.6);
 }
