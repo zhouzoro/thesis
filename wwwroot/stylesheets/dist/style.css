@@ -3,9 +3,8 @@ body {
   padding: 0px;
 }
 
-.esri-ui-top-left.esri-ui-corner {
+#map-container > div.esri-view-root > div.esri-ui > div.esri-ui-inner-container.esri-ui-corner-container > div.esri-ui-top-left.esri-ui-corner {
   left: 256px;
-  top: 92px;
 }
 
 .button {
@@ -22,29 +21,34 @@ body {
 }
 
 #map-container {
-  width: calc(100% - 2px);
-  height: calc(100% - 2px);
+  position: absolute;
+  top: 78px;
+  left: 0px;
+  width: 100%;
+  height: calc(100% - 78px);
+  overflow: hidden;
+  border-top: 1px solid lightgray;
+  background: white;
 }
 #map-container #tools {
   position: absolute;
   left: 256px;
-  top: 162px;
+  top: 66px;
   margin: 15px;
 }
 #map-container #tools .tool {
   padding-top: 4px;
   padding-bottom: 4px;
-  border-top: 1px solid lightgray;
 }
 #map-container #searchDiv {
   position: absolute;
   left: 324px;
-  top: 106px;
+  top: 16px;
   padding: 2px;
   border-radius: 28px;
   border: 1px solid lightgray;
   background: rgba(255, 255, 255, 0.7);
-  box-shadow: -4px 4px 12px -4px rgba(55, 55, 55, 0.6);
+  box-shadow: 4px 4px 12px -4px rgba(55, 55, 55, 0.6);
 }
 #map-container #searchDiv .ui.search .ui.input.icon input {
   background: rgba(255, 255, 255, 0.8);
@@ -56,11 +60,9 @@ body {
 }
 
 #nav-top {
-  position: absolute;
-  top: 0px;
   width: calc(100% - 2px);
-  height: 64px;
-  background: linear-gradient(to bottom, white, rgba(255, 255, 255, 0.6));
+  height: 78px;
+  background-image: url("/bg01.png");
   box-shadow: 0px 64px 64px -64px rgba(55, 55, 55, 0.6);
 }
 #nav-top img#logo {
@@ -73,42 +75,31 @@ body {
   -webkit-transform: translateY(-24px);
   transform: translateY(-24px);
 }
-#nav-top .menu {
+#nav-top #bg {
   position: absolute;
-  top: 64px;
-  width: calc(100% - 2px);
-  padding: 4px 4px 2px 4px;
-  background: rgba(255, 255, 255, 0.6);
-  text-align: right;
-  .item: hover;
-  .item-opacity: 0.7;
-}
-#nav-top .menu .item {
-  display: inline-block;
-  padding: 2px 16px;
-  border-right: 1px solid #22A7F0;
-}
-#nav-top .menu .item a {
-  cursor: pointer;
-}
-#nav-top .menu .item:first-child {
-  border-left: 1px solid #22A7F0;
+  top: 68px;
+  width: 100%;
+  height: 16px;
+  background-color: #409EDD;
+  background-image: url("/bg00.png");
 }
 
 #nav-left {
   position: absolute;
-  top: 93px;
+  top: 78px;
   width: 256px;
   height: calc(100% - 96px);
-  background: rgba(255, 255, 255, 0.6);
   padding: 16px 8px;
+  z-index: 9;
 }
-#nav-left h3#list-title {
-  padding: 4px;
-  border-bottom: 1px solid #22A7F0;
+#nav-left .ui.styled.fluid.accordion .content {
+  padding-left: 32px;
 }
-#nav-left li {
-  padding: 2px;
+#nav-left .ui.styled.fluid.accordion .content .ui.toggle.checkbox {
+  padding-bottom: 8px;
+}
+#nav-left .item {
+  padding: 4px 0px;
 }
 
 #top-right-legend {
@@ -118,13 +109,12 @@ body {
   top: 106px;
   right: 0px;
   padding: 8px;
-  background: rgba(255, 255, 255, 0.7);
   overflow: hidden;
   transition: all 0.3s ease-out;
-  box-shadow: -4px 4px 12px -4px rgba(55, 55, 55, 0.6);
 }
 #top-right-legend .legend-btns {
   padding-bottom: 8px;
+  text-align: right;
 }
 #top-right-legend .legend-btns .ui.button {
   border-radius: 24px;
@@ -140,12 +130,29 @@ body {
   overflow: scroll;
 }
 
-#bottom-right-view {
+#top-right-legend.shown {
+  height: 324px;
+  background: rgba(255, 255, 255, 0.7);
+  box-shadow: -4px 4px 12px -4px rgba(55, 55, 55, 0.6);
+}
+
+#bottom-left-view {
   position: absolute;
-  width: 512px;
+  width: 484px;
   height: 284px;
-  top: calc(100% - 287px);
+  top: calc(100% - 284px);
+  left: 0px;
+  background: white;
+}
+#bottom-left-view #buttons {
+  position: absolute;
   right: 0px;
-  background: rgba(255, 255, 255, 0.6);
-  box-shadow: -4px -4px 12px -4px rgba(55, 55, 55, 0.6);
+}
+#bottom-left-view #buttons i {
+  cursor: pointer;
+}
+
+#bottom-right-view.large {
+  width: calc(100% - 256px);
+  box-shadow: none;
 }

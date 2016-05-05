@@ -3,11 +3,106 @@ html
 	head
 		title the map
 		meta(name='viewport' content='width=device-width, initial-scale=1')
-		link(rel='stylesheet' href='/arcgis_js_api/library/4.0beta3/4.0beta3/esri/css/main.css')
-		//link(rel='stylesheet' href='stylesheets/dist/chartist.min.css')
+		link(rel='stylesheet' href='/arcgis_js_api/library/4.0/4.0/esri/css/main.css')
 		link(rel='stylesheet' href='/semantic/semantic.min.css')
 		link(rel='stylesheet' href='stylesheets/dist/style.min.css')
 	body
+		#nav-top
+			#bg
+			img#logo(src='logo.jpg' alt='logo')
+			h1#page-title 国家海洋局东海分局用海项目信息系统
+		#nav-left
+			.ui.styled.fluid.accordion
+				.title.active
+					i.icon.dropdown
+					图层选择
+				.content.active
+					.ui.toggle.checkbox
+						input.toggle.toggle-zoning(type='checkbox' name='zoningLyr')
+						label 功能区划
+					.ui.toggle.checkbox
+						input.toggle.toggle-auth(type='checkbox' name='authLyr' value='on')
+						label 确权区域
+					//.ui.form
+						.grouped.fields
+							label 确权区域分类
+							.field
+								.ui.radio.checkbox
+									input(type='radio' name='authLyr')radio
+									label 确权区域
+							.field
+								.ui.radio.checkbox
+									input(type='radio' name='authLyr')
+									label 配号来源
+							.field
+								.ui.radio.checkbox
+									input(type='radio' name='authLyr')
+									label 用海一级类
+							.field
+								.ui.radio.checkbox
+									input(type='radio' name='authLyr')
+									label 用海二级类
+							.field
+								.ui.radio.checkbox
+									input(type='radio' name='authLyr')
+									label 用海方式
+					.auth-selection
+						label 确权区域分类
+						select.ui.dropdown.small(name='authLyr')
+							option(value=1) 无
+							option(value=2) 配号来源
+							option(value=3) 用海一级类
+							option(value=4) 用海二级类
+							option(value=5) 用海方式
+				.title
+					i.icon.dropdown
+					统计与分析
+				.content
+					#statistics.menu
+						.item.statistic
+							i.icon.fork
+							a(data-type='source') 配号来源
+						.item.statistic
+							i.icon.folder.open
+							a(data-type='cata1') 用海一级类
+						.item.statistic
+							i.icon.folder.open.outline
+							a(data-type='cata2') 用海二级类
+						.item.statistic
+							i.icon.configure
+							a(data-type='method') 用海方式
+				.title
+					i.icon.dropdown
+					状态监测
+				.content
+					#status.menu
+						.item.statistic
+							i.icon.pie.chart
+							a(data-type='source') 项目进展状态
+						.item.statistic
+							i.icon.bar.chart
+							a(data-type='cata1') 项目进展情况
+						.item.statistic
+							i.icon.area.chart
+							a(data-type='cata2') 填海情况
+						.item.statistic
+							i.icon.bar.chart
+							a(data-type='method') 海域使用上报情况
+						.item.statistic
+							i.icon.legal
+							a(data-type='source') 违法查处
+						.item.statistic
+							i.icon.bar.chart
+							a(data-type='cata1') 用海调整情况
+						.item.statistic
+							i.icon.file.text.outline
+							a(data-type='cata2') 确权发证情况
+						.item.statistic
+							i.icon.bar.chart
+							a(data-type='method') 利益相关者情况
+						.item.statistic
+							i.icon.file.excel.outline
+							a(data-type='method') 统计报表
 		#map-container
 			#tools
 				.tool
@@ -15,96 +110,38 @@ html
 				.tool
 					#home
 				.tool
+					#basemap
 			#searchDiv
 				.ui.search
 					.ui.input.icon
 						input.prompt(type='text' placeholder='搜索区域...')
 						i.search.icon
 					.ui.button.basic 高级
-					.results
+					#searchResult.results
 						.result
 							.content
 								.title USDH2I8H
 						.result
 							.content
 								.title USCWI4R8
-		#nav-top
-			img#logo(src='logo.jpg' alt='logo')
-			h1#page-title 国家海洋局东海分局用海项目信息系统
-			.menu
-				|图层选择：
-				.item: a 确权区域
-				.item: a 配号来源
-				.item: a 用海一级类
-				.item: a 用海二级类
-				.item: a 用海方式
-		#nav-left
-			h3#list-title 统计与分析
-			ul#statistics.menu
-				li.item.statistic
-					i.icon.fork
-					a(data-type='source') 配号来源
-				li.item.statistic
-					i.icon.folder.open
-					a(data-type='cata1') 用海一级类
-				li.item.statistic
-					i.icon.folder.open.outline
-					a(data-type='cata2') 用海二级类
-				li.item.statistic
-					i.icon.configure
-					a(data-type='method') 用海方式
-
-			h3#list-title 状态监测
-			ul#statistics.menu
-				li.item.statistic
-					i.icon.pie.chart
-					a(data-type='source') 项目进展状态
-				li.item.statistic
-					i.icon.bar.chart
-					a(data-type='cata1') 项目进展情况
-				li.item.statistic
-					i.icon.area.chart
-					a(data-type='cata2') 填海情况
-				li.item.statistic
-					i.icon.bar.chart
-					a(data-type='method') 海域使用上报情况
-				li.item.statistic
-					i.icon.legal
-					a(data-type='source') 违法查处
-				li.item.statistic
-					i.icon.bar.chart
-					a(data-type='cata1') 用海调整情况
-				li.item.statistic
-					i.icon.file.text.outline
-					a(data-type='cata2') 确权发证情况
-				li.item.statistic
-					i.icon.bar.chart
-					a(data-type='method') 利益相关者情况
-				li.item.statistic
-					i.icon.file.excel.outline
-					a(data-type='method') 统计报表
-			//#selectAythLyr 确权区域分类
-				select#aythLyrCata(name='aythLyrCata')
-					option(value=0) 无
-					option(value=1) 配号来源
-					option(value=2) 用海一级类
-					option(value=3) 用海二级类
-					option(value=4) 用海方式
-				#reresh-button.button(onclick='refreshLyrs()') refresh
-			//#legend
-		#top-right-legend
+		//#top-right-legend
 			.legend-btns
-				.show-legend.ui.labeled.icon.button.basic.small(onclick='showLegend()') 图例
+				.show-legend.ui.labeled.icon.button.basic.white.small(onclick='showLegend()') 图例
 					i.icon.chevron.down
-				.hide-legend.ui.labeled.icon.button.basic.small(onclick='hideLegend()') 收起
+				.hide-legend.ui.labeled.icon.button.basic.white.small(onclick='hideLegend()') 收起
 					i.icon.chevron.up
 			#legend
-		#bottom-right-view
-			canvas#myChart(width='512' height='284')
-		script(src='/arcgis_js_api/library/4.0beta3/4.0beta3/init.js')
-		//script(src='https://js.arcgis.com/4.0beta3/')
+		#bottom-left-view.hidden
+			#buttons
+				i.icon.undock.caret.up(title=undock)
+				i.icon.close(title=close)
+			#myChart
 		script(src='/javascripts/dist/jquery-2.1.4.min.js')
+		script(src='/arcgis_js_api/library/4.0/4.0/init.js')
+		//script(src='https://js.arcgis.com/4.0/')
 		script(src='/javascripts/dist/chart.min.js')
+		script(type="text/javascript" src="fusioncharts/js/fusioncharts.js")
+		script(type="text/javascript" src="fusioncharts/js/themes/fusioncharts.theme.fint.js")
 		script(src='/semantic/semantic.min.js')
 		script(src='/javascripts/dist/core.babeled.min.js')
 		script(src='/javascripts/dist/app.babeled.min.js')
