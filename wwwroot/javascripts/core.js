@@ -13,13 +13,13 @@ require([
     "esri/widgets/Popup",
     "esri/tasks/QueryTask",
     "esri/tasks/support/Query",
+    "esri/widgets/Search",
     "dojo/domReady!"
-], function(Map, MapView, MapImageLayer, FeatureLayer, PopupTemplate, Legend, Compass, CompassVM, Home, HomeVM, BasemapToggle, Popup, QueryTask, Query) {
+], function(Map, MapView, MapImageLayer, FeatureLayer, PopupTemplate, Legend, Compass, CompassVM, Home, HomeVM, BasemapToggle, Popup, QueryTask, Query, Search) {
 
     var map = new Map({
         basemap: "oceans"
     });
-
     var view = new MapView({
         container: "map-container",
         map: map,
@@ -29,11 +29,13 @@ require([
     var services = ['zoning', 'authorized', 'authorized_source', 'authorized_cata1', 'authorized_cata2', 'authorized_method'];
     view.then(function() {
 
+    map.on('mouse-move', showCoordinates);
         var content = "<b>{FID}</b> {OBJECTID}<br>" +
             "功能区类型:{功能区类型}<br>" + "{SHAPE_LEN}" + "<img src='https://www.google.com/logos/doodles/2016/mohammed-ghani-hikmats-87th-birthday-5708620060688384-hp2x.jpg' />";
         var tableContent = '<table class="ui celled table"><tbody><tr><td>' + 'FID' + '</td><td>' + '{FID}' + '</td></tr><tr><td>' + '配号来源' + '</td><td>' + '{配号来源}' + '</td></tr><tr><td>' + '用海一级类' + '</td><td>' + '{用海一级类}' + '</td></tr><tr><td>' + '用海二级类' + '</td><td>' + '{用海二级类}' + '</td></tr><tr><td>' + '用海方式' + '</td><td>' + '{用海方式}' + '</td></tr></tbody></table>'
 
         //==widgets======================//
+
         var compass = new Compass({
             viewModel: new CompassVM({
                 view: view
@@ -50,7 +52,7 @@ require([
 
         var basemapToggle = new BasemapToggle({
             view: view,
-            nextBasemap: "dark-gray"
+            nextBasemap: "hybrid"
         }, 'basemap');
         basemapToggle.startup();
 
@@ -62,6 +64,7 @@ require([
         legend.startup();
 
         view.ui.add(legend, "bottom-right");
+
         //==widgets======================//
 
 
@@ -78,7 +81,7 @@ require([
                 })
             });
             map.add(authLyrs[1]);
-            var inviewIndex = 1;
+
             for (var i = 2; i < 6; i++) {
                 var tempLyr = new FeatureLayer({
                     id: lyrIds[i],
@@ -88,9 +91,49 @@ require([
                         content: tableContent
                     })
                 });
-                authLyrs.push(tempLyr);
+                authLyrs[i] = tempLyr;
             }
 
+            var searchWidget = new Search({
+                view: view,
+                allPlaceholder: '搜索',
+                maxResults: 1000,
+                sources: [{
+                    featureLayer: new FeatureLayer({
+                        url: "http://localhost:6080/arcgis/rest/services/allofit/MapServer/3",
+                    }),
+                    searchFields: ["用海一级类"],
+                    displayField: "用海一级类",
+                    exactMatch: false,
+                    outFields: ["FID", "用海一级类", "用海方式"],
+                    name: "用海一级类",
+                    placeholder: "搜索用海一级类",
+                }, {
+                    featureLayer: new FeatureLayer({
+                        url: "http://localhost:6080/arcgis/rest/services/allofit/MapServer/4",
+                    }),
+                    searchFields: ["FID", "用海二级类"],
+                    suggestionTemplate: "{FID}, 用海二级类: {用海二级类}",
+                    exactMatch: false,
+                    outFields: ["FID", "用海一级类", "用海二级类"],
+                    name: "用海二级类",
+                }, {
+                    featureLayer: new FeatureLayer({
+                        url: "http://localhost:6080/arcgis/rest/services/allofit/MapServer/5",
+                    }),
+                    searchFields: ["FID", "用海方式"],
+                    suggestionTemplate: "{FID}, 用海方式: {用海方式}",
+                    exactMatch: false,
+                    outFields: ["FID", "用海一级类", "用海方式"],
+                    name: "用海方式",
+                }]
+            });
+            searchWidget.startup();
+
+            view.ui.add(searchWidget, {
+                position: "top-left",
+                index: 0
+            });
             view.whenLayerView(authLyrs[1]).then(function(lyrView) {
                 lyrView.watch("updating", function(val) {
                     if (!val) { // wait for the layer view to finish updating
@@ -139,20 +182,35 @@ require([
             });*/
 
             return {
+                inviewIndex: 1,
                 on: true,
-                switchTo: function to(val) {
-                    if (val !== inviewIndex) {
-                        map.remove(authLyrs[inviewIndex]);
+                switchTo: function(val) {
+                    console.log('switching');
+                    console.log(this.inviewIndex);
+                    console.log(val);
+                    if (val !== this.inviewIndex) {
+                        map.remove(authLyrs[this.inviewIndex]);
+                        console.log('switching');
                         map.add(authLyrs[val]);
+                        this.inviewIndex = val;
                     }
                 },
                 show: function() {
-                    map.add(authLyrs[inviewIndex]);
+                    map.add(authLyrs[this.inviewIndex]);
                     this.on = true;
                 },
                 hide: function() {
-                    map.remove(authLyrs[inviewIndex]);
+                    map.remove(authLyrs[this.inviewIndex]);
                     this.on = false;
+                },
+                toggle: function() {
+                    if (this.on) {
+                        map.remove(authLyrs[this.inviewIndex]);
+                        this.on = false;
+                    } else {
+                        map.add(authLyrs[this.inviewIndex]);
+                        this.on = true;
+                    }
                 }
             }
         }();
@@ -186,18 +244,21 @@ require([
 
         $('input.toggle.toggle-zoning').change(function() {
             zoningLyrCtrl.toggle();
-            console.log(zoningLyrCtrl.on)
         })
 
-        $('input.toggle.toggle-zoning').change(function() {
-            if ($(this).val() == 'on') {
-                authLyrCtrl.show;
-            } else {
-                authLyrCtrl.hide;
+        $('input.toggle.toggle-auth').change(function() {
+                authLyrCtrl.toggle();
+            })
+            /*$('input.toggle.toggle-zoning').change(function() {
+                if ($(this).val() == 'on') {
+                    authLyrCtrl.show;
+                } else {
+                    authLyrCtrl.hide;
 
-            }
-        })
+                }
+            })*/
         $('select[name=authLyr]').change(function() {
+            console.log($(this).val());
             authLyrCtrl.switchTo($(this).val());
         });
 
@@ -248,6 +309,52 @@ require([
                 })
             }
         })*/
+
+        var tempSrc = new dataSrc();
+        tempSrc.data = [{
+            "label": "Jan",
+            "value": "420000"
+        }, {
+            "label": "Feb",
+            "value": "810000"
+        }, {
+            "label": "Mar",
+            "value": "720000"
+        }, {
+            "label": "Apr",
+            "value": "550000"
+        }, {
+            "label": "May",
+            "value": "910000"
+        }, {
+            "label": "Jun",
+            "value": "510000"
+        }, {
+            "label": "Jul",
+            "value": "680000"
+        }, {
+            "label": "Aug",
+            "value": "620000"
+        }, {
+            "label": "Sep",
+            "value": "610000"
+        }, {
+            "label": "Oct",
+            "value": "490000"
+        }, {
+            "label": "Nov",
+            "value": "900000"
+        }, {
+            "label": "Dec",
+            "value": "730000"
+        }];
+
+        renderCol3d(tempSrc);
     });
 
+
+    function showCoordinates(evt) {
+        console.log(evt);
+        $('#esri_widgets_Attribution_0 > div.esri-attribution__sources').html()
+    }
 });

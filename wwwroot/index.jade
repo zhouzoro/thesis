@@ -15,7 +15,7 @@ html
 			.ui.styled.fluid.accordion
 				.title.active
 					i.icon.dropdown
-					图层选择
+					|图层选择
 				.content.active
 					.ui.toggle.checkbox
 						input.toggle.toggle-zoning(type='checkbox' name='zoningLyr')
@@ -56,7 +56,7 @@ html
 							option(value=5) 用海方式
 				.title
 					i.icon.dropdown
-					统计与分析
+					|统计与分析
 				.content
 					#statistics.menu
 						.item.statistic
@@ -73,7 +73,7 @@ html
 							a(data-type='method') 用海方式
 				.title
 					i.icon.dropdown
-					状态监测
+					|状态监测
 				.content
 					#status.menu
 						.item.statistic
@@ -135,7 +135,8 @@ html
 			#buttons
 				i.icon.undock.caret.up(title=undock)
 				i.icon.close(title=close)
-			#myChart
+			#myChart.chart
+			#myChart2.chart
 		script(src='/javascripts/dist/jquery-2.1.4.min.js')
 		script(src='/arcgis_js_api/library/4.0/4.0/init.js')
 		//script(src='https://js.arcgis.com/4.0/')
