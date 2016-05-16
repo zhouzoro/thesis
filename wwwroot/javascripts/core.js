@@ -74,7 +74,7 @@ require([
             var authLyrs = [];
             authLyrs[1] = new FeatureLayer({
                 id: lyrIds[1],
-                url: "http://localhost:6080/arcgis/rest/services/allofit/MapServer/1",
+                url: "http://localhost:6080/arcgis/rest/services/用海信息/MapServer/1",
                 popupTemplate: new PopupTemplate({
                     title: 'title',
                     content: tableContent
@@ -85,7 +85,7 @@ require([
             for (var i = 2; i < 6; i++) {
                 var tempLyr = new FeatureLayer({
                     id: lyrIds[i],
-                    url: "http://localhost:6080/arcgis/rest/services/allofit/MapServer/" + i,
+                    url: "http://localhost:6080/arcgis/rest/services/用海信息/MapServer/" + i,
                     popupTemplate: new PopupTemplate({
                         title: 'title',
                         content: tableContent
@@ -100,7 +100,7 @@ require([
                 maxResults: 1000,
                 sources: [{
                     featureLayer: new FeatureLayer({
-                        url: "http://localhost:6080/arcgis/rest/services/allofit/MapServer/3",
+                        url: "http://localhost:6080/arcgis/rest/services/用海信息/MapServer/3",
                     }),
                     searchFields: ["用海一级类"],
                     displayField: "用海一级类",
@@ -110,7 +110,7 @@ require([
                     placeholder: "搜索用海一级类",
                 }, {
                     featureLayer: new FeatureLayer({
-                        url: "http://localhost:6080/arcgis/rest/services/allofit/MapServer/4",
+                        url: "http://localhost:6080/arcgis/rest/services/用海信息/MapServer/4",
                     }),
                     searchFields: ["FID", "用海二级类"],
                     suggestionTemplate: "{FID}, 用海二级类: {用海二级类}",
@@ -119,7 +119,7 @@ require([
                     name: "用海二级类",
                 }, {
                     featureLayer: new FeatureLayer({
-                        url: "http://localhost:6080/arcgis/rest/services/allofit/MapServer/5",
+                        url: "http://localhost:6080/arcgis/rest/services/用海信息/MapServer/5",
                     }),
                     searchFields: ["FID", "用海方式"],
                     suggestionTemplate: "{FID}, 用海方式: {用海方式}",
@@ -274,7 +274,7 @@ require([
         }
         var col3dShow = [];
 
-        /*$.get('http://localhost:6080/arcgis/rest/services/allofit/MapServer/legend?f=pjson', function(res) {
+        /*$.get('http://localhost:6080/arcgis/rest/services/用海信息/MapServer/legend?f=pjson', function(res) {
             legendJson = JSON.parse(res);
             for (var i = 1; i < 6; i++) {
                 var layerTemp = legendJson.layers[i];
@@ -283,7 +283,7 @@ require([
                 tempSrc.chart.subCaption = layerTemp.layerName;
                 tempSrc.chart.xAxisName = layerTemp.layerName;
                 var queryStatesTask = new QueryTask({
-                    url: "http://localhost:6080/arcgis/rest/services/allofit/MapServer/" + i
+                    url: "http://localhost:6080/arcgis/rest/services/用海信息/MapServer/" + i
                 });
                 var promiseResults = [];
                 for (var j = layerLegend.length - 1; i >= 0; i--) {
@@ -349,7 +349,7 @@ require([
             "value": "730000"
         }];
 
-        renderCol3d(tempSrc);
+        //renderCol3d(tempSrc);
     });
 
 

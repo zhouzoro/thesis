@@ -160,3 +160,7 @@ body {
   width: calc(100% - 256px);
   box-shadow: none;
 }
+
+#status > div {
+  cursor: pointer;
+}
