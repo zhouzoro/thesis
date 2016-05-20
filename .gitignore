@@ -1,7 +1,10 @@
 /vendor
 /node_modules
 /custerr
+/thesis
+/temp
 /wwwroot/arcgis_js_api
+/wwwroot/semantic
 /public/storage
 Homestead.yaml
 Homestead.json

@@ -1,0 +1,612 @@
+{
+ "layers": [
+  {
+   "layerId": 0,
+   "layerName": "确权数据",
+   "layerType": "Feature Layer",
+   "minScale": 0,
+   "maxScale": 0,
+   "legend": [
+    {
+     "label": "",
+     "url": "289bc64c3b5864630b55642cfc286e72",
+     "imageData": "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IB2cksfwAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAEVJREFUOI1jYaAyYKGZgTk5Of8pNWzKlCmMKC6MaO0k27AV1eUMDAy09PKogaMGjho4aiBOA2FFEDlgypQpjCgGwgQoBQDUwAxl2m832gAAAABJRU5ErkJggg==",
+     "contentType": "image/png",
+     "height": 20,
+     "width": 20
+    }
+   ]
+  },
+  {
+   "layerId": 1,
+   "layerName": "确权数据--配号来源",
+   "layerType": "Feature Layer",
+   "minScale": 0,
+   "maxScale": 0,
+   "legend": [
+    {
+     "label": "<all other values>",
+     "url": "a3d8104489aa45c2e75b40fbf62b2335",
+     "imageData": "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IB2cksfwAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAEVJREFUOI1jYaAyYKGZgTk5Of8pNWzKlCmMKC7sTPMj27DyWZsYGBho6eVRA0cNHDVw1ECcBsKKIHLAlClTGFEMhAlQCgDibAyO4jqeVgAAAABJRU5ErkJggg==",
+     "contentType": "image/png",
+     "height": 20,
+     "width": 20
+    },
+    {
+     "label": "初始登记",
+     "url": "60cf58f51123724174c1b3fa8b9481dc",
+     "imageData": "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IB2cksfwAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAEVJREFUOI1jYaAyYKGZgTk5Of8pNWzKlCmMKC5M7JxItmHzy/MZGBho6eVRA0cNHDVw1ECcBsKKIHLAlClTGFEMhAlQCgDNhwxQvXzXkgAAAABJRU5ErkJggg==",
+     "contentType": "image/png",
+     "height": 20,
+     "width": 20,
+     "values": [
+      "初始登记"
+     ]
+    },
+    {
+     "label": "变更登记",
+     "url": "248d00006a08c331e61d1774dbaf9a6f",
+     "imageData": "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IB2cksfwAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAEVJREFUOI1jYaAyYKGZgTk5Of8pNWzKlCmMKC7s8phItmFlO/IZGBho6eVRA0cNHDVw1ECcBsKKIHLAlClTGFEMhAlQCgDVngxocxaerAAAAABJRU5ErkJggg==",
+     "contentType": "image/png",
+     "height": 20,
+     "width": 20,
+     "values": [
+      "变更登记"
+     ]
+    }
+   ]
+  },
+  {
+   "layerId": 2,
+   "layerName": "确权数据--用海一级类",
+   "layerType": "Feature Layer",
+   "minScale": 0,
+   "maxScale": 0,
+   "legend": [
+    {
+     "label": "<all other values>",
+     "url": "92f61a63c87969c21d2457e177c88414",
+     "imageData": "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IB2cksfwAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAEVJREFUOI1jYaAyYKGZgTk5Of8pNWzKlCmMKC5sDO0m27D61aUMDAy09PKogaMGjho4aiBOA2FFEDlgypQpjCgGwgQoBQDWUQxqw4DUVgAAAABJRU5ErkJggg==",
+     "contentType": "image/png",
+     "height": 20,
+     "width": 20
+    },
+    {
+     "label": "交通运输用海",
+     "url": "515f5e2236c436146f05f091db78e731",
+     "imageData": "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IB2cksfwAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAEZJREFUOI1jYaAyYKGZgTk5Of8pNWzKlCmMKC7coRpNtmEet5cyMDDQ0sujBo4aOGrgqIE4DYQVQeSAKVOmMKIYCBOgFAAA5AIMk6UGSv8AAAAASUVORK5CYII=",
+     "contentType": "image/png",
+     "height": 20,
+     "width": 20,
+     "values": [
+      "交通运输用海"
+     ]
+    },
+    {
+     "label": "其它用海",
+     "url": "12535d05112cbe949f3b074c31a4e4c2",
+     "imageData": "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IB2cksfwAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAEZJREFUOI1jYaAyYKGZgTk5Of8pNWzKlCmMKC7ktHck27DvB/czMDDQ0sujBo4aOGrgqIE4DYQVQeSAKVOmMKIYCBOgFAAAIM4NQgLt3gkAAAAASUVORK5CYII=",
+     "contentType": "image/png",
+     "height": 20,
+     "width": 20,
+     "values": [
+      "其它用海"
+     ]
+    },
+    {
+     "label": "工业用海",
+     "url": "cc26ca8c4274a024dc42c1dbe9da1ba3",
+     "imageData": "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IB2cksfwAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAEZJREFUOI1jYaAyYKGZgTk5Of8pNWzKlCmMKC50iFMn27ADi24yMDDQ0sujBo4aOGrgqIE4DYQVQeSAKVOmMKIYCBOgFAAAC90NBkgdSEIAAAAASUVORK5CYII=",
+     "contentType": "image/png",
+     "height": 20,
+     "width": 20,
+     "values": [
+      "工业用海"
+     ]
+    },
+    {
+     "label": "排污倾倒用海",
+     "url": "9b21353b6e083e1d4ff987fe873ff977",
+     "imageData": "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IB2cksfwAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAEVJREFUOI1jYaAyYKGZgTk5Of8pNWzKlCmMKC4sr+ci27DOxm8MDAy09PKogaMGjho4aiBOA2FFEDlgypQpjCgGwgQoBQD3MgzLz96GowAAAABJRU5ErkJggg==",
+     "contentType": "image/png",
+     "height": 20,
+     "width": 20,
+     "values": [
+      "排污倾倒用海"
+     ]
+    },
+    {
+     "label": "旅游娱乐用海",
+     "url": "34e8b4b9cf2eede0c62639443b37a016",
+     "imageData": "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IB2cksfwAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAEVJREFUOI1jYaAyYKGZgTk5Of8pNWzKlCmMKC6cWPyKbMPye8UYGBho6eVRA0cNHDVw1ECcBsKKIHLAlClTGFEMhAlQCgCmKAvdLs1tggAAAABJRU5ErkJggg==",
+     "contentType": "image/png",
+     "height": 20,
+     "width": 20,
+     "values": [
+      "旅游娱乐用海"
+     ]
+    },
+    {
+     "label": "渔业用海",
+     "url": "181b61eecd265415eb497c5cf0c8187a",
+     "imageData": "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IB2cksfwAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAEZJREFUOI1jYaAyYKGZgTk5Of8pNWzKlCmMKC6caHKRbMPyz+gzMDDQ0sujBo4aOGrgqIE4DYQVQeSAKVOmMKIYCBOgFAAAxE8MNQqFuEAAAAAASUVORK5CYII=",
+     "contentType": "image/png",
+     "height": 20,
+     "width": 20,
+     "values": [
+      "渔业用海"
+     ]
+    },
+    {
+     "label": "特殊用海",
+     "url": "ffdb8727da774d3c3cc3642a97415a8b",
+     "imageData": "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IB2cksfwAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAEVJREFUOI1jYaAyYKGZgTk5Of8pNWzKlCmMKC7s/L6DbMPKOT0YGBho6eVRA0cNHDVw1ECcBsKKIHLAlClTGFEMhAlQCgCMjguT77R46QAAAABJRU5ErkJggg==",
+     "contentType": "image/png",
+     "height": 20,
+     "width": 20,
+     "values": [
+      "特殊用海"
+     ]
+    },
+    {
+     "label": "造地工程用海",
+     "url": "63627a729b14c3a90e6215449249fa15",
+     "imageData": "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IB2cksfwAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAEVJREFUOI1jYaAyYKGZgTk5Of8pNWzKlCmMKC6smb2MbMNaUqMYGBho6eVRA0cNHDVw1ECcBsKKIHLAlClTGFEMhAlQCgC20QwOZn+sHgAAAABJRU5ErkJggg==",
+     "contentType": "image/png",
+     "height": 20,
+     "width": 20,
+     "values": [
+      "造地工程用海"
+     ]
+    }
+   ]
+  },
+  {
+   "layerId": 3,
+   "layerName": "确权数据--用海二级类",
+   "layerType": "Feature Layer",
+   "minScale": 0,
+   "maxScale": 0,
+   "legend": [
+    {
+     "label": "<all other values>",
+     "url": "fe4402e55bdcd68752a3ffc08f0799b6",
+     "imageData": "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IB2cksfwAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAEVJREFUOI1jYaAyYKGZgTk5Of8pNWzKlCmMKC6Mi+0j27BFi4sYGBho6eVRA0cNHDVw1ECcBsKKIHLAlClTGFEMhAlQCgDetwyC8+VhfgAAAABJRU5ErkJggg==",
+     "contentType": "image/png",
+     "height": 20,
+     "width": 20
+    },
+    {
+     "label": " ",
+     "url": "906398d7222dd5e29a9f7f7cf51188a6",
+     "imageData": "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IB2cksfwAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAEZJREFUOI1jYaAyYKGZgTk5Of8pNWzKlCmMKC7kt/lMtmEfj/AyMDDQ0sujBo4aOGrgqIE4DYQVQeSAKVOmMKIYCBOgFAAA4zMMjWizxx0AAAAASUVORK5CYII=",
+     "contentType": "image/png",
+     "height": 20,
+     "width": 20,
+     "values": [
+      " "
+     ]
+    },
+    {
+     "label": "其它工业用海",
+     "url": "40b7f6ff2d0703d2c5899d244098fdb4",
+     "imageData": "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IB2cksfwAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAEZJREFUOI1jYaAyYKGZgTk5Of8pNWzKlCmMKC7kzysg27CPkyYwMDDQ0sujBo4aOGrgqIE4DYQVQeSAKVOmMKIYCBOgFAAA/ogM3gIinEEAAAAASUVORK5CYII=",
+     "contentType": "image/png",
+     "height": 20,
+     "width": 20,
+     "values": [
+      "其它工业用海"
+     ]
+    },
+    {
+     "label": "围海养殖用海",
+     "url": "0066d2d35ab224e8d1f6b13110f2f935",
+     "imageData": "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IB2cksfwAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAEVJREFUOI1jYaAyYKGZgTk5Of8pNWzKlCmMKC4sKbUi27Ce7mMMDAy09PKogaMGjho4aiBOA2FFEDlgypQpjCgGwgQoBQDrXQyoOr3+twAAAABJRU5ErkJggg==",
+     "contentType": "image/png",
+     "height": 20,
+     "width": 20,
+     "values": [
+      "围海养殖用海"
+     ]
+    },
+    {
+     "label": "城镇建设填海造地用海",
+     "url": "2d89a7b46f8a3eda27838f7a348a4117",
+     "imageData": "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IB2cksfwAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAEZJREFUOI1jYaAyYKGZgTk5Of8pNWzKlCmMKC7kTTcj27DPM08xMDDQ0sujBo4aOGrgqIE4DYQVQeSAKVOmMKIYCBOgFAAAFWcNIbihg0kAAAAASUVORK5CYII=",
+     "contentType": "image/png",
+     "height": 20,
+     "width": 20,
+     "values": [
+      "城镇建设填海造地用海"
+     ]
+    },
+    {
+     "label": "开放式养殖用海",
+     "url": "f08b9ad8d8ad681f5364638a77dc7fbd",
+     "imageData": "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IB2cksfwAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAEZJREFUOI1jYaAyYKGZgTk5Of8pNWzKlCmMKC78Z6BEtmFMF+4xMDDQ0sujBo4aOGrgqIE4DYQVQeSAKVOmMKIYCBOgFAAA20MMe9RmUHsAAAAASUVORK5CYII=",
+     "contentType": "image/png",
+     "height": 20,
+     "width": 20,
+     "values": [
+      "开放式养殖用海"
+     ]
+    },
+    {
+     "label": "旅游基础设施用海",
+     "url": "0957a9606bc54071d69deeaf66050e71",
+     "imageData": "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IB2cksfwAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAEVJREFUOI1jYaAyYKGZgTk5Of8pNWzKlCmMKC40LxIg27CTfR8YGBho6eVRA0cNHDVw1ECcBsKKIHLAlClTGFEMhAlQCgAP7w0SpFP/eAAAAABJRU5ErkJggg==",
+     "contentType": "image/png",
+     "height": 20,
+     "width": 20,
+     "values": [
+      "旅游基础设施用海"
+     ]
+    },
+    {
+     "label": "污水达标排放用海",
+     "url": "cb4cf4250601fc69dba12e3187c57b6d",
+     "imageData": "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IB2cksfwAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAEZJREFUOI1jYaAyYKGZgTk5Of8pNWzKlCmMKC5UMeYk27A7Z78zMDDQ0sujBo4aOGrgqIE4DYQVQeSAKVOmMKIYCBOgFAAALpMNazbv+sAAAAAASUVORK5CYII=",
+     "contentType": "image/png",
+     "height": 20,
+     "width": 20,
+     "values": [
+      "污水达标排放用海"
+     ]
+    },
+    {
+     "label": "海岸防护工程用海",
+     "url": "e7b90791c75386fa1e75b2621c4d99ee",
+     "imageData": "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IB2cksfwAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAEZJREFUOI1jYaAyYKGZgTk5Of8pNWzKlCmMKC58Y8BKtmEiF34zMDDQ0sujBo4aOGrgqIE4DYQVQeSAKVOmMKIYCBOgFAAA62AMqnstRAYAAAAASUVORK5CYII=",
+     "contentType": "image/png",
+     "height": 20,
+     "width": 20,
+     "values": [
+      "海岸防护工程用海"
+     ]
+    },
+    {
+     "label": "海水综合利用用海",
+     "url": "d42660f0c38dd945fd19c6ff24d76ed5",
+     "imageData": "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IB2cksfwAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAEZJREFUOI1jYaAyYKGZgTk5Of8pNWzKlCmMKC509/xBtmE7t3MwMDDQ0sujBo4aOGrgqIE4DYQVQeSAKVOmMKIYCBOgFAAAyZAMQ9ntVCcAAAAASUVORK5CYII=",
+     "contentType": "image/png",
+     "height": 20,
+     "width": 20,
+     "values": [
+      "海水综合利用用海"
+     ]
+    },
+    {
+     "label": "海洋保护区用海",
+     "url": "4dde75be3a51064015dfb965a855a616",
+     "imageData": "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IB2cksfwAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAEZJREFUOI1jYaAyYKGZgTk5Of8pNWzKlCmMKC40Kggm27BzE9YyMDDQ0sujBo4aOGrgqIE4DYQVQeSAKVOmMKIYCBOgFAAA+4gM1i8xW8wAAAAASUVORK5CYII=",
+     "contentType": "image/png",
+     "height": 20,
+     "width": 20,
+     "values": [
+      "海洋保护区用海"
+     ]
+    },
+    {
+     "label": "渔业基础设施用海",
+     "url": "793c6d3ea588b49a207fa491eab7aec7",
+     "imageData": "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IB2cksfwAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAEVJREFUOI1jYaAyYKGZgTk5Of8pNWzKlCmMKC70KDUj27Ad3acYGBho6eVRA0cNHDVw1ECcBsKKIHLAlClTGFEMhAlQCgD8BQzY0pVIVgAAAABJRU5ErkJggg==",
+     "contentType": "image/png",
+     "height": 20,
+     "width": 20,
+     "values": [
+      "渔业基础设施用海"
+     ]
+    },
+    {
+     "label": "港口用海",
+     "url": "bdbf3ec79aa1e3864520bdb01efed8f7",
+     "imageData": "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IB2cksfwAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAEVJREFUOI1jYaAyYKGZgTk5Of8pNWzKlCmMKC5MKhUh27B53W8YGBho6eVRA0cNHDVw1ECcBsKKIHLAlClTGFEMhAlQCgD+iQzguNCoeAAAAABJRU5ErkJggg==",
+     "contentType": "image/png",
+     "height": 20,
+     "width": 20,
+     "values": [
+      "港口用海"
+     ]
+    },
+    {
+     "label": "电力工业用海",
+     "url": "e449d3ff8e146669763013732fa0b829",
+     "imageData": "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IB2cksfwAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAEZJREFUOI1jYaAyYKGZgTk5Of8pNWzKlCmMKC6U9lEm27CnW+4yMDDQ0sujBo4aOGrgqIE4DYQVQeSAKVOmMKIYCBOgFAAAIEYNQVPZWvgAAAAASUVORK5CYII=",
+     "contentType": "image/png",
+     "height": 20,
+     "width": 20,
+     "values": [
+      "电力工业用海"
+     ]
+    },
+    {
+     "label": "科研教学用海",
+     "url": "e08893f3f45de89244579db4e96e4126",
+     "imageData": "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IB2cksfwAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAEZJREFUOI1jYaAyYKGZgTk5Of8pNWzKlCmMKC7kjGQm27Dvy/8yMDDQ0sujBo4aOGrgqIE4DYQVQeSAKVOmMKIYCBOgFAAALPANZrmAuyUAAAAASUVORK5CYII=",
+     "contentType": "image/png",
+     "height": 20,
+     "width": 20,
+     "values": [
+      "科研教学用海"
+     ]
+    },
+    {
+     "label": "路桥用海",
+     "url": "0ef44c3a81c1a065d843aad501b9c699",
+     "imageData": "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IB2cksfwAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAEZJREFUOI1jYaAyYKGZgTk5Of8pNWzKlCmMKC7UjA4j27DrS1cxMDDQ0sujBo4aOGrgqIE4DYQVQeSAKVOmMKIYCBOgFAAABOsM8ecplg8AAAAASUVORK5CYII=",
+     "contentType": "image/png",
+     "height": 20,
+     "width": 20,
+     "values": [
+      "路桥用海"
+     ]
+    }
+   ]
+  },
+  {
+   "layerId": 4,
+   "layerName": "确权数据--用海方式",
+   "layerType": "Feature Layer",
+   "minScale": 0,
+   "maxScale": 0,
+   "legend": [
+    {
+     "label": "<all other values>",
+     "url": "d618da56447663a1ef64198b951046aa",
+     "imageData": "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IB2cksfwAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAEVJREFUOI1jYaAyYKGZgTk5Of8pNWzKlCmMKC4M7uwk27C15eUMDAy09PKogaMGjho4aiBOA2FFEDlgypQpjCgGwgQoBQDVHQxmw3KcSgAAAABJRU5ErkJggg==",
+     "contentType": "image/png",
+     "height": 20,
+     "width": 20
+    },
+    {
+     "label": "11、建设填海造地",
+     "url": "29317f1d09ee5995244fb768c912b6d8",
+     "imageData": "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IB2cksfwAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAEVJREFUOI1jYaAyYKGZgTk5Of8pNWzKlCmMKC70r55ItmEbW/MZGBho6eVRA0cNHDVw1ECcBsKKIHLAlClTGFEMhAlQCgDYmQxwmAor7gAAAABJRU5ErkJggg==",
+     "contentType": "image/png",
+     "height": 20,
+     "width": 20,
+     "values": [
+      "11、建设填海造地"
+     ]
+    },
+    {
+     "label": "41、开放式养殖",
+     "url": "c43c2ef8b051a06e969722ec7cf58b87",
+     "imageData": "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IB2cksfwAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAEVJREFUOI1jYaAyYKGZgTk5Of8pNWzKlCmMKC6cmNFHtmH5M4oYGBho6eVRA0cNHDVw1ECcBsKKIHLAlClTGFEMhAlQCgDJNAxErm9yJQAAAABJRU5ErkJggg==",
+     "contentType": "image/png",
+     "height": 20,
+     "width": 20,
+     "values": [
+      "41、开放式养殖"
+     ]
+    },
+    {
+     "label": "专用航道、锚地及其它开放式",
+     "url": "25db3c358eec750398e5500e705d4888",
+     "imageData": "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IB2cksfwAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAEVJREFUOI1jYaAyYKGZgTk5Of8pNWzKlCmMKC6cWJpNtmH53VMZGBho6eVRA0cNHDVw1ECcBsKKIHLAlClTGFEMhAlQCgDQoQxaRpAGMgAAAABJRU5ErkJggg==",
+     "contentType": "image/png",
+     "height": 20,
+     "width": 20,
+     "values": [
+      "专用航道、锚地及其它开放式"
+     ]
+    },
+    {
+     "label": "取、排水口",
+     "url": "7a071eb3dcbb34f38267650ef3c5406e",
+     "imageData": "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IB2cksfwAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAEZJREFUOI1jYaAyYKGZgTk5Of8pNWzKlCmMKC4Mi59ItmGrFuYzMDDQ0sujBo4aOGrgqIE4DYQVQeSAKVOmMKIYCBOgFAAA38oMhaI4kYQAAAAASUVORK5CYII=",
+     "contentType": "image/png",
+     "height": 20,
+     "width": 20,
+     "values": [
+      "取、排水口"
+     ]
+    },
+    {
+     "label": "围海养殖",
+     "url": "6879354b3aa703b3d0ccb680d5c1c836",
+     "imageData": "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IB2cksfwAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAEZJREFUOI1jYaAyYKGZgTk5Of8pNWzKlCmMKC5M9ZhItmGzd+QzMDDQ0sujBo4aOGrgqIE4DYQVQeSAKVOmMKIYCBOgFAAA4nsMjfOuHCYAAAAASUVORK5CYII=",
+     "contentType": "image/png",
+     "height": 20,
+     "width": 20,
+     "values": [
+      "围海养殖"
+     ]
+    },
+    {
+     "label": "建设填海造地",
+     "url": "adf34a58af796ef16f6b621b559c91a1",
+     "imageData": "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IB2cksfwAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAEZJREFUOI1jYaAyYKGZgTk5Of8pNWzKlCmMKC70mBhItmE78tczMDDQ0sujBo4aOGrgqIE4DYQVQeSAKVOmMKIYCBOgFAAA6TgMoVqjuQwAAAAASUVORK5CYII=",
+     "contentType": "image/png",
+     "height": 20,
+     "width": 20,
+     "values": [
+      "建设填海造地"
+     ]
+    },
+    {
+     "label": "开放式养殖",
+     "url": "9fabdd70f9a9e6f817f5643297e587e5",
+     "imageData": "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IB2cksfwAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAEVJREFUOI1jYaAyYKGZgTk5Of8pNWzKlCmMKC5MnlhKtmFz87sZGBho6eVRA0cNHDVw1ECcBsKKIHLAlClTGFEMhAlQCgDTmQxiCzzAfgAAAABJRU5ErkJggg==",
+     "contentType": "image/png",
+     "height": 20,
+     "width": 20,
+     "values": [
+      "开放式养殖"
+     ]
+    },
+    {
+     "label": "污水达标排放",
+     "url": "3879d798fdd0247f5be2cd3dfeaf3fa7",
+     "imageData": "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IB2cksfwAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAEVJREFUOI1jYaAyYKGZgTk5Of8pNWzKlCmMKC6c2OBBtmH5DTsYGBho6eVRA0cNHDVw1ECcBsKKIHLAlClTGFEMhAlQCgDYvgxyfzigyAAAAABJRU5ErkJggg==",
+     "contentType": "image/png",
+     "height": 20,
+     "width": 20,
+     "values": [
+      "污水达标排放"
+     ]
+    },
+    {
+     "label": "海底电缆管道",
+     "url": "7ee651b35307284b0a9d1aaf7fe140dd",
+     "imageData": "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IB2cksfwAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAEZJREFUOI1jYaAyYKGZgTk5Of8pNWzKlCmMKC6cGOtPtmH5izcyMDDQ0sujBo4aOGrgqIE4DYQVQeSAKVOmMKIYCBOgFAAA4mUMjmxQ0OIAAAAASUVORK5CYII=",
+     "contentType": "image/png",
+     "height": 20,
+     "width": 20,
+     "values": [
+      "海底电缆管道"
+     ]
+    },
+    {
+     "label": "港池",
+     "url": "04bea5d2621d9c339fdb8085aada45a4",
+     "imageData": "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IB2cksfwAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAEVJREFUOI1jYaAyYKGZgTk5Of8pNWzKlCmMKC4smuhLtmF9+ZsZGBho6eVRA0cNHDVw1ECcBsKKIHLAlClTGFEMhAlQCgDb+gx7yiMPjgAAAABJRU5ErkJggg==",
+     "contentType": "image/png",
+     "height": 20,
+     "width": 20,
+     "values": [
+      "港池"
+     ]
+    },
+    {
+     "label": "港池、蓄水等",
+     "url": "0475f1fc4e8422ece4cecf3a5e10e029",
+     "imageData": "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IB2cksfwAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAEZJREFUOI1jYaAyYKGZgTk5Of8pNWzKlCmMKC70mDiBbMN25BcwMDDQ0sujBo4aOGrgqIE4DYQVQeSAKVOmMKIYCBOgFAAA088MYiVIM0YAAAAASUVORK5CYII=",
+     "contentType": "image/png",
+     "height": 20,
+     "width": 20,
+     "values": [
+      "港池、蓄水等"
+     ]
+    },
+    {
+     "label": "跨海桥梁、海底隧道等",
+     "url": "2c186628c6c6b97e856882ed05f60567",
+     "imageData": "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IB2cksfwAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAEVJREFUOI1jYaAyYKGZgTk5Of8pNWzKlCmMKC7sC5xItmFF6/MZGBho6eVRA0cNHDVw1ECcBsKKIHLAlClTGFEMhAlQCgDRIgxbJNwSwQAAAABJRU5ErkJggg==",
+     "contentType": "image/png",
+     "height": 20,
+     "width": 20,
+     "values": [
+      "跨海桥梁、海底隧道等"
+     ]
+    },
+    {
+     "label": "透水构筑物",
+     "url": "ecb83d822f84c25a53154c6ae2f5326f",
+     "imageData": "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IB2cksfwAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAEZJREFUOI1jYaAyYKGZgTk5Of8pNWzKlCmMKC6c6OVPtmH52zYyMDDQ0sujBo4aOGrgqIE4DYQVQeSAKVOmMKIYCBOgFAAA6O0MoerDmG8AAAAASUVORK5CYII=",
+     "contentType": "image/png",
+     "height": 20,
+     "width": 20,
+     "values": [
+      "透水构筑物"
+     ]
+    },
+    {
+     "label": "非透水构筑物",
+     "url": "d2a6d1d260bda9c9d217cfeb8b779f85",
+     "imageData": "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IB2cksfwAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAEVJREFUOI1jYaAyYKGZgTk5Of8pNWzKlCmMKC7smphNtmFl+VMZGBho6eVRA0cNHDVw1ECcBsKKIHLAlClTGFEMhAlQCgDJcAxFAkomLAAAAABJRU5ErkJggg==",
+     "contentType": "image/png",
+     "height": 20,
+     "width": 20,
+     "values": [
+      "非透水构筑物"
+     ]
+    }
+   ]
+  },
+  {
+   "layerId": 5,
+   "layerName": "功能区划",
+   "layerType": "Feature Layer",
+   "minScale": 0,
+   "maxScale": 0,
+   "legend": [
+    {
+     "label": "<all other values>",
+     "url": "92b522abb5307627758df42a1f690eb9",
+     "imageData": "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IB2cksfwAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAEZJREFUOI1jYaAyYKGZgTk5Of8pNWzKlCmMKC48fvw42YZZWloyMDDQ0sujBo4aOGrgqIE4DYQVQeSAKVOmMKIYCBOgFAAAgmcLdtZPnv4AAAAASUVORK5CYII=",
+     "contentType": "image/png",
+     "height": 20,
+     "width": 20
+    },
+    {
+     "label": "保留区",
+     "url": "5c7c45e029a32fa58248f6dd77c5bc58",
+     "imageData": "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IB2cksfwAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAEVJREFUOI1jYaAyYKGZgTk5Of8pNWzKlCmMKC4sLS0l27Du7m4GBgZaennUwFEDRw0cNRCngbAiiBwwZcoURhQDYQKUAgDW9wxsjzMceAAAAABJRU5ErkJggg==",
+     "contentType": "image/png",
+     "height": 20,
+     "width": 20,
+     "values": [
+      "保留区"
+     ]
+    },
+    {
+     "label": "农渔业区",
+     "url": "695273407221118a914f794fc2203751",
+     "imageData": "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IB2cksfwAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAEZJREFUOI1jYaAyYKGZgTk5Of8pNWzKlCmMKC5MTEwk27D58+czMDDQ0sujBo4aOGrgqIE4DYQVQeSAKVOmMKIYCBOgFAAA65cMqAmkC7QAAAAASUVORK5CYII=",
+     "contentType": "image/png",
+     "height": 20,
+     "width": 20,
+     "values": [
+      "农渔业区"
+     ]
+    },
+    {
+     "label": "工业与城镇用海区",
+     "url": "1141e79b126b1c828af7eb7326848459",
+     "imageData": "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IB2cksfwAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAEZJREFUOI1jYaAyYKGZgTk5Of8pNWzKlCmMKC50d3cn27CdO3cyMDDQ0sujBo4aOGrgqIE4DYQVQeSAKVOmMKIYCBOgFAAABnYM9h6FkDcAAAAASUVORK5CYII=",
+     "contentType": "image/png",
+     "height": 20,
+     "width": 20,
+     "values": [
+      "工业与城镇用海区"
+     ]
+    },
+    {
+     "label": "旅游休闲娱乐区",
+     "url": "c70b135f1c1d4f545621f82e424c5560",
+     "imageData": "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IB2cksfwAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAEZJREFUOI1jYaAyYKGZgTk5Of8pNWzKlCmMKC40NDQk27Dz588zMDDQ0sujBo4aOGrgqIE4DYQVQeSAKVOmMKIYCBOgFAAAHSYNOFhYC/wAAAAASUVORK5CYII=",
+     "contentType": "image/png",
+     "height": 20,
+     "width": 20,
+     "values": [
+      "旅游休闲娱乐区"
+     ]
+    },
+    {
+     "label": "海洋保护区",
+     "url": "9feaac05e37bb465315dfd3e31ead838",
+     "imageData": "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IB2cksfwAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAEZJREFUOI1jYaAyYKGZgTk5Of8pNWzKlCmMKC4UExMj27BXr14xMDDQ0sujBo4aOGrgqIE4DYQVQeSAKVOmMKIYCBOgFAAAOP4NiWtXCHYAAAAASUVORK5CYII=",
+     "contentType": "image/png",
+     "height": 20,
+     "width": 20,
+     "values": [
+      "海洋保护区"
+     ]
+    },
+    {
+     "label": "港口航运区",
+     "url": "6078cce0b1ad0f0b244460d7a452a796",
+     "imageData": "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IB2cksfwAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAEVJREFUOI3t1CESAEAEhWFmuK3jvNsKu0kQtrCaPwrfUAh9TsZAMztdDACnDd29jKkqEU2evOCCCy74BOMFVQLACYxBtwtMxwra6sjV6AAAAABJRU5ErkJggg==",
+     "contentType": "image/png",
+     "height": 20,
+     "width": 20,
+     "values": [
+      "港口航运区"
+     ]
+    },
+    {
+     "label": "特殊利用区",
+     "url": "da08a9e9a638088895783025ddf8b35d",
+     "imageData": "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IB2cksfwAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAEZJREFUOI1jYaAyYKGZgTk5Of8pNWzKlCmMKC58/Pgx2YbJysoyMDDQ0sujBo4aOGrgqIE4DYQVQeSAKVOmMKIYCBOgFAAAZYcLIpqcVVAAAAAASUVORK5CYII=",
+     "contentType": "image/png",
+     "height": 20,
+     "width": 20,
+     "values": [
+      "特殊利用区"
+     ]
+    }
+   ]
+  }
+ ]
+}
