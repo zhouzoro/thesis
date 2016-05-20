@@ -1,6 +1,6 @@
 "use strict";
 
-require(["esri/Map", "esri/views/MapView", "esri/layers/MapImageLayer", "esri/layers/FeatureLayer", "esri/PopupTemplate", "esri/widgets/Legend", "esri/widgets/Compass", "esri/widgets/Compass/CompassViewModel", "esri/widgets/Home", "esri/widgets/Home/HomeViewModel", "esri/widgets/BasemapToggle", "esri/widgets/Popup", "esri/tasks/QueryTask", "esri/tasks/support/Query", "esri/widgets/Search", "dojo/domReady!"], function (Map, MapView, MapImageLayer, FeatureLayer, PopupTemplate, Legend, Compass, CompassVM, Home, HomeVM, BasemapToggle, Popup, QueryTask, Query, Search) {
+require(["esri/Map", "esri/views/MapView", "esri/layers/MapImageLayer", "esri/layers/FeatureLayer", "esri/PopupTemplate", "esri/widgets/Legend", "esri/widgets/Compass", "esri/widgets/Compass/CompassViewModel", "esri/widgets/Home", "esri/widgets/Home/HomeViewModel", "esri/widgets/BasemapToggle", "esri/widgets/Popup", "esri/tasks/QueryTask", "esri/tasks/support/Query", "esri/symbols/SimpleFillSymbol", "dojo/domReady!"], function (Map, MapView, MapImageLayer, FeatureLayer, PopupTemplate, Legend, Compass, CompassVM, Home, HomeVM, BasemapToggle, Popup, QueryTask, Query, SimpleFillSymbol) {
 
     var map = new Map({
         basemap: "oceans"
@@ -15,9 +15,9 @@ require(["esri/Map", "esri/views/MapView", "esri/layers/MapImageLayer", "esri/la
     view.then(function () {
 
         map.on('mouse-move', showCoordinates);
-        var content = "<b>{FID}</b> {OBJECTID}<br>" + "功能区类型:{功能区类型}<br>" + "{SHAPE_LEN}" + "<img src='https://www.google.com/logos/doodles/2016/mohammed-ghani-hikmats-87th-birthday-5708620060688384-hp2x.jpg' />";
-        var tableContent = '<table class="ui celled table"><tbody><tr><td>' + 'FID' + '</td><td>' + '{FID}' + '</td></tr><tr><td>' + '配号来源' + '</td><td>' + '{配号来源}' + '</td></tr><tr><td>' + '用海一级类' + '</td><td>' + '{用海一级类}' + '</td></tr><tr><td>' + '用海二级类' + '</td><td>' + '{用海二级类}' + '</td></tr><tr><td>' + '用海方式' + '</td><td>' + '{用海方式}' + '</td></tr></tbody></table>';
-
+        var contentID = "<label class='data-fid loader' data-fid='{FID}'>Loading...</label>";
+        /*var contentID = '<table class="ui celled table"><tbody><tr><td>' + 'FID' + '</td><td>' + '{FID}' + '</td></tr><tr><td>' + '配号来源' + '</td><td>' + '{配号来源}' + '</td></tr><tr><td>' + '用海一级类' + '</td><td>' + '{用海一级类}' + '</td></tr><tr><td>' + '用海二级类' + '</td><td>' + '{用海二级类}' + '</td></tr><tr><td>' + '用海方式' + '</td><td>' + '{用海方式}' + '</td></tr></tbody></table>'
+         */
         //==widgets======================//
 
         var compass = new Compass({
@@ -59,10 +59,11 @@ require(["esri/Map", "esri/views/MapView", "esri/layers/MapImageLayer", "esri/la
                 id: lyrIds[1],
                 url: "http://localhost:6080/arcgis/rest/services/用海信息/MapServer/1",
                 popupTemplate: new PopupTemplate({
-                    title: 'title',
-                    content: tableContent
+                    title: 'ID: {FID}',
+                    content: contentID
                 })
             });
+            console.log(authLyrs[1]);
             map.add(authLyrs[1]);
 
             for (var i = 2; i < 6; i++) {
@@ -70,53 +71,13 @@ require(["esri/Map", "esri/views/MapView", "esri/layers/MapImageLayer", "esri/la
                     id: lyrIds[i],
                     url: "http://localhost:6080/arcgis/rest/services/用海信息/MapServer/" + i,
                     popupTemplate: new PopupTemplate({
-                        title: 'title',
-                        content: tableContent
+                        title: 'ID: {FID}',
+                        content: contentID
                     })
                 });
                 authLyrs[i] = tempLyr;
             }
 
-            var searchWidget = new Search({
-                view: view,
-                allPlaceholder: '搜索',
-                maxResults: 1000,
-                sources: [{
-                    featureLayer: new FeatureLayer({
-                        url: "http://localhost:6080/arcgis/rest/services/用海信息/MapServer/3"
-                    }),
-                    searchFields: ["用海一级类"],
-                    displayField: "用海一级类",
-                    exactMatch: false,
-                    outFields: ["FID", "用海一级类", "用海方式"],
-                    name: "用海一级类",
-                    placeholder: "搜索用海一级类"
-                }, {
-                    featureLayer: new FeatureLayer({
-                        url: "http://localhost:6080/arcgis/rest/services/用海信息/MapServer/4"
-                    }),
-                    searchFields: ["FID", "用海二级类"],
-                    suggestionTemplate: "{FID}, 用海二级类: {用海二级类}",
-                    exactMatch: false,
-                    outFields: ["FID", "用海一级类", "用海二级类"],
-                    name: "用海二级类"
-                }, {
-                    featureLayer: new FeatureLayer({
-                        url: "http://localhost:6080/arcgis/rest/services/用海信息/MapServer/5"
-                    }),
-                    searchFields: ["FID", "用海方式"],
-                    suggestionTemplate: "{FID}, 用海方式: {用海方式}",
-                    exactMatch: false,
-                    outFields: ["FID", "用海一级类", "用海方式"],
-                    name: "用海方式"
-                }]
-            });
-            searchWidget.startup();
-
-            view.ui.add(searchWidget, {
-                position: "top-left",
-                index: 0
-            });
             view.whenLayerView(authLyrs[1]).then(function (lyrView) {
                 lyrView.watch("updating", function (val) {
                     if (!val) {
@@ -125,22 +86,18 @@ require(["esri/Map", "esri/views/MapView", "esri/layers/MapImageLayer", "esri/la
                         // query all the features available for drawing.
                         lyrView.queryFeatures().then(function (results) {
                             console.log(results[0]);
-
-                            /*graphics = results;
-                            var fragment = document.createDocumentFragment();
-                            results.forEach(function(result, index) {
-                            var attributes = result.attributes;
-                            var name = attributes.ZIP + " (" +
-                            attributes.PO_NAME + ")"
-                            // Create a list zip codes in NY
-                            domConstruct.create("li", {
-                            className: "panel-result",
-                            tabIndex: 0,
-                            "data-result-id": index,
-                            textContent: name
-                            }, fragment);
+                            var sym = SimpleFillSymbol({
+                                color: "red",
+                                outline: {
+                                    color: [128, 128, 128, 0.5],
+                                    width: "0.5px"
+                                }
                             });
-                            domConstruct.place(fragment, listNode, "only");*/
+                            results.forEach(function (result, index) {
+                                var attributes = result.attributes;
+                                var name = attributes.ZIP + " (" + attributes.PO_NAME + ")";
+                                result.symbol = sym;
+                            });
                         });
                     }
                 });
@@ -239,17 +196,38 @@ require(["esri/Map", "esri/views/MapView", "esri/layers/MapImageLayer", "esri/la
             authLyrCtrl.switchTo($(this).val());
         });
 
-        function dataSrc() {
-            this.chart = {
-                "caption": "确权数据分类",
-                "subCaption": "用海一级类",
-                "xAxisName": "用海一级类",
-                "yAxisName": "数量",
-                "theme": "fint"
+        var managePopupContent = function () {
+            var status = 1;
+            return function () {
+                var el = $('.esri-popup-content')[0];
+                if (status === 1 && el.childElementCount > 0) {
+                    $('.esri-popup-content').unbind("DOMSubtreeModified");
+                    var fid = $('.esri-popup-content').find('.data-fid.loader').data('fid');
+                    if (fid) {
+                        $.get('http://localhost:3000/popup_content?id=' + fid, function (htmlStr) {
+                            $('.esri-popup-content').html(htmlStr);
+
+                            $('.ui.dropdown').dropdown();
+                            $('.popup-content-custom table').find('a').click(function () {
+                                var field = $(this).data('type');
+                                var qstr = 'SELECT `' + field + '` as label, count(`' + field + '` = `' + field + '`) as value FROM gis1.authorizing group by `' + field + '`';
+                                createChart(qstr, field);
+                            });
+                            $('.esri-popup-content').bind("DOMSubtreeModified", managePopupContent);
+                        });
+                    }
+
+                    status = 0;
+                };
+                if (el.childElementCount < 1) {
+                    status = 1;
+                };
             };
-            this.data = [];
-        }
-        var col3dShow = [];
+        }();
+        $('.esri-popup-content').bind("DOMSubtreeModified", managePopupContent);
+        view.on('click', function (evt) {
+            showCoordinates(evt);
+        });
 
         /*$.get('http://localhost:6080/arcgis/rest/services/用海信息/MapServer/legend?f=pjson', function(res) {
             legendJson = JSON.parse(res);
@@ -285,51 +263,9 @@ require(["esri/Map", "esri/views/MapView", "esri/layers/MapImageLayer", "esri/la
                   })
             }
         })*/
-
-        var tempSrc = new dataSrc();
-        tempSrc.data = [{
-            "label": "Jan",
-            "value": "420000"
-        }, {
-            "label": "Feb",
-            "value": "810000"
-        }, {
-            "label": "Mar",
-            "value": "720000"
-        }, {
-            "label": "Apr",
-            "value": "550000"
-        }, {
-            "label": "May",
-            "value": "910000"
-        }, {
-            "label": "Jun",
-            "value": "510000"
-        }, {
-            "label": "Jul",
-            "value": "680000"
-        }, {
-            "label": "Aug",
-            "value": "620000"
-        }, {
-            "label": "Sep",
-            "value": "610000"
-        }, {
-            "label": "Oct",
-            "value": "490000"
-        }, {
-            "label": "Nov",
-            "value": "900000"
-        }, {
-            "label": "Dec",
-            "value": "730000"
-        }];
-
-        //renderCol3d(tempSrc);
     });
 
     function showCoordinates(evt) {
-        console.log(evt);
-        $('#esri_widgets_Attribution_0 > div.esri-attribution__sources').html();
+        $('#esri_widgets_Attribution_0 > div.esri-attribution__sources').html(evt.mapPoint.latitude + evt.mapPoint.longitude);
     }
 });

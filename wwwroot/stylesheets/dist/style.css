@@ -41,15 +41,14 @@ body {
   padding-bottom: 4px;
 }
 #map-container #searchDiv {
-  display: none;
   position: absolute;
   left: 68px;
   top: 16px;
   padding: 2px;
   border-radius: 28px;
   border: 1px solid lightgray;
-  background: rgba(255, 255, 255, 0.7);
-  box-shadow: 4px 4px 12px -4px rgba(55, 55, 55, 0.6);
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 4px 4px 2px -4px rgba(55, 55, 55, 0.6);
 }
 #map-container #searchDiv .ui.search .ui.input.icon input {
   background: rgba(255, 255, 255, 0.8);
@@ -139,20 +138,24 @@ body {
 
 #bottom-left-view {
   position: absolute;
-  height: 284px;
-  top: calc(100% - 284px);
+  height: 354px;
+  top: calc(100% - 376px);
   left: 256px;
   display: none;
   background: white;
 }
-#bottom-left-view #buttons {
-  position: absolute;
-  right: 0px;
+#bottom-left-view .inner {
+  border: 1px solid lightgray;
+  border-radius: 8px;
+  margin: 4px;
 }
-#bottom-left-view #buttons i {
+#bottom-left-view .inner #buttons {
+  float: right;
+}
+#bottom-left-view .inner #buttons i {
   cursor: pointer;
 }
-#bottom-left-view .chart {
+#bottom-left-view .inner .chart {
   display: inline-block;
 }
 
@@ -163,4 +166,12 @@ body {
 
 #status > div {
   cursor: pointer;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.esri-popup-content .hidden {
+  display: none;
 }

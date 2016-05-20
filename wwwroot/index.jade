@@ -56,7 +56,7 @@ html
 							option(value=5) 用海方式
 				.title
 					i.icon.dropdown
-					|统计与分析
+					|区域类型统计与分析
 				.content
 					#statistics.menu
 						.item.statistic
@@ -73,36 +73,41 @@ html
 							a(data-type='method') 用海方式
 				.title
 					i.icon.dropdown
-					|状态监测
+					|项目状态统计与分析
 				.content
 					#status.menu
 						.item.statistic
 							i.icon.pie.chart
-							a(data-type='source') 项目进展状态
-						.item.statistic
-							i.icon.bar.chart
-							a(data-type='cata1') 项目进展情况
+							a(data-type='进展情况') 项目进展状态
 						.item.statistic
 							i.icon.area.chart
-							a(data-type='cata2') 填海情况
+							a(data-type='填海情况') 填海情况
 						.item.statistic
 							i.icon.bar.chart
-							a(data-type='method') 海域使用上报情况
+							a(data-type='海域使用上报情况') 海域使用上报情况
 						.item.statistic
 							i.icon.legal
-							a(data-type='source') 违法查处
+							a(data-type='违法情况') 违法查处
 						.item.statistic
 							i.icon.bar.chart
-							a(data-type='cata1') 用海调整情况
+							a(data-type='用海调整情况') 用海调整情况
 						.item.statistic
 							i.icon.file.text.outline
-							a(data-type='cata2') 确权发证情况
+							a(data-type='确权发证情况') 确权发证情况
 						.item.statistic
 							i.icon.bar.chart
-							a(data-type='method') 利益相关者情况
+							a(data-type='受益方上报情况') 利益相关者情况
+				.title
+					i.icon.dropdown
+					|统计报表
+				.content
+					#reports.menu
 						.item.statistic
 							i.icon.file.excel.outline
 							a(data-type='method') 统计报表
+						.item.statistic
+							i.icon.bar.chart
+							a(data-type='progress_status') 项目进展情况
 		#map-container
 			#tools
 				.tool
@@ -132,11 +137,20 @@ html
 					i.icon.chevron.up
 			#legend
 		#bottom-left-view.hidden
-			#buttons
-				i.icon.undock.caret.up(title=undock)
-				i.icon.close(title=close)
-			#myChart.chart
-			#myChart2.chart
+			.inner
+				.chartSelection
+					label 图表类型：
+					select.ui.dropdown.small(name='chartType')
+						option(value='column2d') 柱状
+						option(value='column3d') 柱状3D
+						option(value='pie2d') 饼状
+						option(value='pie3d') 饼状3D
+						option(value='line') 折线
+					#buttons
+						//i.icon.undock.caret.up(title=undock)
+						i.icon.close(title=close onclick="$('#bottom-left-view').hide()")
+				#myChart.chart
+				//#myChart2.chart
 		script(src='/javascripts/dist/jquery-2.1.4.min.js')
 		script(src='/arcgis_js_api/library/4.0/4.0/init.js')
 		//script(src='https://js.arcgis.com/4.0/')
