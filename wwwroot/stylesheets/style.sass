@@ -42,16 +42,28 @@ div
 	width: calc(100% - 256px)
 	height: calc(100% - 78px)
 	overflow: hidden
-	border-top: $border
 	background: white
+	transition: all 0.6s ease-in-out
 	#tools
 		position: absolute
 		left: 0px
 		top: 108px
 		margin: 15px
+		transition: all 0.6s ease-in-out
 		.tool
+			min-height: 32px
 			padding-top: 4px
 			padding-bottom: 4px
+			a#fullScreen
+				padding: 8px 10px
+				background: white
+				color: gray
+				box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3)
+				cursor: pointer
+				.fa-compress
+					display: none
+			a: hover
+				box-shadow: inset 0 1px 20px 20px rgba(0, 0, 0, 0.3)
 		#compass
 		#home
 		#basemap
@@ -63,7 +75,8 @@ div
 		border-radius: 28px
 		border: 1px solid lightgray
 		background: rgba(255,255,255,0.9)
-		box-shadow: 4px 4px 2px -4px rgba(55,55,55,0.6)
+		box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3)
+		transition: all 0.6s ease-in-out
 		.ui.search
 			.ui.input.icon
 				input
@@ -89,9 +102,8 @@ div
 		position: absolute
 		top: 68px
 		width: 100%
-		height: 16px
-		//background-color: #409EDD
-		//background-image: url('/bg00.png')
+		height: 6px
+		border-bottom: $border
 		background: linear-gradient(to right, #b42a29, #2752b6)
 
 #nav-left
@@ -99,10 +111,11 @@ div
 	top: $nav-top-height
 	width: $left-nav-width
 	height: calc(100% - 96px)
-	background: white
 	padding: 16px 8px
 	z-index: 9
+	transition: all 0.6s ease-in-out
 	.ui.styled.fluid.accordion
+		box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3)
 		.content
 			padding-left: 32px
 			.ui.toggle.checkbox
@@ -139,16 +152,23 @@ div
 #bottom-left-view
 	position: absolute
 	//width: 484px
-	height: 354px
-	top: calc(100% - 376px)
+	height: 358px
+	top: calc(100% - 378px)
 	left: 256px
 	display: none
 	background: white
+	transition: all 0.6s ease-in-out
 	//box-shadow: -4px 4px 12px -4px rgba(55,55,55,0.6)
-	.inner
+	.report-container,
+	.chart-container
+		padding: 4px
 		border: 1px solid lightgray
 		border-radius: 8px
 		margin: 4px
+		display: inline-block
+	.report-container
+		width: 324px
+	.chart-container
 		.chartSelection
 		#buttons
 			float: right
@@ -171,3 +191,22 @@ div
 .esri-popup-content
 	.hidden
 		display: none
+
+body.full-screen
+	#map-container > div.esri-view-root > div.esri-ui > div.esri-ui-inner-container.esri-ui-corner-container > div.esri-ui-top-left.esri-ui-corner
+		left: 264px
+	#map-container
+		top: 0px
+		left: 0px
+		width: 100%
+		height: 100%
+		#tools
+			left: 264px
+		#searchDiv
+			left: 324px
+	#nav-left
+		top: 0px
+		left: 0px
+	#bottom-left-view
+		left: 0px
+		top: calc(100% - 374px)

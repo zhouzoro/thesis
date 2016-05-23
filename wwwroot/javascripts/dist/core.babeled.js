@@ -1,6 +1,6 @@
 "use strict";
 
-require(["esri/Map", "esri/views/MapView", "esri/layers/MapImageLayer", "esri/layers/FeatureLayer", "esri/PopupTemplate", "esri/widgets/Legend", "esri/widgets/Compass", "esri/widgets/Compass/CompassViewModel", "esri/widgets/Home", "esri/widgets/Home/HomeViewModel", "esri/widgets/BasemapToggle", "esri/widgets/Popup", "esri/tasks/QueryTask", "esri/tasks/support/Query", "esri/symbols/SimpleFillSymbol", "dojo/domReady!"], function (Map, MapView, MapImageLayer, FeatureLayer, PopupTemplate, Legend, Compass, CompassVM, Home, HomeVM, BasemapToggle, Popup, QueryTask, Query, SimpleFillSymbol) {
+require(["esri/Map", "esri/views/MapView", "esri/layers/MapImageLayer", "esri/layers/FeatureLayer", "esri/PopupTemplate", "esri/widgets/Legend", "esri/widgets/Compass", "esri/widgets/Compass/CompassViewModel", "esri/widgets/Home", "esri/widgets/Home/HomeViewModel", "esri/widgets/BasemapToggle", "esri/widgets/Popup", "esri/tasks/QueryTask", "esri/tasks/support/Query", "esri/symbols/SimpleFillSymbol", "esri/symbols/SimpleMarkerSymbol", "esri/layers/GraphicsLayer", "esri/Graphic", "esri/geometry/Circle", "esri/geometry/Point", "esri/renderers/SimpleRenderer", "esri/renderers/ClassBreaksRenderer", "dojo/domReady!"], function (Map, MapView, MapImageLayer, FeatureLayer, PopupTemplate, Legend, Compass, CompassVM, Home, HomeVM, BasemapToggle, Popup, QueryTask, Query, SimpleFillSymbol, SimpleMarkerSymbol, GraphicsLayer, Graphic, Circle, Point, SimpleRenderer, ClassBreaksRenderer) {
 
     var map = new Map({
         basemap: "oceans"
@@ -14,10 +14,9 @@ require(["esri/Map", "esri/views/MapView", "esri/layers/MapImageLayer", "esri/la
     var services = ['zoning', 'authorized', 'authorized_source', 'authorized_cata1', 'authorized_cata2', 'authorized_method'];
     view.then(function () {
 
-        map.on('mouse-move', showCoordinates);
         var contentID = "<label class='data-fid loader' data-fid='{FID}'>Loading...</label>";
-        /*var contentID = '<table class="ui celled table"><tbody><tr><td>' + 'FID' + '</td><td>' + '{FID}' + '</td></tr><tr><td>' + '配号来源' + '</td><td>' + '{配号来源}' + '</td></tr><tr><td>' + '用海一级类' + '</td><td>' + '{用海一级类}' + '</td></tr><tr><td>' + '用海二级类' + '</td><td>' + '{用海二级类}' + '</td></tr><tr><td>' + '用海方式' + '</td><td>' + '{用海方式}' + '</td></tr></tbody></table>'
-         */
+        var contentTable = '<table class="ui celled table"><tbody><tr><td>' + '区域ID' + '</td><td>' + '{FID}' + '</td></tr><tr><td>' + 'radius' + '</td><td>' + '{radius}' + '</td></tr><tr><td>' + '配号来源' + '</td><td>' + '{配号来源}' + '</td></tr><tr><td>' + '用海一级类' + '</td><td>' + '{用海一级类}' + '</td></tr><tr><td>' + '用海二级类' + '</td><td>' + '{用海二级类}' + '</td></tr><tr><td>' + '用海方式' + '</td><td>' + '{用海方式}' + '</td></tr><tr><td class="projects">' + '项目数量' + '</td><td>*</td></tr></tbody></table>';
+
         //==widgets======================//
 
         var compass = new Compass({
@@ -51,57 +50,265 @@ require(["esri/Map", "esri/views/MapView", "esri/layers/MapImageLayer", "esri/la
 
         //==widgets======================//
 
-        var authLyrCtrl = function () {
+        var zoningLyr = new FeatureLayer({
+            id: 'base',
+            url: "http://localhost:6080/arcgis/rest/services/区域/MapServer/0"
+        });
 
-            var lyrIds = ['功能区划', '确权数据', '确权数据--配号来源', '确权数据--用海一级类', '确权数据--用海二级类', '确权数据--用海方式'];
-            var authLyrs = [];
-            authLyrs[1] = new FeatureLayer({
-                id: lyrIds[1],
-                url: "http://localhost:6080/arcgis/rest/services/用海信息/MapServer/1",
+        map.add(zoningLyr);
+        map.reorder(zoningLyr, 0);
+
+        var zoningLyrCtrl = {
+            on: true,
+            toggle: function toggle() {
+                if (this.on) {
+                    map.remove(zoningLyr);
+                } else {
+                    map.add(zoningLyr);
+                    map.reorder(zoningLyr, 0);
+                };
+                this.on = !this.on;
+            }
+        };
+
+        var lyrIds = ['功能区划', '确权数据', '确权数据--配号来源', '确权数据--用海一级类', '确权数据--用海二级类', '确权数据--用海方式'];
+
+        var authLyrs = [];
+        authLyrs[1] = new FeatureLayer({
+            id: lyrIds[1],
+            outFields: ["*"],
+            url: "http://localhost:6080/arcgis/rest/services/用海信息/MapServer/1",
+            popupTemplate: new PopupTemplate({
+                title: 'ID: {FID}',
+                content: contentTable
+            })
+        });
+        map.add(authLyrs[1]);
+
+        for (var i = 2; i < 6; i++) {
+            var tempLyr = new FeatureLayer({
+                id: lyrIds[i],
+                outFields: ["*"],
+                url: "http://localhost:6080/arcgis/rest/services/用海信息/MapServer/" + i,
                 popupTemplate: new PopupTemplate({
                     title: 'ID: {FID}',
-                    content: contentID
+                    content: contentTable
                 })
             });
-            console.log(authLyrs[1]);
-            map.add(authLyrs[1]);
 
-            for (var i = 2; i < 6; i++) {
-                var tempLyr = new FeatureLayer({
-                    id: lyrIds[i],
-                    url: "http://localhost:6080/arcgis/rest/services/用海信息/MapServer/" + i,
-                    popupTemplate: new PopupTemplate({
-                        title: 'ID: {FID}',
-                        content: contentID
-                    })
-                });
-                authLyrs[i] = tempLyr;
+            authLyrs[i] = tempLyr;
+        }
+
+        var authLyrCtrl = {
+            inviewIndex: 1,
+            on: true,
+            switchTo: function switchTo(val) {
+                if (val !== this.inviewIndex) {
+                    map.remove(authLyrs[this.inviewIndex]);
+                    map.add(authLyrs[val]);
+                    map.reorder(authLyrs[val], 1);
+                    this.inviewIndex = val;
+                }
+            },
+            show: function show() {
+                map.add(authLyrs[this.inviewIndex]);
+                map.reorder(authLyrs[this.inviewIndex], 1);
+                this.on = true;
+            },
+            hide: function hide() {
+                map.remove(authLyrs[this.inviewIndex]);
+                this.on = false;
+            },
+            toggle: function toggle() {
+                if (this.on) {
+                    map.remove(authLyrs[this.inviewIndex]);
+                    this.on = false;
+                } else {
+                    map.add(authLyrs[this.inviewIndex]);
+                    map.reorder(authLyrs[this.inviewIndex], 1);
+                    this.on = true;
+                }
             }
+        };
 
-            view.whenLayerView(authLyrs[1]).then(function (lyrView) {
-                lyrView.watch("updating", function (val) {
-                    if (!val) {
-                        // wait for the layer view to finish updating
+        function showVS(results) {
 
-                        // query all the features available for drawing.
-                        lyrView.queryFeatures().then(function (results) {
-                            console.log(results[0]);
-                            var sym = SimpleFillSymbol({
-                                color: "red",
-                                outline: {
-                                    color: [128, 128, 128, 0.5],
-                                    width: "0.5px"
-                                }
-                            });
-                            results.forEach(function (result, index) {
-                                var attributes = result.attributes;
-                                var name = attributes.ZIP + " (" + attributes.PO_NAME + ")";
-                                result.symbol = sym;
-                            });
-                        });
-                    }
-                });
+            var features = results.features;
+            var sym = new SimpleMarkerSymbol({
+                color: [26, 119, 80, 0.7],
+                outline: { // autocasts as new SimpleLineSymbol()
+                    color: [255, 255, 255],
+                    width: 1
+                }
             });
+
+            var sym2 = new SimpleFillSymbol({
+                color: [26, 119, 80, 0.7],
+                outline: { // autocasts as new SimpleLineSymbol()
+                    color: [255, 255, 255],
+                    width: 2
+                }
+            });
+
+            var fields = [{
+                name: "ObjectID",
+                alias: "ObjectID",
+                type: "oid"
+            }, {
+                name: "radius",
+                alias: "radius",
+                type: "double"
+            }, {
+                name: "radius2",
+                alias: "radius2",
+                type: "double"
+            }];
+
+            fields = fields.concat(authLyrs[1].fields);
+
+            var colorVisVar = {
+                type: "color",
+                field: "radius",
+                stops: [{
+                    value: 4,
+                    color: [45, 195, 125, 0.9]
+                }, {
+                    value: 10,
+                    color: [45, 195, 125, 0.4]
+                }]
+            };
+
+            var colorVisVar2 = {
+                type: "color",
+                field: "radius2",
+                stops: [{
+                    value: 4,
+                    color: [155, 45, 95, 0.9]
+                }, {
+                    value: 10,
+                    color: [155, 45, 95, 0.4]
+                }]
+            };
+            var sizeVisVar = {
+                type: "size",
+                field: "radius",
+                valueUnit: "unknown",
+                stops: [{
+                    value: 4,
+                    size: 8
+                }, {
+                    value: 6,
+                    size: 24
+                }, {
+                    value: 8,
+                    size: 36
+                }, {
+                    value: 10,
+                    size: 42
+                }, {
+                    value: 12,
+                    size: 100
+                }]
+            };
+
+            var sizeVisVar2 = {
+                type: "size",
+                field: "radius2",
+                valueUnit: "unknown",
+                stops: [{
+                    value: 4,
+                    size: 42
+                }, {
+                    value: 6,
+                    size: 36
+                }, {
+                    value: 8,
+                    size: 24
+                }, {
+                    value: 10,
+                    size: 8
+                }]
+            };
+            var renderer = new SimpleRenderer({
+                // Define a default marker symbol with a small outline
+                symbol: new SimpleMarkerSymbol({
+                    color: [255, 105, 55, 0.7],
+                    outline: { // autocasts as new SimpleLineSymbol()
+                        color: [255, 255, 255, 0.6],
+                        width: 1
+                    }
+                }),
+                // Set the color and size visual variables on the renderer
+                visualVariables: [colorVisVar, sizeVisVar]
+            });
+
+            var renderer2 = new SimpleRenderer({
+                // Define a default marker symbol with a small outline
+                symbol: new SimpleMarkerSymbol({
+                    color: [255, 105, 55, 0.7],
+                    outline: { // autocasts as new SimpleLineSymbol()
+                        color: [255, 255, 255, 0.8],
+                        width: 1
+                    }
+                }),
+                // Set the color and size visual variables on the renderer
+                visualVariables: [colorVisVar2, sizeVisVar2]
+            });
+
+            features.forEach(function (feature, index) {
+                var attributes = feature.attributes;
+                var name = attributes.ZIP + " (" + attributes.PO_NAME + ")";
+                var gm = feature.geometry;
+
+                var point = new Point({
+                    longitude: gm.longitude ? gm.longitude : gm.centroid.longitude,
+                    latitude: gm.latitude ? gm.latitude : gm.centroid.latitude
+                });
+
+                var radius = feature.attributes.FID > 1800 ? 10 : feature.attributes.FID > 1700 ? 8 : feature.attributes.FID > 1500 ? 6 : 4;
+
+                var circle = new Circle({
+                    radius: radius,
+                    radiusUnit: 'miles',
+                    center: feature.geometry.getPoint(0, 0)
+                });
+                feature.attributes.ObjectID = index;
+
+                feature.attributes.radius = radius;
+
+                feature.attributes.radius2 = 14 - radius;
+                //feature.symbol = sym2;
+                //console.log(point.longitude + "-" + point.latitude);
+                //feature.geometry = circle;
+            });
+
+            var vslyr = new FeatureLayer({
+                source: features,
+                fields: fields,
+                objectIdField: "ObjectID",
+                renderer: renderer,
+                geometryType: "polygon",
+                id: 'vs'
+
+            });
+
+            map.add(vslyr);
+
+            map.reorder(vslyr, 99);
+
+            var vslyr2 = new FeatureLayer({
+                source: features,
+                fields: fields,
+                objectIdField: "ObjectID",
+                renderer: renderer2,
+                geometryType: "polygon",
+                id: 'vs2'
+
+            });
+
+            //map.add(vslyr2);
+
+            map.reorder(vslyr2, 99);
             /*on(listNode, on.selector("li", a11yclick), function(evt) {
                 var target = evt.target;
                 var resultId = domAttr.get(target, "data-result-id");
@@ -117,65 +324,10 @@ require(["esri/Map", "esri/views/MapView", "esri/layers/MapImageLayer", "esri/la
                     });
                 }
             });*/
-
-            return {
-                inviewIndex: 1,
-                on: true,
-                switchTo: function switchTo(val) {
-                    console.log('switching');
-                    console.log(this.inviewIndex);
-                    console.log(val);
-                    if (val !== this.inviewIndex) {
-                        map.remove(authLyrs[this.inviewIndex]);
-                        console.log('switching');
-                        map.add(authLyrs[val]);
-                        this.inviewIndex = val;
-                    }
-                },
-                show: function show() {
-                    map.add(authLyrs[this.inviewIndex]);
-                    this.on = true;
-                },
-                hide: function hide() {
-                    map.remove(authLyrs[this.inviewIndex]);
-                    this.on = false;
-                },
-                toggle: function toggle() {
-                    if (this.on) {
-                        map.remove(authLyrs[this.inviewIndex]);
-                        this.on = false;
-                    } else {
-                        map.add(authLyrs[this.inviewIndex]);
-                        this.on = true;
-                    }
-                }
-            };
-        }();
-
-        var zoningLyrCtrl = function () {
-
-            var zoningLyr = new FeatureLayer({
-                id: '功能区划',
-                url: "http://localhost:6080/arcgis/rest/services/zoning/MapServer/0"
-            });
-
-            return {
-                on: false,
-                toggle: function toggle() {
-                    if (this.on) {
-                        map.remove(zoningLyr);
-                    } else {
-
-                        map.add(zoningLyr);
-                        if (authLyrCtrl.on) {
-                            authLyrCtrl.hide;
-                            authLyrCtrl.show;
-                        }
-                    };
-                    this.on = !this.on;
-                }
-            };
-        }();
+        }
+        authLyrs[1].then(function () {
+            authLyrs[1].queryFeatures().then(showVS);
+        });
 
         $('input.toggle.toggle-zoning').change(function () {
             zoningLyrCtrl.toggle();
@@ -184,15 +336,8 @@ require(["esri/Map", "esri/views/MapView", "esri/layers/MapImageLayer", "esri/la
         $('input.toggle.toggle-auth').change(function () {
             authLyrCtrl.toggle();
         });
-        /*$('input.toggle.toggle-zoning').change(function() {
-            if ($(this).val() == 'on') {
-                authLyrCtrl.show;
-            } else {
-                authLyrCtrl.hide;
-              }
-        })*/
+
         $('select[name=authLyr]').change(function () {
-            console.log($(this).val());
             authLyrCtrl.switchTo($(this).val());
         });
 
@@ -224,12 +369,12 @@ require(["esri/Map", "esri/views/MapView", "esri/layers/MapImageLayer", "esri/la
                 };
             };
         }();
-        $('.esri-popup-content').bind("DOMSubtreeModified", managePopupContent);
-        view.on('click', function (evt) {
-            showCoordinates(evt);
-        });
 
-        /*$.get('http://localhost:6080/arcgis/rest/services/用海信息/MapServer/legend?f=pjson', function(res) {
+        /*$('.esri-popup-content').bind("DOMSubtreeModified", managePopupContent);
+        view.on('click', function(evt) {
+            showCoordinates(evt);
+        })
+          $.get('http://localhost:6080/arcgis/rest/services/用海信息/MapServer/legend?f=pjson', function(res) {
             legendJson = JSON.parse(res);
             for (var i = 1; i < 6; i++) {
                 var layerTemp = legendJson.layers[i];

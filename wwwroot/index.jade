@@ -2,9 +2,11 @@ doctype html
 html
 	head
 		title the map
+		meta(charset='utf-8')
 		meta(name='viewport' content='width=device-width, initial-scale=1')
 		link(rel='stylesheet' href='/arcgis_js_api/library/4.0/4.0/esri/css/main.css')
 		link(rel='stylesheet' href='/semantic/semantic.min.css')
+		link(rel='stylesheet' href='stylesheets/dist/fa.min.css')
 		link(rel='stylesheet' href='stylesheets/dist/style.min.css')
 	body
 		#nav-top
@@ -18,34 +20,11 @@ html
 					|图层选择
 				.content.active
 					.ui.toggle.checkbox
-						input.toggle.toggle-zoning(type='checkbox' name='zoningLyr')
+						input.toggle.toggle-zoning(type='checkbox' name='zoningLyr' value='on')
 						label 功能区划
 					.ui.toggle.checkbox
 						input.toggle.toggle-auth(type='checkbox' name='authLyr' value='on')
 						label 确权区域
-					//.ui.form
-						.grouped.fields
-							label 确权区域分类
-							.field
-								.ui.radio.checkbox
-									input(type='radio' name='authLyr')radio
-									label 确权区域
-							.field
-								.ui.radio.checkbox
-									input(type='radio' name='authLyr')
-									label 配号来源
-							.field
-								.ui.radio.checkbox
-									input(type='radio' name='authLyr')
-									label 用海一级类
-							.field
-								.ui.radio.checkbox
-									input(type='radio' name='authLyr')
-									label 用海二级类
-							.field
-								.ui.radio.checkbox
-									input(type='radio' name='authLyr')
-									label 用海方式
 					.auth-selection
 						label 确权区域分类
 						select.ui.dropdown.small(name='authLyr')
@@ -111,6 +90,10 @@ html
 		#map-container
 			#tools
 				.tool
+					a#fullScreen(title='expand fulls creen')
+						i.fa.fa-expand
+						i.fa.fa-compress
+				.tool
 					#compass
 				.tool
 					#home
@@ -119,7 +102,7 @@ html
 			#searchDiv
 				.ui.search
 					.ui.input.icon
-						input.prompt(type='text' placeholder='搜索区域...')
+						input.prompt(type='text' placeholder='搜索...')
 						i.search.icon
 					.ui.button.basic 高级
 					#searchResult.results
@@ -129,15 +112,17 @@ html
 						.result
 							.content
 								.title USCWI4R8
-		//#top-right-legend
-			.legend-btns
-				.show-legend.ui.labeled.icon.button.basic.white.small(onclick='showLegend()') 图例
-					i.icon.chevron.down
-				.hide-legend.ui.labeled.icon.button.basic.white.small(onclick='hideLegend()') 收起
-					i.icon.chevron.up
-			#legend
+					.advanced
+
+
+
+
+
+
+						
 		#bottom-left-view.hidden
-			.inner
+			.report-container.hidden
+			.chart-container.hidden
 				.chartSelection
 					label 图表类型：
 					select.ui.dropdown.small(name='chartType')

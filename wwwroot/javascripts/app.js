@@ -1,12 +1,32 @@
 $(document).ready(() => {
-    $("input.toggle-auth").click();
+    $("input[value='on']").click();
     $('.ui.dropdown').dropdown();
     $('.ui.accordion').accordion();
 
+    //click show charts
     $('#status > div > a').click(function() {
-        showStats($(this).data('type'));
+        var field = $(this).data('type');
+        var qstr = 'SELECT `' + field + '` as label, count(`' + field + '` = `' + field + '`) as value FROM gis1.authorizing group by `' + field + '`';
+        createChart(qstr, field);
     });
-    showStats();
+
+    //click expand full screen
+    $('a#fullScreen').click(function() {
+        var btn = $(this);
+        var body = $('body');
+        if (body.hasClass('full-screen')) {
+            body.removeClass('full-screen');
+            btn.find('.fa-compress').hide();
+            btn.find('.fa-expand').show();
+            btn.attr('title','exit full screen');
+        } else {
+            body.addClass('full-screen');
+            btn.find('.fa-expand').hide();
+            btn.find('.fa-compress').show();
+            btn.attr('title','expand full screen');
+        }
+    })
+
 })
 
 function showLegend() {
@@ -21,44 +41,9 @@ function hideLegend() {
     $('.show-legend').css('display', 'inline-block');
 }
 
-function showStats() {
-    /*var qstrs = {},
-        titles = {};
-    titles['progress_status'] = '项目进展状态';
-    qstrs['progress_status'] = 'select sum(progress_status = 0) as "开工", sum(progress_status = 1) as "竣工", sum(progress_status = 2) as "验收" from projects';
-    titles['reclaiming'] = '填海统计';
-    qstrs['reclaiming'] = 'select sum(reclaiming = 0) as "无填海", sum(reclaiming = 1) as "填海" from projects';
-    titles['rec_status'] = '填海超面积情况统计';
-    qstrs['rec_status'] = 'select sum(rec_status = 0) as "超面积", sum(rec_status = 1) as "正常" from projects';
-    titles['submit_status'] = '海域使用上报情况';
-    qstrs['submit_status'] = 'select sum(submit_status = 0) as "已上报", sum(submit_status = 1) as "上报预警", sum(submit_status = 2) as "上报报警" from projects';
-    titles['monitoring'] = '动态监测情况';
-    qstrs['monitoring'] = 'select sum(monitoring = 0) as "未监测", sum(monitoring = 1) as "已监测" from projects';
-    titles['legal_status'] = '违法情况';
-    qstrs['legal_status'] = 'select sum(legal_status = 0) as "违法", sum(legal_status = 1) as "合法" from projects';
-    titles['ajust_status'] = '用海调整情况';
-    qstrs['ajust_status'] = 'select sum(ajust_status = 0) as "无调整", sum(ajust_status = 1) as "有调整" from projects';
-    titles['ajust_submit_status'] = '用海调整上报情况';
-    qstrs['ajust_submit_status'] = 'select sum(ajust_submit_status = 0) as "未上报", sum(ajust_submit_status = 1) as "已上报" from projects';
-    titles['ajust_approval_status'] = '用海调整审批情况';
-    qstrs['ajust_approval_status'] = 'select sum(ajust_approval_status = 0) as "未通过", sum(ajust_approval_status = 1) as "已通过" from projects';
-    titles['auth_certified_status'] = '确权发证情况';
-    qstrs['auth_certified_status'] = 'select sum(auth_certified_status = 0) as "未发证", sum(auth_certified_status = 1) as "已发证" from projects';
-    titles['benif_submit_status'] = '利益相关者上报情况';
-    qstrs['benif_submit_status'] = 'select sum(benif_submit_status = 0) as "未上报", sum(benif_submit_status = 1) as "已上报" from projects';
-    titles['benif_approval_status'] = '利益相关者上报审批情况';
-    qstrs['benif_approval_status'] = 'select sum(benif_approval_status = 0) as "未通过", sum(benif_approval_status = 1) as "已通过" from projects';
-*/
-    $('#status > div > a').click(function() {
-        var field = $(this).data('type');
-        var qstr = 'SELECT `' + field + '` as label, count(`' + field + '` = `' + field + '`) as value FROM gis1.authorizing group by `' + field + '`';
-        console.log(qstr);
-        createChart(qstr, field);
-    });
-}
-
 function createChart(qstr, title) {
     $('#bottom-left-view').show();
+    $('.chart-container').show();
     $.get('http://localhost:3000/exq?qs=' + qstr, function(res) {
 
 
@@ -83,7 +68,17 @@ function fChart(title, dataSrc, container, initType = 'column2d') {
 
         FusionCharts.ready(function() {
             var tempData = {
-                data: dataSrc.data
+                data: dataSrc.data,
+                events: {
+                    "chartClick": function(evt, dat) {
+                        console.log(evt);
+                        console.log(dat);
+                    },
+                    "dataLabelClick": function(evt, dat) {
+                        console.log(evt);
+                        console.log(dat);
+                    },
+                }
             };
             tempData["chart"] = dataSrc[chartType];
             var newChart = new FusionCharts({
@@ -220,6 +215,6 @@ function submitEdit() {
     var frm = $(this).next('form')[0];
     var formData = new FormData(frm);
     var fid = $(this).data('id');
-    formData.append('id',fid);
+    formData.append('id', fid);
     xhr.send(formData);
 }
