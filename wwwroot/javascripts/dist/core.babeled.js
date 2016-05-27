@@ -14,6 +14,10 @@ require(["esri/Map", "esri/views/MapView", "esri/layers/MapImageLayer", "esri/la
     var services = ['zoning', 'authorized', 'authorized_source', 'authorized_cata1', 'authorized_cata2', 'authorized_method'];
     view.then(function () {
 
+        $('input[name="search"').keyup(searchForIt).change(searchForIt);
+
+        $('i.icon.search').click(searchForIt);
+
         var contentID = "<label class='data-fid loader' data-fid='{FID}'>Loading...</label>";
         var contentTable = '<table class="ui celled table"><tbody><tr><td>' + '区域ID' + '</td><td>' + '{FID}' + '</td></tr><tr><td>' + 'radius' + '</td><td>' + '{radius}' + '</td></tr><tr><td>' + '配号来源' + '</td><td>' + '{配号来源}' + '</td></tr><tr><td>' + '用海一级类' + '</td><td>' + '{用海一级类}' + '</td></tr><tr><td>' + '用海二级类' + '</td><td>' + '{用海二级类}' + '</td></tr><tr><td>' + '用海方式' + '</td><td>' + '{用海方式}' + '</td></tr><tr><td class="projects">' + '项目数量' + '</td><td>*</td></tr></tbody></table>';
 
@@ -132,8 +136,11 @@ require(["esri/Map", "esri/views/MapView", "esri/layers/MapImageLayer", "esri/la
         };
 
         function showVS(results) {
-
+            /*****
+                multipul layers for vs different outline size
+              ******/
             var features = results.features;
+
             var sym = new SimpleMarkerSymbol({
                 color: [26, 119, 80, 0.7],
                 outline: { // autocasts as new SimpleLineSymbol()
@@ -232,7 +239,7 @@ require(["esri/Map", "esri/views/MapView", "esri/layers/MapImageLayer", "esri/la
             var renderer = new SimpleRenderer({
                 // Define a default marker symbol with a small outline
                 symbol: new SimpleMarkerSymbol({
-                    color: [255, 105, 55, 0.7],
+                    color: [45, 195, 125, 0.7],
                     outline: { // autocasts as new SimpleLineSymbol()
                         color: [255, 255, 255, 0.6],
                         width: 1
@@ -245,7 +252,7 @@ require(["esri/Map", "esri/views/MapView", "esri/layers/MapImageLayer", "esri/la
             var renderer2 = new SimpleRenderer({
                 // Define a default marker symbol with a small outline
                 symbol: new SimpleMarkerSymbol({
-                    color: [255, 105, 55, 0.7],
+                    color: [45, 195, 125, 0.7],
                     outline: { // autocasts as new SimpleLineSymbol()
                         color: [255, 255, 255, 0.8],
                         width: 1
@@ -255,6 +262,21 @@ require(["esri/Map", "esri/views/MapView", "esri/layers/MapImageLayer", "esri/la
                 visualVariables: [colorVisVar2, sizeVisVar2]
             });
 
+            function getSimpleR(outlineWidth) {
+                return new SimpleRenderer({
+                    // Define a default marker symbol with a small outline
+                    symbol: new SimpleMarkerSymbol({
+                        color: [45, 195, 125, 0.8],
+                        outline: { // autocasts as new SimpleLineSymbol()
+                            color: [85, 24 * outlineWidth, 185, 0.6],
+                            width: outlineWidth - 4
+                        }
+                    }),
+                    // Set the color and size visual variables on the renderer
+                    visualVariables: [sizeVisVar2]
+                });
+            }
+            var featureSets = [[], [], [], []];
             features.forEach(function (feature, index) {
                 var attributes = feature.attributes;
                 var name = attributes.ZIP + " (" + attributes.PO_NAME + ")";
@@ -277,10 +299,32 @@ require(["esri/Map", "esri/views/MapView", "esri/layers/MapImageLayer", "esri/la
                 feature.attributes.radius = radius;
 
                 feature.attributes.radius2 = 14 - radius;
-                //feature.symbol = sym2;
-                //console.log(point.longitude + "-" + point.latitude);
-                //feature.geometry = circle;
+                switch (feature.attributes.radius2) {
+                    case 4:
+                        featureSets[0].push(feature);
+                    case 6:
+                        featureSets[1].push(feature);
+                    case 8:
+                        featureSets[2].push(feature);
+                    case 10:
+                        featureSets[3].push(feature);
+                }
             });
+            for (var index in featureSets) {
+                var vslyr = new FeatureLayer({
+                    source: featureSets[index],
+                    fields: fields,
+                    objectIdField: "ObjectID",
+                    renderer: getSimpleR(index * 2 + 4),
+                    geometryType: "polygon",
+                    id: 'vs' + index
+
+                });
+
+                map.add(vslyr);
+
+                map.reorder(vslyr, 99);
+            }
 
             var vslyr = new FeatureLayer({
                 source: features,
@@ -292,10 +336,9 @@ require(["esri/Map", "esri/views/MapView", "esri/layers/MapImageLayer", "esri/la
 
             });
 
-            map.add(vslyr);
+            //map.add(vslyr);
 
-            map.reorder(vslyr, 99);
-
+            //map.reorder(vslyr, 99);
             var vslyr2 = new FeatureLayer({
                 source: features,
                 fields: fields,
@@ -325,8 +368,9 @@ require(["esri/Map", "esri/views/MapView", "esri/layers/MapImageLayer", "esri/la
                 }
             });*/
         }
+
         authLyrs[1].then(function () {
-            authLyrs[1].queryFeatures().then(showVS);
+            //authLyrs[1].queryFeatures().then(showVS);
         });
 
         $('input.toggle.toggle-zoning').change(function () {
@@ -408,6 +452,112 @@ require(["esri/Map", "esri/views/MapView", "esri/layers/MapImageLayer", "esri/la
                   })
             }
         })*/
+
+        function searchForIt() {
+            var resultDiv = $('#searchResult.results');
+            resultDiv.addClass('visible');
+            var $input = $('input[name="search"');
+            $('i.icon.remove').show();
+            $('i.icon.search').hide();
+            console.log('http://localhost:3000/search?q=' + $input.val());
+            $.get('http://localhost:3000/search?q=' + $input.val(), function (res) {
+                console.log(res);
+                var resultDiv = $('#searchResult.results');
+                resultDiv.find('.result').remove();
+                var projects = resultDiv.find('.projects');
+                var zones = resultDiv.find('.zones');
+                var _iteratorNormalCompletion = true;
+                var _didIteratorError = false;
+                var _iteratorError = undefined;
+
+                try {
+                    for (var _iterator = res.rows[0][Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                        var rs = _step.value;
+
+                        projects.show();
+                        $('a.csv1').show();
+                        var desc = '';
+                        for (var key in rs) {
+                            desc = desc + key + ': ' + rs[key];
+                        }
+                        desc = desc.substring(0, 64) + '...';
+                        projects.append(addResult(rs['项目名称'], desc, rs['确权区域ID']));
+                    }
+                } catch (err) {
+                    _didIteratorError = true;
+                    _iteratorError = err;
+                } finally {
+                    try {
+                        if (!_iteratorNormalCompletion && _iterator.return) {
+                            _iterator.return();
+                        }
+                    } finally {
+                        if (_didIteratorError) {
+                            throw _iteratorError;
+                        }
+                    }
+                }
+
+                var _iteratorNormalCompletion2 = true;
+                var _didIteratorError2 = false;
+                var _iteratorError2 = undefined;
+
+                try {
+                    for (var _iterator2 = res.rows[1][Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+                        var _rs = _step2.value;
+
+                        zones.show();
+                        $('a.csv2').show();
+                        var desc = '';
+                        for (var _key in _rs) {
+                            desc = desc + _key + ': ' + _rs[_key];
+                        }
+                        desc = desc.substring(0, 64) + '...';
+                        zones.append(addResult(_rs.id, desc, _rs.id));
+                    }
+                } catch (err) {
+                    _didIteratorError2 = true;
+                    _iteratorError2 = err;
+                } finally {
+                    try {
+                        if (!_iteratorNormalCompletion2 && _iterator2.return) {
+                            _iterator2.return();
+                        }
+                    } finally {
+                        if (_didIteratorError2) {
+                            throw _iteratorError2;
+                        }
+                    }
+                }
+
+                var links = resultDiv.find(".download-results");
+                var csvNames = res.csvs.split(',');
+
+                links.find('.csv1').attr('href', 'http://localhost:3000/csv/' + csvNames[0]);
+                links.find('.csv2').attr('href', 'http://localhost:3000/csv/' + csvNames[1]);
+                links.show();
+            });
+
+            function addResult(title, desc, popid) {
+                return $('<a>').attr({ 'class': 'result', 'data-popid': popid }).append($('<div>').attr('class', 'content').append($('<div>').attr('class', 'title').text(title)).append($('<div>').attr('class', 'description').text(desc))).click(function () {
+                    var featureId = $(this).data('popid');
+                    console.log(authLyrCtrl.inviewIndex);
+                    var flayr = authLyrs[authLyrCtrl.inviewIndex];
+                    var query = new Query();
+                    query.where = "FID = " + featureId;
+                    query.returnGeometry = true;
+                    query.outFields = ['*'];
+                    map.reorder(flayr, 100);
+                    flayr.queryFeatures(query).then(function (results) {
+                        console.log(results);
+                        view.popup.open({
+                            features: [results.features[0]],
+                            location: results.features[0].geometry.centroid
+                        });
+                    });
+                });
+            }
+        }
     });
 
     function showCoordinates(evt) {

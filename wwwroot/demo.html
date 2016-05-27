@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>the demo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/arcgis_js_api/library/4.0/4.0/esri/css/main.css">
+    <link rel="stylesheet" href="/semantic/semantic.min.css">
+    <link rel="stylesheet" href="stylesheets/dist/style.min.css">
+  </head>
+  <body>
+    <div class="index hidden">
+      <div id="nav-top">
+        <div id="bg"></div><img id="logo" src="logo.jpg" alt="logo">
+        <h1 id="page-title">国家海洋局东海分局用海项目信息系统</h1>
+      </div>
+      <div id="nav-left">
+        <div class="ui styled fluid accordion">
+          <div class="title active"><i class="icon dropdown"></i>图层选择</div>
+          <div class="content active">
+            <div class="ui toggle checkbox">
+              <input type="checkbox" name="zoningLyr" value="on" class="toggle toggle-zoning">
+              <label>功能区划</label>
+            </div>
+            <div class="ui toggle checkbox">
+              <input type="checkbox" name="authLyr" value="on" class="toggle toggle-auth">
+              <label>确权区域</label>
+            </div>
+            <div class="auth-selection">
+              <label>确权区域分类</label>
+              <select name="authLyr" class="ui dropdown small">
+                <option value="1">无</option>
+                <option value="2">配号来源</option>
+                <option value="3">用海一级类</option>
+                <option value="4">用海二级类</option>
+                <option value="5">用海方式</option>
+              </select>
+            </div>
+          </div>
+          <div class="title"><i class="icon dropdown"></i>区域类型统计与分析</div>
+          <div class="content">
+            <div id="statistics" class="menu">
+              <div class="item statistic"><i class="icon fork"></i><a data-type="source">配号来源</a></div>
+              <div class="item statistic"><i class="icon folder open"></i><a data-type="cata1">用海一级类</a></div>
+              <div class="item statistic"><i class="icon folder open outline"></i><a data-type="cata2">用海二级类</a></div>
+              <div class="item statistic"><i class="icon configure"></i><a data-type="method">用海方式</a></div>
+            </div>
+          </div>
+          <div class="title"><i class="icon dropdown"></i>项目状态统计与分析</div>
+          <div class="content">
+            <div id="status" class="menu">
+              <div class="item statistic"><i class="icon pie chart"></i><a data-type="进展情况">项目进展状态</a></div>
+              <div class="item statistic"><i class="icon area chart"></i><a data-type="填海情况">填海情况</a></div>
+              <div class="item statistic"><i class="icon bar chart"></i><a data-type="海域使用上报情况">海域使用上报情况</a></div>
+              <div class="item statistic"><i class="icon legal"></i><a data-type="违法情况">违法查处</a></div>
+              <div class="item statistic"><i class="icon bar chart"></i><a data-type="用海调整情况">用海调整情况</a></div>
+              <div class="item statistic"><i class="icon file text outline"></i><a data-type="确权发证情况">确权发证情况</a></div>
+              <div class="item statistic"><i class="icon bar chart"></i><a data-type="受益方上报情况">利益相关者情况</a></div>
+            </div>
+          </div>
+          <div class="title"><i class="icon dropdown"></i>统计报表</div>
+          <div class="content">
+            <div id="reports" class="menu">
+              <div class="item statistic"><i class="icon file excel outline"></i><a data-type="method">统计报表</a></div>
+              <div class="item statistic"><i class="icon bar chart"></i><a data-type="progress_status">项目进展情况</a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="map-container">
+        <div id="tools">
+          <div class="tool">
+            <div id="compass"></div>
+          </div>
+          <div class="tool">
+            <div id="home"></div>
+          </div>
+          <div class="tool">
+            <div id="basemap"></div>
+          </div>
+        </div>
+        <div id="searchDiv">
+          <div class="ui search">
+            <div class="ui input icon">
+              <input type="text" placeholder="搜索区域..." class="prompt"><i class="search icon"></i>
+            </div>
+            <div class="ui button basic">高级</div>
+            <div id="searchResult" class="results"></div>
+          </div>
+        </div>
+      </div>
+      <div id="bottom-left-view" class="hidden">
+        <div class="inner">
+          <div class="chartSelection">
+            <label>图表类型：</label>
+            <select name="chartType" class="ui dropdown small">
+              <option value="column2d">柱状</option>
+              <option value="column3d">柱状3D</option>
+              <option value="pie2d">饼状</option>
+              <option value="pie3d">饼状3D</option>
+              <option value="line">折线</option>
+            </select>
+            <div id="buttons">
+              <!--i.icon.undock.caret.up(title=undock)--><i onclick="$('#bottom-left-view').hide()" class="icon close"></i>
+            </div>
+          </div>
+          <div id="myChart" class="chart"></div>
+          <!--#myChart2.chart-->
+        </div>
+      </div>
+    </div>
+    <script src="/javascripts/dist/jquery-2.1.4.min.js"></script>
+    <script src="/arcgis_js_api/library/4.0/4.0/init.js"></script>
+    <!--script(src='https://js.arcgis.com/4.0/')-->
+    <script src="/javascripts/dist/chart.min.js"></script>
+    <script type="text/javascript" src="fusioncharts/js/fusioncharts.js"></script>
+    <script type="text/javascript" src="fusioncharts/js/themes/fusioncharts.theme.fint.js"></script>
+    <script src="/semantic/semantic.min.js"></script>
+    <script src="/javascripts/dist/core.babeled.min.js"></script>
+    <script src="/javascripts/dist/app.babeled.min.js"></script>
+  </body>
+</html>

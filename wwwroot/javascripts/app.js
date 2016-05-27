@@ -1,4 +1,12 @@
 $(document).ready(() => {
+    /*****
+    search results => popup => table
+    chart: view all; year accum; vase-vesa
+
+    */
+
+
+    //layer btn selected
     $("input[value='on']").click();
     $('.ui.dropdown').dropdown();
     $('.ui.accordion').accordion();
@@ -18,16 +26,29 @@ $(document).ready(() => {
             body.removeClass('full-screen');
             btn.find('.fa-compress').hide();
             btn.find('.fa-expand').show();
-            btn.attr('title','exit full screen');
+            btn.attr('title', 'exit full screen');
         } else {
             body.addClass('full-screen');
             btn.find('.fa-expand').hide();
             btn.find('.fa-compress').show();
-            btn.attr('title','expand full screen');
+            btn.attr('title', 'expand full screen');
         }
     })
 
 })
+
+
+function clearSearch() {
+    var $input = $('input[name="search"');
+    $input.val('');
+    var resultDiv = $('#searchResult.results');
+    resultDiv.removeClass('visible');
+    var links = resultDiv.find(".download-results");
+    links.hide();
+    $('i.icon.search').show();
+    $('i.icon.remove').hide();
+    $('.category.results').hide();
+}
 
 function showLegend() {
     $('#top-right-legend').addClass('shown');

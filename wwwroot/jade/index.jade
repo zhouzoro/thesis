@@ -99,27 +99,35 @@ html
 					#home
 				.tool
 					#basemap
-			#searchDiv
-				.ui.search
-					.ui.input.icon
-						input.prompt(type='text' placeholder='搜索...')
-						i.search.icon
-					.ui.button.basic 高级
-					#searchResult.results
-						.result
-							.content
-								.title USDH2I8H
-						.result
-							.content
-								.title USCWI4R8
-					.advanced
+			#searchDiv.ui.search.category
+				.ui.action.input
+					input.prompt(name='search' type='text' placeholder='搜索...')
+					.ui.icon.button
+						i.icon.search(onclick='searchForIt()')
+						i.icon.remove(onclick='clearSearch()')
+				.ui.button.basic 高级
+				.advanced
+					.ui.top.attached.tabular.menu
+						a.item.active 用海项目
+						a.item 确权区域
+					.ui.bottom.attached.tab.segment.active(data-tab='first')
+					.ui.bottom.attached.tab.segment(data-tab='second')
+				#searchResult.results.transition
+					.category.results.projects
+						.name 用海项目
+					.category.results.zones
+						.name 确权区域
+					//a.all-link.hidden 查看所有
+						span.result-count 0
+						span 结果
+					.download-results 下载结果:
+						a.csv1.hidden(download='项目信息.csv').download-link 项目信息.csv
+						a.csv2.hidden(download='区域信息.csv').download-link 区域信息.csv
 
 
 
 
 
-
-						
 		#bottom-left-view.hidden
 			.report-container.hidden
 			.chart-container.hidden

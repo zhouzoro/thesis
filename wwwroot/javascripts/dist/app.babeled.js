@@ -1,6 +1,12 @@
 'use strict';
 
 $(document).ready(function () {
+    /*****
+    search results => popup => table
+    chart: view all; year accum; vase-vesa
+      */
+
+    //layer btn selected
     $("input[value='on']").click();
     $('.ui.dropdown').dropdown();
     $('.ui.accordion').accordion();
@@ -29,6 +35,18 @@ $(document).ready(function () {
         }
     });
 });
+
+function clearSearch() {
+    var $input = $('input[name="search"');
+    $input.val('');
+    var resultDiv = $('#searchResult.results');
+    resultDiv.removeClass('visible');
+    var links = resultDiv.find(".download-results");
+    links.hide();
+    $('i.icon.search').show();
+    $('i.icon.remove').hide();
+    $('.category.results').hide();
+}
 
 function showLegend() {
     $('#top-right-legend').addClass('shown');
