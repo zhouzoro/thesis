@@ -70,7 +70,7 @@ div
 	#searchDiv
 		position: absolute
 		left: 68px
-		top: 16px
+		top: 12px
 		padding: 2px
 		//border-radius: 28px
 		border: 1px solid lightgray
@@ -83,6 +83,12 @@ div
 					display: none
 
 		#searchResult
+			.category.results
+				display: inline-block
+				padding: 4px
+				width: 38em
+				a.result
+					padding: 8px 12px
 			.category
 				display: none
 			.download-results
@@ -90,11 +96,28 @@ div
 				a
 					padding: 2px 16px
 					display: none
+	.advanced
+		display: none
+	.advanced.shown
+		display: block
+		position: absolute
+		top: 10px 
+		left: 456px
+		width: 384px
+		height: auto
+		background: white
+		z-index: 99
+		table
+			tr
+				td
+					padding: 4px 12px
+					
 #nav-top
 	width: $full-width
 	height: $nav-top-height
 	background-image: url('/bg01.png')
 	box-shadow: 0px 64px 64px -64px rgba(55,55,55,0.6)
+	transition: all 0.5s ease-out
 	img#logo
 		display: inline-block
 		width: 64px
@@ -118,15 +141,40 @@ div
 	padding: 16px 8px
 	z-index: 9
 	transition: all 0.5s ease-out
+	.ui.toggle.checkbox
+		border: 1px solid lightgray
+		border-radius: 5px
+		margin-bottom: 4px
 	.ui.styled.fluid.accordion
 		box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3)
 		.content
 			padding-left: 32px
 			.ui.toggle.checkbox
 				padding-bottom: 8px
+		.content
+			#status
+				.accordion
+					.title
+						padding: 8px 8px
+					.content
+						.vs-selection
+							margin-top: 4px
+							border: 1px solid lightgray
+							border-radius: 5px
+							width: 100%
+							padding: 4px 4px
+							.check-title
+								.symbol
+									float: left
+									width: 16px
+									height: 16px
+									border-radius: 8px
+
 	.item
 		padding: 4px 0px
-
+.ui.checkbox
+	display: block
+	padding: 4px 8px
 #top-right-legend
 	position: absolute
 	width: 264px
@@ -155,13 +203,14 @@ div
 	box-shadow: -4px 4px 12px -4px rgba(55,55,55,0.6)
 #bottom-left-view
 	position: absolute
-	//width: 484px
-	height: 358px
-	top: calc(100% - 378px)
+	width: 524px
+	height: 384px
+	top: calc(100% - 398px)
 	left: 256px
 	display: none
 	background: white
 	transition: all 0.5s ease-out
+	z-index: 99
 	//box-shadow: -4px 4px 12px -4px rgba(55,55,55,0.6)
 	.report-container,
 	.chart-container
@@ -173,17 +222,39 @@ div
 	.report-container
 		width: 324px
 	.chart-container
-		.chartSelection
-		#buttons
-			float: right
-			i
-				cursor: pointer
+		h3
+			text-align: center
+		.chart-Selection
+			a.chart-selection
+				padding: 2px 8px
+			.chart-selection.series-container
+				display: inline-block
+			.ui.dropdown.fluid
+				width: auto
+				display: inline-block
 		.chart
 			display: inline-block
+	#buttons
+		float: right
+		i
+			cursor: pointer
+			padding: 4px
+			margin-left: 4px
+			transition: all 0.1s
+		i:hover
+			transform: scale(1.2)
+		i.fa.fa-compress.compress
+			display: none
+td
+	a
+		margin-left: 8px
 
-#bottom-right-view.large
-	width: calc(100% - 256px)
-	box-shadow: none
+#bottom-left-view.large
+	width: 864px
+	height: 584px
+	left: calc(50% - 432px)
+	top: calc(50% - 264px)
+	box-shadow: 2px 2px 16px 0px rgba(66,66,66,0.4)
 
 #status > div
 	cursor: pointer
@@ -195,6 +266,31 @@ div
 .esri-popup-content
 	.hidden
 		display: none
+.projects
+	.ui.styled.fluid.accordion
+		.project
+			.content
+				a
+					padding: 0px 4px
+					margin-left: 4px
+					cursor: pointer
+
+
+#modal.modal
+	i.close
+		position: absolute
+		right: 0px
+		cursor: pointer
+	.content
+		a.enlarge
+			display: none
+		a.edit-project
+			cursor: pointer
+			margin-left: 8px
+			padding: 0px 4px
+			span
+				font-size: 0.8rem
+				margin-left: 4px
 
 body.full-screen
 	#map-container > div.esri-view-root > div.esri-ui > div.esri-ui-inner-container.esri-ui-corner-container > div.esri-ui-top-left.esri-ui-corner
@@ -211,6 +307,14 @@ body.full-screen
 	#nav-left
 		top: 0px
 		left: 0px
+	#nav-top
+		top: -128px
 	#bottom-left-view
 		left: 0px
 		top: calc(100% - 374px)
+	#bottom-left-view.large
+		width: 864px
+		height: 584px
+		left: calc(50% - 432px)
+		top: calc(50% - 264px)
+		box-shadow: 2px 2px 16px 0px rgba(66,66,66,0.4)

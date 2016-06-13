@@ -1,0 +1,15 @@
+#Software: Microsoft Internet Information Services 10.0
+#Version: 1.0
+#Date: 2016-05-28 00:04:13
+#Fields: date time s-ip cs-method cs-uri-stem cs-uri-query s-port cs-username c-ip cs(User-Agent) cs(Referer) sc-status sc-substatus sc-win32-status time-taken
+2016-05-28 00:04:13 192.168.155.1 GET /cgi-bin/luci/api/xqsystem/init_info - 80 - 192.168.155.4 okhttp/2.7.4 - 404 0 2 517
+#Software: Microsoft Internet Information Services 10.0
+#Version: 1.0
+#Date: 2016-05-28 15:26:18
+#Fields: date time s-ip cs-method cs-uri-stem cs-uri-query s-port cs-username c-ip cs(User-Agent) cs(Referer) sc-status sc-substatus sc-win32-status time-taken
+2016-05-28 15:26:18 192.168.155.1 GET /cgi-bin/luci/api/xqsystem/init_info - 80 - 192.168.155.5 okhttp/2.7.4 - 404 0 2 214
+#Software: Microsoft Internet Information Services 10.0
+#Version: 1.0
+#Date: 2016-05-28 16:36:23
+#Fields: date time s-ip cs-method cs-uri-stem cs-uri-query s-port cs-username c-ip cs(User-Agent) cs(Referer) sc-status sc-substatus sc-win32-status time-taken
+2016-05-28 16:36:23 192.168.155.1 GET /cgi-bin/luci/api/xqsystem/init_info - 80 - 192.168.155.5 okhttp/2.7.4 - 404 0 2 253

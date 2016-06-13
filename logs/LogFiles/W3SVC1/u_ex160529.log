@@ -1,0 +1,71 @@
+#Software: Microsoft Internet Information Services 10.0
+#Version: 1.0
+#Date: 2016-05-29 08:45:47
+#Fields: date time s-ip cs-method cs-uri-stem cs-uri-query s-port cs-username c-ip cs(User-Agent) cs(Referer) sc-status sc-substatus sc-win32-status time-taken
+2016-05-29 08:45:47 192.168.155.1 GET /cgi-bin/luci/api/xqsystem/init_info - 80 - 192.168.155.5 okhttp/2.7.4 - 404 0 2 255
+#Software: Microsoft Internet Information Services 10.0
+#Version: 1.0
+#Date: 2016-05-29 09:50:10
+#Fields: date time s-ip cs-method cs-uri-stem cs-uri-query s-port cs-username c-ip cs(User-Agent) cs(Referer) sc-status sc-substatus sc-win32-status time-taken
+2016-05-29 09:50:10 192.168.155.1 GET /cgi-bin/luci/api/xqsystem/init_info - 80 - 192.168.155.5 okhttp/2.7.4 - 404 0 2 152
+2016-05-29 09:52:27 192.168.155.1 GET /cgi-bin/luci/api/xqsystem/init_info - 80 - 192.168.155.5 okhttp/2.7.4 - 404 0 2 15
+#Software: Microsoft Internet Information Services 10.0
+#Version: 1.0
+#Date: 2016-05-29 12:09:13
+#Fields: date time s-ip cs-method cs-uri-stem cs-uri-query s-port cs-username c-ip cs(User-Agent) cs(Referer) sc-status sc-substatus sc-win32-status time-taken
+2016-05-29 12:09:13 192.168.155.1 GET /cgi-bin/luci/api/xqsystem/init_info - 80 - 192.168.155.5 okhttp/2.7.4 - 404 0 2 183
+#Software: Microsoft Internet Information Services 10.0
+#Version: 1.0
+#Date: 2016-05-29 14:57:59
+#Fields: date time s-ip cs-method cs-uri-stem cs-uri-query s-port cs-username c-ip cs(User-Agent) cs(Referer) sc-status sc-substatus sc-win32-status time-taken
+2016-05-29 14:57:59 180.160.4.50 GET / - 80 - 180.160.4.50 Mozilla/5.0+(Windows+NT+10.0;+Win64;+x64)+AppleWebKit/537.36+(KHTML,+like+Gecko)+Chrome/51.0.2704.63+Safari/537.36 - 200 0 0 128
+2016-05-29 14:57:59 180.160.4.50 GET /stylesheets/dist/fa.min.css - 80 - 180.160.4.50 Mozilla/5.0+(Windows+NT+10.0;+Win64;+x64)+AppleWebKit/537.36+(KHTML,+like+Gecko)+Chrome/51.0.2704.63+Safari/537.36 http://180.160.4.50/ 200 0 0 10
+2016-05-29 14:57:59 180.160.4.50 GET /arcgis_js_api/library/4.0/4.0/esri/css/main.css - 80 - 180.160.4.50 Mozilla/5.0+(Windows+NT+10.0;+Win64;+x64)+AppleWebKit/537.36+(KHTML,+like+Gecko)+Chrome/51.0.2704.63+Safari/537.36 http://180.160.4.50/ 200 0 0 13
+2016-05-29 14:57:59 180.160.4.50 GET /stylesheets/dist/style.min.css - 80 - 180.160.4.50 Mozilla/5.0+(Windows+NT+10.0;+Win64;+x64)+AppleWebKit/537.36+(KHTML,+like+Gecko)+Chrome/51.0.2704.63+Safari/537.36 http://180.160.4.50/ 200 0 0 9
+2016-05-29 14:57:59 180.160.4.50 GET /semantic/semantic.min.css - 80 - 180.160.4.50 Mozilla/5.0+(Windows+NT+10.0;+Win64;+x64)+AppleWebKit/537.36+(KHTML,+like+Gecko)+Chrome/51.0.2704.63+Safari/537.36 http://180.160.4.50/ 200 0 0 33
+2016-05-29 14:57:59 180.160.4.50 GET /fusioncharts/js/themes/fusioncharts.theme.fint.js - 80 - 180.160.4.50 Mozilla/5.0+(Windows+NT+10.0;+Win64;+x64)+AppleWebKit/537.36+(KHTML,+like+Gecko)+Chrome/51.0.2704.63+Safari/537.36 http://180.160.4.50/ 200 0 0 86
+2016-05-29 14:57:59 180.160.4.50 GET /javascripts/dist/jquery-2.1.4.min.js - 80 - 180.160.4.50 Mozilla/5.0+(Windows+NT+10.0;+Win64;+x64)+AppleWebKit/537.36+(KHTML,+like+Gecko)+Chrome/51.0.2704.63+Safari/537.36 http://180.160.4.50/ 200 0 0 142
+2016-05-29 14:57:59 180.160.4.50 GET /javascripts/dist/chart.min.js - 80 - 180.160.4.50 Mozilla/5.0+(Windows+NT+10.0;+Win64;+x64)+AppleWebKit/537.36+(KHTML,+like+Gecko)+Chrome/51.0.2704.63+Safari/537.36 http://180.160.4.50/ 200 0 0 166
+2016-05-29 14:57:59 180.160.4.50 GET /javascripts/dist/core.babeled.min.js - 80 - 180.160.4.50 Mozilla/5.0+(Windows+NT+10.0;+Win64;+x64)+AppleWebKit/537.36+(KHTML,+like+Gecko)+Chrome/51.0.2704.63+Safari/537.36 http://180.160.4.50/ 200 0 0 79
+2016-05-29 14:57:59 180.160.4.50 GET /javascripts/dist/app.babeled.min.js - 80 - 180.160.4.50 Mozilla/5.0+(Windows+NT+10.0;+Win64;+x64)+AppleWebKit/537.36+(KHTML,+like+Gecko)+Chrome/51.0.2704.63+Safari/537.36 http://180.160.4.50/ 200 0 0 73
+2016-05-29 14:57:59 180.160.4.50 GET /logo.jpg - 80 - 180.160.4.50 Mozilla/5.0+(Windows+NT+10.0;+Win64;+x64)+AppleWebKit/537.36+(KHTML,+like+Gecko)+Chrome/51.0.2704.63+Safari/537.36 http://180.160.4.50/ 200 0 0 66
+2016-05-29 14:57:59 180.160.4.50 GET /bg01.png - 80 - 180.160.4.50 Mozilla/5.0+(Windows+NT+10.0;+Win64;+x64)+AppleWebKit/537.36+(KHTML,+like+Gecko)+Chrome/51.0.2704.63+Safari/537.36 http://180.160.4.50/stylesheets/dist/style.min.css 200 0 0 73
+2016-05-29 14:57:59 180.160.4.50 GET /semantic/semantic.min.js - 80 - 180.160.4.50 Mozilla/5.0+(Windows+NT+10.0;+Win64;+x64)+AppleWebKit/537.36+(KHTML,+like+Gecko)+Chrome/51.0.2704.63+Safari/537.36 http://180.160.4.50/ 200 0 0 219
+2016-05-29 14:57:59 180.160.4.50 GET /fusioncharts/js/fusioncharts.js - 80 - 180.160.4.50 Mozilla/5.0+(Windows+NT+10.0;+Win64;+x64)+AppleWebKit/537.36+(KHTML,+like+Gecko)+Chrome/51.0.2704.63+Safari/537.36 http://180.160.4.50/ 200 0 0 302
+2016-05-29 14:57:59 180.160.4.50 GET /stylesheets/fonts/fontawesome-webfont.woff2 v=4.6.3 80 - 180.160.4.50 Mozilla/5.0+(Windows+NT+10.0;+Win64;+x64)+AppleWebKit/537.36+(KHTML,+like+Gecko)+Chrome/51.0.2704.63+Safari/537.36 http://180.160.4.50/stylesheets/dist/fa.min.css 200 0 0 7
+2016-05-29 14:57:59 180.160.4.50 GET /semantic/themes/default/assets/fonts/icons.woff2 - 80 - 180.160.4.50 Mozilla/5.0+(Windows+NT+10.0;+Win64;+x64)+AppleWebKit/537.36+(KHTML,+like+Gecko)+Chrome/51.0.2704.63+Safari/537.36 http://180.160.4.50/semantic/semantic.min.css 200 0 0 6
+2016-05-29 14:57:59 180.160.4.50 GET /arcgis_js_api/library/4.0/4.0/init.js - 80 - 180.160.4.50 Mozilla/5.0+(Windows+NT+10.0;+Win64;+x64)+AppleWebKit/537.36+(KHTML,+like+Gecko)+Chrome/51.0.2704.63+Safari/537.36 http://180.160.4.50/ 200 0 0 420
+2016-05-29 14:57:59 ::1 GET /arcgis_js_api/library/4.0/4.0/dojo/nls/dojo_en-us.js - 80 - ::1 Mozilla/5.0+(Windows+NT+10.0;+Win64;+x64)+AppleWebKit/537.36+(KHTML,+like+Gecko)+Chrome/51.0.2704.63+Safari/537.36 http://180.160.4.50/ 200 0 0 9
+2016-05-29 14:58:00 ::1 GET /arcgis_js_api/library/4.0/4.0/esri/layers/MapImageLayer.js - 80 - ::1 Mozilla/5.0+(Windows+NT+10.0;+Win64;+x64)+AppleWebKit/537.36+(KHTML,+like+Gecko)+Chrome/51.0.2704.63+Safari/537.36 http://180.160.4.50/ 200 0 0 16
+2016-05-29 14:58:00 ::1 GET /arcgis_js_api/library/4.0/4.0/esri/views/MapView.js - 80 - ::1 Mozilla/5.0+(Windows+NT+10.0;+Win64;+x64)+AppleWebKit/537.36+(KHTML,+like+Gecko)+Chrome/51.0.2704.63+Safari/537.36 http://180.160.4.50/ 200 0 0 66
+2016-05-29 14:58:00 ::1 GET /arcgis_js_api/library/4.0/4.0/esri/widgets/Legend.js - 80 - ::1 Mozilla/5.0+(Windows+NT+10.0;+Win64;+x64)+AppleWebKit/537.36+(KHTML,+like+Gecko)+Chrome/51.0.2704.63+Safari/537.36 http://180.160.4.50/ 200 0 0 19
+2016-05-29 14:58:00 ::1 GET /arcgis_js_api/library/4.0/4.0/esri/widgets/Home.js - 80 - ::1 Mozilla/5.0+(Windows+NT+10.0;+Win64;+x64)+AppleWebKit/537.36+(KHTML,+like+Gecko)+Chrome/51.0.2704.63+Safari/537.36 http://180.160.4.50/ 200 0 0 16
+2016-05-29 14:58:00 ::1 GET /arcgis_js_api/library/4.0/4.0/esri/widgets/Home/HomeViewModel.js - 80 - ::1 Mozilla/5.0+(Windows+NT+10.0;+Win64;+x64)+AppleWebKit/537.36+(KHTML,+like+Gecko)+Chrome/51.0.2704.63+Safari/537.36 http://180.160.4.50/ 200 0 0 16
+2016-05-29 14:58:00 ::1 GET /arcgis_js_api/library/4.0/4.0/esri/widgets/BasemapToggle.js - 80 - ::1 Mozilla/5.0+(Windows+NT+10.0;+Win64;+x64)+AppleWebKit/537.36+(KHTML,+like+Gecko)+Chrome/51.0.2704.63+Safari/537.36 http://180.160.4.50/ 200 0 0 19
+2016-05-29 14:58:00 ::1 GET /arcgis_js_api/library/4.0/4.0/esri/geometry/Circle.js - 80 - ::1 Mozilla/5.0+(Windows+NT+10.0;+Win64;+x64)+AppleWebKit/537.36+(KHTML,+like+Gecko)+Chrome/51.0.2704.63+Safari/537.36 http://180.160.4.50/ 200 0 0 14
+2016-05-29 14:58:00 ::1 GET /arcgis_js_api/library/4.0/4.0/esri/layers/GraphicsLayer.js - 80 - ::1 Mozilla/5.0+(Windows+NT+10.0;+Win64;+x64)+AppleWebKit/537.36+(KHTML,+like+Gecko)+Chrome/51.0.2704.63+Safari/537.36 http://180.160.4.50/ 200 0 0 15
+2016-05-29 14:58:00 ::1 GET /arcgis_js_api/library/4.0/4.0/dojo/resources/blank.gif - 80 - ::1 Mozilla/5.0+(Windows+NT+10.0;+Win64;+x64)+AppleWebKit/537.36+(KHTML,+like+Gecko)+Chrome/51.0.2704.63+Safari/537.36 http://180.160.4.50/ 200 0 0 3
+2016-05-29 14:58:00 ::1 GET /arcgis_js_api/library/4.0/4.0/esri/layers/DynamicLayer.js - 80 - ::1 Mozilla/5.0+(Windows+NT+10.0;+Win64;+x64)+AppleWebKit/537.36+(KHTML,+like+Gecko)+Chrome/51.0.2704.63+Safari/537.36 http://180.160.4.50/ 200 0 0 9
+2016-05-29 14:58:00 ::1 GET /arcgis_js_api/library/4.0/4.0/esri/layers/mixins/ArcGISDynamicService.js - 80 - ::1 Mozilla/5.0+(Windows+NT+10.0;+Win64;+x64)+AppleWebKit/537.36+(KHTML,+like+Gecko)+Chrome/51.0.2704.63+Safari/537.36 http://180.160.4.50/ 200 0 0 35
+2016-05-29 14:58:00 ::1 GET /arcgis_js_api/library/4.0/4.0/esri/widgets/Home/nls/Home.js - 80 - ::1 Mozilla/5.0+(Windows+NT+10.0;+Win64;+x64)+AppleWebKit/537.36+(KHTML,+like+Gecko)+Chrome/51.0.2704.63+Safari/537.36 http://180.160.4.50/ 200 0 0 36
+2016-05-29 14:58:00 ::1 GET /arcgis_js_api/library/4.0/4.0/dojox/gfx/matrix.js - 80 - ::1 Mozilla/5.0+(Windows+NT+10.0;+Win64;+x64)+AppleWebKit/537.36+(KHTML,+like+Gecko)+Chrome/51.0.2704.63+Safari/537.36 http://180.160.4.50/ 200 0 0 32
+2016-05-29 14:58:00 ::1 GET /arcgis_js_api/library/4.0/4.0/dojox/gfx.js - 80 - ::1 Mozilla/5.0+(Windows+NT+10.0;+Win64;+x64)+AppleWebKit/537.36+(KHTML,+like+Gecko)+Chrome/51.0.2704.63+Safari/537.36 http://180.160.4.50/ 200 0 0 34
+2016-05-29 14:58:00 ::1 GET /arcgis_js_api/library/4.0/4.0/esri/widgets/Legend/nls/Legend.js - 80 - ::1 Mozilla/5.0+(Windows+NT+10.0;+Win64;+x64)+AppleWebKit/537.36+(KHTML,+like+Gecko)+Chrome/51.0.2704.63+Safari/537.36 http://180.160.4.50/ 200 0 0 9
+2016-05-29 14:58:00 ::1 GET /arcgis_js_api/library/4.0/4.0/esri/widgets/Legend/LegendViewModel.js - 80 - ::1 Mozilla/5.0+(Windows+NT+10.0;+Win64;+x64)+AppleWebKit/537.36+(KHTML,+like+Gecko)+Chrome/51.0.2704.63+Safari/537.36 http://180.160.4.50/ 200 0 0 39
+2016-05-29 14:58:00 ::1 GET /arcgis_js_api/library/4.0/4.0/esri/widgets/BasemapToggle/BasemapToggleViewModel.js - 80 - ::1 Mozilla/5.0+(Windows+NT+10.0;+Win64;+x64)+AppleWebKit/537.36+(KHTML,+like+Gecko)+Chrome/51.0.2704.63+Safari/537.36 http://180.160.4.50/ 200 0 0 20
+2016-05-29 14:58:00 ::1 GET /arcgis_js_api/library/4.0/4.0/esri/symbols/support/gfxUtils.js - 80 - ::1 Mozilla/5.0+(Windows+NT+10.0;+Win64;+x64)+AppleWebKit/537.36+(KHTML,+like+Gecko)+Chrome/51.0.2704.63+Safari/537.36 http://180.160.4.50/ 200 0 0 57
+2016-05-29 14:58:00 ::1 GET /arcgis_js_api/library/4.0/4.0/esri/widgets/BasemapToggle/nls/BasemapToggle.js - 80 - ::1 Mozilla/5.0+(Windows+NT+10.0;+Win64;+x64)+AppleWebKit/537.36+(KHTML,+like+Gecko)+Chrome/51.0.2704.63+Safari/537.36 http://180.160.4.50/ 200 0 0 25
+2016-05-29 14:58:00 ::1 GET /arcgis_js_api/library/4.0/4.0/esri/geometry/support/geodesicUtils.js - 80 - ::1 Mozilla/5.0+(Windows+NT+10.0;+Win64;+x64)+AppleWebKit/537.36+(KHTML,+like+Gecko)+Chrome/51.0.2704.63+Safari/537.36 http://180.160.4.50/ 200 0 0 28
+2016-05-29 14:58:00 ::1 GET /arcgis_js_api/library/4.0/4.0/esri/widgets/Legend/support/ActiveLayerInfo.js - 80 - ::1 Mozilla/5.0+(Windows+NT+10.0;+Win64;+x64)+AppleWebKit/537.36+(KHTML,+like+Gecko)+Chrome/51.0.2704.63+Safari/537.36 http://180.160.4.50/ 200 0 0 14
+2016-05-29 14:58:00 ::1 GET /arcgis_js_api/library/4.0/4.0/esri/widgets/Legend/support/colorRampUtils.js - 80 - ::1 Mozilla/5.0+(Windows+NT+10.0;+Win64;+x64)+AppleWebKit/537.36+(KHTML,+like+Gecko)+Chrome/51.0.2704.63+Safari/537.36 http://180.160.4.50/ 200 0 0 10
+2016-05-29 14:58:00 ::1 GET /arcgis_js_api/library/4.0/4.0/esri/widgets/Legend/support/sizeRampUtils.js - 80 - ::1 Mozilla/5.0+(Windows+NT+10.0;+Win64;+x64)+AppleWebKit/537.36+(KHTML,+like+Gecko)+Chrome/51.0.2704.63+Safari/537.36 http://180.160.4.50/ 200 0 0 13
+2016-05-29 14:58:00 ::1 GET /arcgis_js_api/library/4.0/4.0/esri/core/numberUtils.js - 80 - ::1 Mozilla/5.0+(Windows+NT+10.0;+Win64;+x64)+AppleWebKit/537.36+(KHTML,+like+Gecko)+Chrome/51.0.2704.63+Safari/537.36 http://180.160.4.50/ 200 0 0 6
+2016-05-29 14:58:02 180.160.4.50 GET /arcgis_js_api/library/4.0/4.0/esri/fonts/avenir-next/Avenir_Next_W00_400.woff2 - 80 - 180.160.4.50 Mozilla/5.0+(Windows+NT+10.0;+Win64;+x64)+AppleWebKit/537.36+(KHTML,+like+Gecko)+Chrome/51.0.2704.63+Safari/537.36 http://180.160.4.50/arcgis_js_api/library/4.0/4.0/esri/css/main.css 200 0 0 8
+2016-05-29 14:58:02 180.160.4.50 GET /favicon.ico - 80 - 180.160.4.50 Mozilla/5.0+(Windows+NT+10.0;+Win64;+x64)+AppleWebKit/537.36+(KHTML,+like+Gecko)+Chrome/51.0.2704.63+Safari/537.36 http://180.160.4.50/ 404 0 2 13
+2016-05-29 14:58:03 ::1 GET /arcgis_js_api/library/4.0/4.0/esri/images/basemap/oceans.jpg - 80 - ::1 Mozilla/5.0+(Windows+NT+10.0;+Win64;+x64)+AppleWebKit/537.36+(KHTML,+like+Gecko)+Chrome/51.0.2704.63+Safari/537.36 http://180.160.4.50/ 200 0 0 8
+2016-05-29 14:58:03 ::1 GET /arcgis_js_api/library/4.0/4.0/esri/images/basemap/hybrid.jpg - 80 - ::1 Mozilla/5.0+(Windows+NT+10.0;+Win64;+x64)+AppleWebKit/537.36+(KHTML,+like+Gecko)+Chrome/51.0.2704.63+Safari/537.36 http://180.160.4.50/ 200 0 0 10
+#Software: Microsoft Internet Information Services 10.0
+#Version: 1.0
+#Date: 2016-05-29 23:06:59
+#Fields: date time s-ip cs-method cs-uri-stem cs-uri-query s-port cs-username c-ip cs(User-Agent) cs(Referer) sc-status sc-substatus sc-win32-status time-taken
+2016-05-29 23:06:59 192.168.155.1 GET /cgi-bin/luci/api/xqsystem/init_info - 80 - 192.168.155.5 okhttp/2.7.4 - 404 0 2 276

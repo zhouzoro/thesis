@@ -1,21 +1,223 @@
 $(document).ready(() => {
-    /*****
-    search results => popup => table
-    chart: view all; year accum; vase-vesa
-
-    */
-
 
     //layer btn selected
-    $("input[value='on']").click();
+    $(".toggle.checkbox.base-toggle").checkbox().checkbox('check');
     $('.ui.dropdown').dropdown();
     $('.ui.accordion').accordion();
+    $('.tabular.menu .item').tab();
+    $('.advanced-search.button').click(function() {
+        var btn = $('this');
+        var adv = $('#map-container .advanced');
+        if (adv.hasClass('shown')) {
+            adv.removeClass('shown');
+            btn.text('高级');
+        } else {
+            adv.addClass('shown');
+            $('a.item[data-tab="first"]').click();
+            btn.text('收起');
+        }
+    });
+    $('.toggle-chart.checkbox').checkbox().checkbox({
+        onChecked: function() {
+            $('#bottom-left-view').show();
+        },
+        onUnchecked: function() {
+            $('#bottom-left-view').hide();
+        }
+    });
 
+    var tableFields = {
+        projects: ['项目进展情况',
+            '填海情况',
+            '填海超面积情况',
+            '海域使用上报情况',
+            '动态监测情况',
+            '违法情况',
+            '用海调整情况',
+            '调整上报情况',
+            '调整上报审批情况',
+            '确权发证情况',
+            '受益方上报情况',
+            '受益方上报审批情况'
+        ],
+        authorizing: ['配号来源', '用海一级类', '用海二级类', '用海方式']
+    };
+
+    var chartController = function() {
+        var inviewData = 0; //inviewData=0 means data is single series, for normal chart, =1 means stacked chart
+        var data0 = []; //data0 is normal chart data
+        var data1 = {}; //data1 is stacked chart data
+        var table = ''; //database table in use
+        var mainField = '';
+        var secondField = '';
+        var dataSrc0 = {};
+        var dataSrc1 = {};
+        var chartData = {};
+        var chartType = '';
+        var container = 'myChart';
+        var width = 500;
+        var height = 300;
+
+        function changeContainer(contnr) {
+            container = contnr;
+            showChart();
+        }
+
+        function changeSize(w, h) {
+            width = w;
+            height = h;
+            showChart();
+        }
+
+        function renderChart(field, tb) {
+            dataSrc0 = {};
+            chartData = {};
+            table = tb;
+            mainField = field;
+            secondField = '';
+            chartType = 'column2d';
+            var qstr = 'SELECT `' + field + '` as label, count(`' + field + '` = `' + field + '`) as value FROM gis1.' + tb + ' group by `' + field + '`';
+            $.get('/mysql/exq?qs=' + qstr, function(res) {
+                data0 = res;
+                dataSrc0 = new dataSrc(field + '数量统计');
+                showChart();
+            })
+        }
+
+        function showChart(type) {
+            chartType = type ? type : chartType;
+            chartData = {
+                events: {
+                    "chartClick": function(evt, dat) {
+                        console.log(evt);
+                        console.log(dat);
+                    },
+                    "dataLabelClick": function(evt, dat) {
+                        console.log(evt);
+                        console.log(dat);
+                    },
+                }
+            };
+            if (chartType.lastIndexOf('stacked') === 0) {
+                chartData = data1;
+                chartData.chart = dataSrc1[chartType];
+            } else {
+                chartData.data = data0;
+                chartData.chart = dataSrc0[chartType];
+
+            };
+
+            FusionCharts.ready(function() {
+                var newChart = new FusionCharts({
+                    "type": chartType,
+                    "renderAt": container,
+                    "width": width,
+                    "height": height,
+                    "dataFormat": "json",
+                    "dataSource": chartData
+                });
+                newChart.render();
+            })
+        }
+
+        function switchType(type) {
+            if (type !== chartType) {
+                chartType = type;
+                if (chartType.lastIndexOf('stacked') === 0) {
+                    if (secondField == '') {
+                        for (let i in tableFields[table]) {
+                            if (tableFields[table][i] == mainField) {
+                                secondField = tableFields[table][(i + 1) % (tableFields[table].length)];
+                                $('select[name=series]').dropdown('set selected', secondField);
+                                break;
+                            }
+                        }
+                        $.get('/mysql/get_stacked_data?field1=' + mainField + '&field2=' + secondField + '&tb=' + table, function(res) {
+                            data1 = res;
+                            dataSrc1 = new stackedMeta(mainField + '按' + secondField + '分类统计', mainField);
+                            showChart();
+                        });
+                    }
+                    var tempField = $('select[name=series]').val();
+                    if (secondField === tempField) {
+                        showChart();
+                    } else {
+                        $.get('/mysql/get_stacked_data?field1=' + mainField + '&field2=' + secondField + '&tb=' + table, function(res) {
+                            data1 = res;
+                            dataSrc1 = new stackedMeta(mainField + '按' + secondField + '分类统计', mainField);
+                            showChart();
+                            secondField = tempField;
+                        })
+                    }
+                } else {
+                    showChart();
+                }
+            }
+
+        }
+
+        function switchSrc(field2) {
+            if (secondField !== field2 && mainField !== field2) {
+                secondField = field2;
+                $.get('/mysql/get_stacked_data?field1=' + mainField + '&field2=' + secondField + '&tb=' + table, function(res) {
+                    data1 = res;
+                    dataSrc1 = new stackedMeta(mainField + '按' + secondField + '分类统计', mainField);
+                    showChart();
+                })
+            }
+        }
+
+        return {
+            renderChart: renderChart,
+            switchType: switchType,
+            switchSrc: switchSrc,
+            changeContainer: changeContainer,
+            changeSize: changeSize
+        }
+    }();
+    $('.toggle-chart.checkbox').checkbox().checkbox('uncheck');
     //click show charts
-    $('#status > div > a').click(function() {
+    $('.toggle-chart.checkbox').checkbox().checkbox({
+        onChecked: function() {
+            $('#bottom-left-view').show();
+            $('#myChart.chart').html('<div class="ui segment"><div class="ui active inverted dimmer"><div class="ui loader"></div></div><p></p></div>');
+
+            var field = $(this).data('type');
+            $('.chart-selection.series.auth').hide();
+            $('.chart-selection.series.proj').show();
+            $('.series-container').hide();
+            $('select[name=chartType]').dropdown('set selected', 'column2d');
+            chartController.renderChart(field, 'projects');
+        },
+        onUnchecked: function() {
+            $('#bottom-left-view').hide();
+        }
+    });
+
+    $('.item.statistic.auth').click(function() {
+        $('#bottom-left-view').show();
+        $('#myChart.chart').html('<div class="ui segment"><div class="ui active inverted dimmer"><div class="ui loader"></div></div><p></p></div>');
         var field = $(this).data('type');
-        var qstr = 'SELECT `' + field + '` as label, count(`' + field + '` = `' + field + '`) as value FROM gis1.authorizing group by `' + field + '`';
-        createChart(qstr, field);
+        $('.chart-selection.series.proj').hide();
+        $('.chart-selection.series.auth').show();
+        $('.series-container').hide();
+        $('select[name=chartType]').dropdown('set selected', 'column2d');
+        chartController.renderChart(field, 'authorizing');
+    });
+
+    $('select[name=chartType]').change(function() {
+        var type = $(this).val()
+        if (type.lastIndexOf('stacked') === 0) {
+            $('.series-container').show();
+        } else {
+            $('.series-container').hide();
+        }
+        chartController.switchType(type);
+    });
+
+
+    $('select[name=series]').change(function() {
+        chartController.switchSrc($(this).val());
     });
 
     //click expand full screen
@@ -34,7 +236,22 @@ $(document).ready(() => {
             btn.attr('title', 'expand full screen');
         }
     })
+    $('#bottom-left-view #buttons i.fa.fa-expand.expand').click(enlargeChart);
+    $('#bottom-left-view #buttons i.fa.fa-compress.compress').click(restoreChart);
 
+    function restoreChart() {
+        $('#bottom-left-view').removeClass('large');
+        chartController.changeSize(500, 300);
+        $(this).hide();
+        $('#bottom-left-view #buttons i.fa.fa-expand.expand').show()
+    }
+
+    function enlargeChart() {
+        $('#bottom-left-view').addClass('large');
+        chartController.changeSize(840, 500);
+        $(this).hide();
+        $('#bottom-left-view #buttons i.fa.fa-compress.compress').show()
+    }
 })
 
 
@@ -50,83 +267,18 @@ function clearSearch() {
     $('.category.results').hide();
 }
 
-function showLegend() {
-    $('#top-right-legend').addClass('shown');
-    $('.show-legend').css('display', 'none');
-    $('.hide-legend').css('display', 'inline-block');
-}
-
-function hideLegend() {
-    $('#top-right-legend').removeClass('shown');
-    $('.hide-legend').css('display', 'none');
-    $('.show-legend').css('display', 'inline-block');
-}
-
-function createChart(qstr, title) {
-    $('#bottom-left-view').show();
-    $('.chart-container').show();
-    $.get('http://localhost:3000/exq?qs=' + qstr, function(res) {
-
-
-        var data = res;
-        /*for (let key in res[0]) {
-            data.push({
-                "label": key,
-                "value": res[0][key]
-            })
-        }*/
-
-        var tempSrc = new dataSrc(title, data);
-        var newChart = new fChart(title, tempSrc, "myChart");
-        newChart.startup();
-
-    })
-
-}
-
-function fChart(title, dataSrc, container, initType = 'column2d') {
-    this.show = function(chartType) {
-
-        FusionCharts.ready(function() {
-            var tempData = {
-                data: dataSrc.data,
-                events: {
-                    "chartClick": function(evt, dat) {
-                        console.log(evt);
-                        console.log(dat);
-                    },
-                    "dataLabelClick": function(evt, dat) {
-                        console.log(evt);
-                        console.log(dat);
-                    },
-                }
-            };
-            tempData["chart"] = dataSrc[chartType];
-            var newChart = new FusionCharts({
-                "type": chartType,
-                "renderAt": container,
-                "width": "500",
-                "height": "300",
-                "dataFormat": "json",
-                "dataSource": tempData
-            });
-
-            newChart.render();
-        })
+function stackedMeta(title, xname) {
+    this.stackedcolumn2d = {
+        "caption": title,
+        "xAxisname": xname,
+        "yAxisName": "数量",
+        "showSum": "1",
+        "theme": "fint"
     };
-    this.startup = function() {
-        this.show(initType);
-        var $selectChart = $('select[name=chartType]');
-        $selectChart.off('change');
-        $selectChart.val(initType);
-        $selectChart.change(() => {
-            this.show($selectChart.val());
-        });
-
-    };
+    this.stackedcolumn3d = this.stackedcolumn2d;
 }
 
-function dataSrc(title, data) {
+function dataSrc(title) {
     this.column2d = {
         "caption": title,
         "yAxisName": "数量",
@@ -147,26 +299,8 @@ function dataSrc(title, data) {
         "useDataPlotColorForLabels": "1",
         "theme": "fint"
     };
-    this.column3d = {
-        "caption": title,
-        "yAxisName": "数量",
-        "theme": "fint"
-    };
-    this.pie3d = {
-        "caption": title,
-        "showBorder": "0",
-        "use3DLighting": "0",
-        "enableSmartLabels": "0",
-        "startingAngle": "310",
-        "showLabels": "0",
-        "showPercentValues": "1",
-        "showLegend": "1",
-        "centerLabelBold": "1",
-        "showTooltip": "0",
-        "decimals": "0",
-        "useDataPlotColorForLabels": "1",
-        "theme": "fint"
-    };
+    this.column3d = this.column2d;
+    this.pie3d = this.pie2d;
     this.line2d = {
         "caption": title,
         "yAxisName": "数量",
@@ -193,49 +327,87 @@ function dataSrc(title, data) {
         "xAxisLineColor": "#999999",
         "showAlternateHGridColor": "0"
     };
-    this.data = data;
 }
 
-function toggleEdit() {
-    var editBtn = $(this);
-    var submitBtn = editBtn.next('.button.submit');
 
+
+function showProjects() {
+    var popup = $('.esri-popup-renderer-text.esri-popup-renderer-content-element');
+    var link = popup.find('.projects-link');
+    popup.html('<div class="ui segment"><div class="ui active inverted dimmer"><div class="ui loader"></div></div><p></p></div>');
+
+    var url = '/mysql/get_projects?zone=' + link.data('zone');
+    if (link.data('field')) {
+        url += '&field=' + link.data('field') + '&val=' + link.data('val');
+    };
+    $.get(url, function(htmlStr) {
+        if (htmlStr == '') {
+            popup.html('该区域没有项目信息');
+            return;
+        }
+        popup.html(htmlStr);
+        if (link.data('field')) {
+            $('h1.esri-title').append(': ' + link.data('val') + '项目');
+        };
+        $('.projects .ui.styled.fluid.accordion').accordion();
+        $('.projects .content .edit-project').click(startEdit);
+        $('.content a.enlarge').click(function() {
+            showProj($(this).data('id'));
+        });
+    })
 }
+
+function showProj(id) {
+    $.get('/mysql/project?id=' + id, function(html) {
+        $('#modal').html('<i class="close fa fa-remove" />');
+        $('#modal').append(html);
+        $('#modal').modal('show');
+        $('.modal .content .edit-project').click(startEdit);
+    })
+}
+
+function deleteProject() {
+    $('#modal .content').html('<div class="ui segment"><div class="ui active inverted dimmer"><div class="ui loader"></div></div><p></p></div>');
+    $.get($(this.data('href')), function(res) {
+        if (res.ok) {
+            $('#modal .loader').text('信息已删除');
+
+        } else {
+            $('#modal .loader').text('删除时发生错误');
+        }
+
+    })
+}
+
+
 
 function startEdit() {
-    var editBtn = $(this);
-    var container = editBtn.parent('.popup-content-custom');
-    editBtn.addClass('hidden');
-    container.find('.in-edit').removeClass('hidden');
-    $('td.display').addClass('hidden');
-    $('td.input').removeClass('hidden');
-}
+    var url = '/mysql/edit_project?id=' + $(this).data('id');
+    $('#modal .content').html('<div class="ui segment"><div class="ui active inverted dimmer"><div class="ui loader"></div></div><p></p></div>');
 
-function cancelEdit() {
-    var container = $(this).parent('.popup-content-custom');
-    var editBtn = container.find('.edit');
-    container.find('.in-edit').addClass('hidden');
-    editBtn.removeClass('hidden');
-    $('td.input').addClass('hidden');
-    $('td.display').removeClass('hidden');
-}
+    $.get(url, function(res) {
 
-function submitEdit() {
-    var xhr = new XMLHttpRequest();
-    xhr.withCredentials = false;
-    xhr.open('POST', '/update');
+        $('#modal .content').html(res);
+        $('.ui.dropdown').dropdown();
+        $('#modal').modal('show');
+        $('.save-project').click(function() {
+            var id = $(this.data('id'));
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', '/mysql/edit_project？id=' + id);
 
-    xhr.onload = function() {
-        var json = JSON.parse(xhr.responseText);
-        hero.css({ 'background': 'url("http://' + window.location.host + json.location + '")', 'background-size': 'cover' });
-        $('.input-hero-img').val(json.location).change();
-        //label.removeClass('pct').addClass('btn').text('change');
-        $('.temp-input').remove();
-    };
-    //xhr.upload.addEventListener("progress", updateProgress, false);
-    var frm = $(this).next('form')[0];
-    var formData = new FormData(frm);
-    var fid = $(this).data('id');
-    formData.append('id', fid);
-    xhr.send(formData);
+            xhr.onload = function() {
+                var res = JSON.parse(xhr.responseText);
+                if (res.ok) {
+                    $.get('/mysql/project?id=' + res.id, function(html) {
+                        $('#modal .content').html($(html).find('.content'));
+                        $('.modal .content .edit-project').click(startEdit);
+                    })
+                }
+            };
+            var formData = new FormData($('form.project')[0]);
+            xhr.send(formData);
+        })
+
+    })
+
 }

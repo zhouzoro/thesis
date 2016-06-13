@@ -1,7 +1,7 @@
 doctype html
 html
 	head
-		title the map
+		title 用海项目信息系统——国家海洋局东海分局
 		meta(charset='utf-8')
 		meta(name='viewport' content='width=device-width, initial-scale=1')
 		link(rel='stylesheet' href='/arcgis_js_api/library/4.0/4.0/esri/css/main.css')
@@ -19,11 +19,11 @@ html
 					i.icon.dropdown
 					|图层选择
 				.content.active
-					.ui.toggle.checkbox
-						input.toggle.toggle-zoning(type='checkbox' name='zoningLyr' value='on')
+					.zone.ui.toggle.checkbox.base-toggle
+						input.toggle.toggle-zoning(type='checkbox' name='zoningLyr')
 						label 功能区划
-					.ui.toggle.checkbox
-						input.toggle.toggle-auth(type='checkbox' name='authLyr' value='on')
+					.auth.ui.toggle.checkbox.base-toggle
+						input.toggle.toggle-auth(type='checkbox' name='authLyr')
 						label 确权区域
 					.auth-selection
 						label 确权区域分类
@@ -38,44 +38,43 @@ html
 					|区域类型统计与分析
 				.content
 					#statistics.menu
-						.item.statistic
+						.item.statistic.auth.cursor-pointer(data-type='配号来源')
 							i.icon.fork
-							a(data-type='source') 配号来源
-						.item.statistic
+							a 配号来源
+						.item.statistic.auth.cursor-pointer(data-type='用海一级类')
 							i.icon.folder.open
-							a(data-type='cata1') 用海一级类
-						.item.statistic
+							a 用海一级类
+						.item.statistic.auth.cursor-pointer(data-type='用海二级类')
 							i.icon.folder.open.outline
-							a(data-type='cata2') 用海二级类
-						.item.statistic
+							a 用海二级类
+						.item.statistic.auth.cursor-pointer(data-type='用海方式')
 							i.icon.configure
-							a(data-type='method') 用海方式
+							a 用海方式
 				.title
 					i.icon.dropdown
-					|项目状态统计与分析
+					|项目状态统计与可视化
 				.content
 					#status.menu
-						.item.statistic
-							i.icon.pie.chart
-							a(data-type='进展情况') 项目进展状态
-						.item.statistic
-							i.icon.area.chart
-							a(data-type='填海情况') 填海情况
-						.item.statistic
-							i.icon.bar.chart
-							a(data-type='海域使用上报情况') 海域使用上报情况
-						.item.statistic
-							i.icon.legal
-							a(data-type='违法情况') 违法查处
-						.item.statistic
-							i.icon.bar.chart
-							a(data-type='用海调整情况') 用海调整情况
-						.item.statistic
-							i.icon.file.text.outline
-							a(data-type='确权发证情况') 确权发证情况
-						.item.statistic
-							i.icon.bar.chart
-							a(data-type='受益方上报情况') 利益相关者情况
+						.accordion
+							-var dd={'项目进展情况':['开工','竣工','验收'],'填海情况':['填海','未填海'],'海域使用上报情况':['已上报','未上报'],'违法情况':['合法','违法'],'用海调整情况':['有调整','无调整'],'确权发证情况':['已发证','未发证'],'受益方上报情况':['已上报','未上报']}
+							each val, key in dd
+								.title.item.statistic.proj(data-type= key)
+									i.icon.pie.chart
+									a= key
+								.content
+									.ui.toggle.toggle-chart.checkbox
+										input(type='checkbox' name='chart' data-type= key)
+										label 统计图表
+									.vs-selection(data-field=key) 
+										label.check-title 可视化图层选择
+										.ui.checkbox.allin
+											input(type='checkbox' value='全部')
+											label.check-title 全部
+										each val2, index in val
+											.ui.checkbox(data-val=val2 data-field=key )
+												input(type='checkbox' value=val2 data-field=key )
+												label.check-title= val2
+													span.symbol
 				.title
 					i.icon.dropdown
 					|统计报表
@@ -105,14 +104,10 @@ html
 					.ui.icon.button
 						i.icon.search(onclick='searchForIt()')
 						i.icon.remove(onclick='clearSearch()')
-				.ui.button.basic 高级
-				.advanced
-					.ui.top.attached.tabular.menu
-						a.item.active 用海项目
-						a.item 确权区域
-					.ui.bottom.attached.tab.segment.active(data-tab='first')
-					.ui.bottom.attached.tab.segment(data-tab='second')
-				#searchResult.results.transition
+				.advanced-search.ui.button.basic 高级
+				
+
+				#searchResult.results.transition.aligned
 					.category.results.projects
 						.name 用海项目
 					.category.results.zones
@@ -123,27 +118,91 @@ html
 					.download-results 下载结果:
 						a.csv1.hidden(download='项目信息.csv').download-link 项目信息.csv
 						a.csv2.hidden(download='区域信息.csv').download-link 区域信息.csv
+			.advanced
+				-var projFieldValues = {'项目进展情况': ['开工', '竣工', '验收'],'填海情况': ['填海', '未填海'],'填海超面积情况': ['正常', '超面积'],'海域使用上报情况': ['已上报', '未上报'],'动态监测情况': ['已监测', '未监测'],'违法情况': ['合法', '违法'],'用海调整情况': ['有调整', '无调整'],'调整上报情况': ['已上报', '未上报'],'调整上报审批情况': ['已通过', '未通过'],'确权发证情况': ['已发证', '未发证'],'受益方上报情况': ['已上报', '未上报'],'受益方上报审批情况': ['已通过', '未通过']}
+				form#search
+					.ui.top.attached.tabular.menu
+						a.item(data-tab="first") 用海项目
+						a.item(data-tab="second") 确权区域
+					.ui.bottom.attached.tab.segment(data-tab="first")
+						table.ui.table.celled.striped
+							tbody
+								tr
+									td 项目名称
+									td
+										.ui.input.small
+											input(type='text' name='项目名称')
+								tr
+									td 确权区域ID
+									td
+										.ui.input.small
+											input(type='text' name='确权区域ID')
+								each val, key in projFieldValues
+									tr
+										td= key
+										td
+											select.ui.dropdown.fluid(name=key)
+												each val2, index in val
+													option(value=val2)= val2
+					.ui.bottom.attached.tab.segment(data-tab="second")
+						table.ui.table.celled.striped
+							tbody
+								tr
+									td 配号来源
+									td
+										select.ui.dropdown.fluid(name='配号来源')
+											option(value='初始登记')= '初始登记'
+											option(value='变更登记')= '变更登记'
+								tr
+									td 用海一级类
+									td
+										.ui.input.small 用海一级类
+											input(type='text' name='用海一级类')
+								tr
+									td 用海二级类
+									td
+										.ui.input.small 用海二级类
+											input(type='text' name='用海二级类')
+								tr
+									td 用海方式
+									td
+										.ui.input.small 用海方式
+											input(type='text' name='用海方式')
 
 
 
 
-
-		#bottom-left-view.hidden
-			.report-container.hidden
+		#bottom-left-view
+			#buttons
+				i.fa.fa-expand.expand(title="放大")
+				i.fa.fa-compress.compress(title="缩小")
+				i.icon.close(title=close onclick="$('#bottom-left-view').hide()")
 			.chart-container.hidden
-				.chartSelection
-					label 图表类型：
-					select.ui.dropdown.small(name='chartType')
-						option(value='column2d') 柱状
-						option(value='column3d') 柱状3D
-						option(value='pie2d') 饼状
-						option(value='pie3d') 饼状3D
-						option(value='line') 折线
-					#buttons
-						//i.icon.undock.caret.up(title=undock)
-						i.icon.close(title=close onclick="$('#bottom-left-view').hide()")
+				-var chartTypes={column2d:'柱状',column3d:'柱状3D',stackedcolumn2d:'层叠柱状',stackedcolumn3d:'层叠柱状3D',pie2d:'饼状',pie3d:'饼状3D',line:'折线'}
+				-var projFields={'项目进展情况':['开工','竣工','验收'],'填海情况':['填海','未填海'],'填海超面积情况':['正常','超面积'],'海域使用上报情况':['已上报','未上报'],'动态监测情况':['已监测','未监测'],'违法情况':['合法','违法'],'用海调整情况':['有调整','无调整'],'调整上报情况':['已上报','未上报'],'调整上报审批情况':['已通过','未通过'],'确权发证情况':['已发证','未发证'],'受益方上报情况':['已上报','未上报'],'受益方上报审批情况':['已通过','未通过']}
+				-var authFields=['配号来源','用海一级类','用海二级类','用海方式']
+				.chart-Selection
+					a.chart-selection.chart-type
+						label 图表类型：
+						select.ui.dropdown.fluid(name='chartType')
+							each val, key in chartTypes
+								option(value=key)= val
+					.chart-selection.series-container
+						a.chart-selection.series.proj
+							label 二级分类：
+							select.ui.dropdown.fluid(name='series')
+								each val, key in projFields
+									option(value=key)= key
+						a.chart-selection.series.auth
+							label 二级分类：
+							select.ui.dropdown.fluid(name='series')
+								each val, key in authFields
+									option(value=val)= val
 				#myChart.chart
 				//#myChart2.chart
+			
+		#modal.ui.modal
+			i.close.fa.fa-remove
 		script(src='/javascripts/dist/jquery-2.1.4.min.js')
 		script(src='/arcgis_js_api/library/4.0/4.0/init.js')
 		//script(src='https://js.arcgis.com/4.0/')

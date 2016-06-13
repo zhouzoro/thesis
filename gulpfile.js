@@ -26,60 +26,58 @@ var livereload = require('gulp-livereload');
 var del = require('del');
 var babel = require("gulp-babel");
 var jade = require('gulp-jade');
+var plumber = require('gulp-plumber')
 
 function renderJade(evt) {
-    if (evt.type == 'changed') {
-        return gulp.src(evt.path)
-            .pipe(jade({
-                pretty: true
-            }))
-            .pipe(gulp.dest('./wwwroot'))
-            .pipe(notify({
-                message: 'Jade task complete: ' + evt.path.substring(evt.path.lastIndexOf('\\'))
-            }))
-    }
+    return gulp.src(evt.path)
+        .pipe(plumber())
+        .pipe(jade({
+            pretty: true
+        }))
+        .pipe(gulp.dest('./wwwroot'))
+        .pipe(notify({
+            message: 'Jade task complete: ' + evt.path.substring(evt.path.lastIndexOf('\\'))
+        }))
 }
 
+
 function renderSass(evt) {
-    if (evt.type == 'changed') {
-        return sass(evt.path, {
-                style: 'expanded'
-            })
-            .pipe(autoprefixer({
-                browsers: ['last 2 versions'],
-                cascade: false
-            }))
-            .pipe(gulp.dest(evt.path.substring(0, evt.path.lastIndexOf('\\')) + '\\dist'))
-            .pipe(rename({
-                suffix: '.min'
-            }))
-            .pipe(cssnano())
-            .pipe(gulp.dest(evt.path.substring(0, evt.path.lastIndexOf('\\')) + '\\dist'))
-            .pipe(notify({
-                message: 'Sass task complete: ' + evt.path.substring(evt.path.lastIndexOf('\\'))
-            }))
-    }
+    return sass(evt.path,{
+            style: 'expanded'
+        })
+        .pipe(autoprefixer({
+            browsers: ['last 4 versions'],
+            cascade: false
+        }))
+        .pipe(gulp.dest(evt.path.substring(0, evt.path.lastIndexOf('\\')) + '\\dist'))
+        .pipe(rename({
+            suffix: '.min'
+        }))
+        .pipe(cssnano())
+        .pipe(gulp.dest(evt.path.substring(0, evt.path.lastIndexOf('\\')) + '\\dist'))
+        .pipe(notify({
+            message: 'Sass task complete: ' + evt.path.substring(evt.path.lastIndexOf('\\'))
+        }))
 }
 
 function renderJS(evt) {
-    if (evt.type == 'changed') {
-        return gulp.src(evt.path)
-            .pipe(sourcemaps.init())
-            .pipe(rename({
-                suffix: '.babeled'
-            }))
-            .pipe(babel())
-            .pipe(gulp.dest(evt.path.substring(0, evt.path.lastIndexOf('\\')) + '\\dist'))
-            .pipe(rename({
-                suffix: '.min'
-            }))
-            .pipe(uglify())
-            .pipe(sourcemaps.write(evt.path.substring(0, evt.path.lastIndexOf('\\')) + '\\maps'))
-            .pipe(gulp.dest(evt.path.substring(0, evt.path.lastIndexOf('\\')) + '\\dist'))
-            .pipe(notify({
-                message: 'Babel task complete: ' + evt.path.substring(evt.path.lastIndexOf('\\'))
-            }))
-    }
+    gulp.src(evt.path)
+        .pipe(plumber())
+        .pipe(sourcemaps.init())
+        .pipe(rename({
+            suffix: '.babeled'
+        }))
+        .pipe(babel())
+        .pipe(gulp.dest(evt.path.substring(0, evt.path.lastIndexOf('\\')) + '\\dist'))
+        .pipe(rename({
+            suffix: '.min'
+        }))
+        .pipe(uglify())
+        .pipe(sourcemaps.write(evt.path.substring(0, evt.path.lastIndexOf('\\')) + '\\maps'))
+        .pipe(gulp.dest(evt.path.substring(0, evt.path.lastIndexOf('\\')) + '\\dist'))
+        .pipe(notify({
+            message: 'Babel task complete: ' + evt.path.substring(evt.path.lastIndexOf('\\'))
+        }))
 }
 
 function renderIMG(evt) {

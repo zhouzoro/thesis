@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>the map</title>
+    <title>用海项目信息系统——国家海洋局东海分局</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/arcgis_js_api/library/4.0/4.0/esri/css/main.css">
@@ -18,12 +18,12 @@
       <div class="ui styled fluid accordion">
         <div class="title active"><i class="icon dropdown"></i>图层选择</div>
         <div class="content active">
-          <div class="ui toggle checkbox">
-            <input type="checkbox" name="zoningLyr" value="on" class="toggle toggle-zoning">
+          <div class="zone ui toggle checkbox base-toggle">
+            <input type="checkbox" name="zoningLyr" class="toggle toggle-zoning">
             <label>功能区划</label>
           </div>
-          <div class="ui toggle checkbox">
-            <input type="checkbox" name="authLyr" value="on" class="toggle toggle-auth">
+          <div class="auth ui toggle checkbox base-toggle">
+            <input type="checkbox" name="authLyr" class="toggle toggle-auth">
             <label>确权区域</label>
           </div>
           <div class="auth-selection">
@@ -40,22 +40,175 @@
         <div class="title"><i class="icon dropdown"></i>区域类型统计与分析</div>
         <div class="content">
           <div id="statistics" class="menu">
-            <div class="item statistic"><i class="icon fork"></i><a data-type="source">配号来源</a></div>
-            <div class="item statistic"><i class="icon folder open"></i><a data-type="cata1">用海一级类</a></div>
-            <div class="item statistic"><i class="icon folder open outline"></i><a data-type="cata2">用海二级类</a></div>
-            <div class="item statistic"><i class="icon configure"></i><a data-type="method">用海方式</a></div>
+            <div data-type="配号来源" class="item statistic auth cursor-pointer"><i class="icon fork"></i><a>配号来源</a></div>
+            <div data-type="用海一级类" class="item statistic auth cursor-pointer"><i class="icon folder open"></i><a>用海一级类</a></div>
+            <div data-type="用海二级类" class="item statistic auth cursor-pointer"><i class="icon folder open outline"></i><a>用海二级类</a></div>
+            <div data-type="用海方式" class="item statistic auth cursor-pointer"><i class="icon configure"></i><a>用海方式</a></div>
           </div>
         </div>
-        <div class="title"><i class="icon dropdown"></i>项目状态统计与分析</div>
+        <div class="title"><i class="icon dropdown"></i>项目状态统计与可视化</div>
         <div class="content">
           <div id="status" class="menu">
-            <div class="item statistic"><i class="icon pie chart"></i><a data-type="进展情况">项目进展状态</a></div>
-            <div class="item statistic"><i class="icon area chart"></i><a data-type="填海情况">填海情况</a></div>
-            <div class="item statistic"><i class="icon bar chart"></i><a data-type="海域使用上报情况">海域使用上报情况</a></div>
-            <div class="item statistic"><i class="icon legal"></i><a data-type="违法情况">违法查处</a></div>
-            <div class="item statistic"><i class="icon bar chart"></i><a data-type="用海调整情况">用海调整情况</a></div>
-            <div class="item statistic"><i class="icon file text outline"></i><a data-type="确权发证情况">确权发证情况</a></div>
-            <div class="item statistic"><i class="icon bar chart"></i><a data-type="受益方上报情况">利益相关者情况</a></div>
+            <div class="accordion">
+              <div data-type="项目进展情况" class="title item statistic proj"><i class="icon pie chart"></i><a>项目进展情况</a></div>
+              <div class="content">
+                <div class="ui toggle toggle-chart checkbox">
+                  <input type="checkbox" name="chart" data-type="项目进展情况">
+                  <label>统计图表</label>
+                </div>
+                <div data-field="项目进展情况" class="vs-selection"> 
+                  <label class="check-title">可视化图层选择</label>
+                  <div class="ui checkbox allin">
+                    <input type="checkbox" value="全部">
+                    <label class="check-title">全部</label>
+                  </div>
+                  <div data-val="开工" data-field="项目进展情况" class="ui checkbox">
+                    <input type="checkbox" value="开工" data-field="项目进展情况">
+                    <label class="check-title">开工<span class="symbol"></span></label>
+                  </div>
+                  <div data-val="竣工" data-field="项目进展情况" class="ui checkbox">
+                    <input type="checkbox" value="竣工" data-field="项目进展情况">
+                    <label class="check-title">竣工<span class="symbol"></span></label>
+                  </div>
+                  <div data-val="验收" data-field="项目进展情况" class="ui checkbox">
+                    <input type="checkbox" value="验收" data-field="项目进展情况">
+                    <label class="check-title">验收<span class="symbol"></span></label>
+                  </div>
+                </div>
+              </div>
+              <div data-type="填海情况" class="title item statistic proj"><i class="icon pie chart"></i><a>填海情况</a></div>
+              <div class="content">
+                <div class="ui toggle toggle-chart checkbox">
+                  <input type="checkbox" name="chart" data-type="填海情况">
+                  <label>统计图表</label>
+                </div>
+                <div data-field="填海情况" class="vs-selection"> 
+                  <label class="check-title">可视化图层选择</label>
+                  <div class="ui checkbox allin">
+                    <input type="checkbox" value="全部">
+                    <label class="check-title">全部</label>
+                  </div>
+                  <div data-val="填海" data-field="填海情况" class="ui checkbox">
+                    <input type="checkbox" value="填海" data-field="填海情况">
+                    <label class="check-title">填海<span class="symbol"></span></label>
+                  </div>
+                  <div data-val="未填海" data-field="填海情况" class="ui checkbox">
+                    <input type="checkbox" value="未填海" data-field="填海情况">
+                    <label class="check-title">未填海<span class="symbol"></span></label>
+                  </div>
+                </div>
+              </div>
+              <div data-type="海域使用上报情况" class="title item statistic proj"><i class="icon pie chart"></i><a>海域使用上报情况</a></div>
+              <div class="content">
+                <div class="ui toggle toggle-chart checkbox">
+                  <input type="checkbox" name="chart" data-type="海域使用上报情况">
+                  <label>统计图表</label>
+                </div>
+                <div data-field="海域使用上报情况" class="vs-selection"> 
+                  <label class="check-title">可视化图层选择</label>
+                  <div class="ui checkbox allin">
+                    <input type="checkbox" value="全部">
+                    <label class="check-title">全部</label>
+                  </div>
+                  <div data-val="已上报" data-field="海域使用上报情况" class="ui checkbox">
+                    <input type="checkbox" value="已上报" data-field="海域使用上报情况">
+                    <label class="check-title">已上报<span class="symbol"></span></label>
+                  </div>
+                  <div data-val="未上报" data-field="海域使用上报情况" class="ui checkbox">
+                    <input type="checkbox" value="未上报" data-field="海域使用上报情况">
+                    <label class="check-title">未上报<span class="symbol"></span></label>
+                  </div>
+                </div>
+              </div>
+              <div data-type="违法情况" class="title item statistic proj"><i class="icon pie chart"></i><a>违法情况</a></div>
+              <div class="content">
+                <div class="ui toggle toggle-chart checkbox">
+                  <input type="checkbox" name="chart" data-type="违法情况">
+                  <label>统计图表</label>
+                </div>
+                <div data-field="违法情况" class="vs-selection"> 
+                  <label class="check-title">可视化图层选择</label>
+                  <div class="ui checkbox allin">
+                    <input type="checkbox" value="全部">
+                    <label class="check-title">全部</label>
+                  </div>
+                  <div data-val="合法" data-field="违法情况" class="ui checkbox">
+                    <input type="checkbox" value="合法" data-field="违法情况">
+                    <label class="check-title">合法<span class="symbol"></span></label>
+                  </div>
+                  <div data-val="违法" data-field="违法情况" class="ui checkbox">
+                    <input type="checkbox" value="违法" data-field="违法情况">
+                    <label class="check-title">违法<span class="symbol"></span></label>
+                  </div>
+                </div>
+              </div>
+              <div data-type="用海调整情况" class="title item statistic proj"><i class="icon pie chart"></i><a>用海调整情况</a></div>
+              <div class="content">
+                <div class="ui toggle toggle-chart checkbox">
+                  <input type="checkbox" name="chart" data-type="用海调整情况">
+                  <label>统计图表</label>
+                </div>
+                <div data-field="用海调整情况" class="vs-selection"> 
+                  <label class="check-title">可视化图层选择</label>
+                  <div class="ui checkbox allin">
+                    <input type="checkbox" value="全部">
+                    <label class="check-title">全部</label>
+                  </div>
+                  <div data-val="有调整" data-field="用海调整情况" class="ui checkbox">
+                    <input type="checkbox" value="有调整" data-field="用海调整情况">
+                    <label class="check-title">有调整<span class="symbol"></span></label>
+                  </div>
+                  <div data-val="无调整" data-field="用海调整情况" class="ui checkbox">
+                    <input type="checkbox" value="无调整" data-field="用海调整情况">
+                    <label class="check-title">无调整<span class="symbol"></span></label>
+                  </div>
+                </div>
+              </div>
+              <div data-type="确权发证情况" class="title item statistic proj"><i class="icon pie chart"></i><a>确权发证情况</a></div>
+              <div class="content">
+                <div class="ui toggle toggle-chart checkbox">
+                  <input type="checkbox" name="chart" data-type="确权发证情况">
+                  <label>统计图表</label>
+                </div>
+                <div data-field="确权发证情况" class="vs-selection"> 
+                  <label class="check-title">可视化图层选择</label>
+                  <div class="ui checkbox allin">
+                    <input type="checkbox" value="全部">
+                    <label class="check-title">全部</label>
+                  </div>
+                  <div data-val="已发证" data-field="确权发证情况" class="ui checkbox">
+                    <input type="checkbox" value="已发证" data-field="确权发证情况">
+                    <label class="check-title">已发证<span class="symbol"></span></label>
+                  </div>
+                  <div data-val="未发证" data-field="确权发证情况" class="ui checkbox">
+                    <input type="checkbox" value="未发证" data-field="确权发证情况">
+                    <label class="check-title">未发证<span class="symbol"></span></label>
+                  </div>
+                </div>
+              </div>
+              <div data-type="受益方上报情况" class="title item statistic proj"><i class="icon pie chart"></i><a>受益方上报情况</a></div>
+              <div class="content">
+                <div class="ui toggle toggle-chart checkbox">
+                  <input type="checkbox" name="chart" data-type="受益方上报情况">
+                  <label>统计图表</label>
+                </div>
+                <div data-field="受益方上报情况" class="vs-selection"> 
+                  <label class="check-title">可视化图层选择</label>
+                  <div class="ui checkbox allin">
+                    <input type="checkbox" value="全部">
+                    <label class="check-title">全部</label>
+                  </div>
+                  <div data-val="已上报" data-field="受益方上报情况" class="ui checkbox">
+                    <input type="checkbox" value="已上报" data-field="受益方上报情况">
+                    <label class="check-title">已上报<span class="symbol"></span></label>
+                  </div>
+                  <div data-val="未上报" data-field="受益方上报情况" class="ui checkbox">
+                    <input type="checkbox" value="未上报" data-field="受益方上报情况">
+                    <label class="check-title">未上报<span class="symbol"></span></label>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
         <div class="title"><i class="icon dropdown"></i>统计报表</div>
@@ -85,43 +238,240 @@
           <input name="search" type="text" placeholder="搜索..." class="prompt">
           <div class="ui icon button"><i onclick="searchForIt()" class="icon search"></i><i onclick="clearSearch()" class="icon remove"></i></div>
         </div>
-        <div class="ui button basic">高级</div>
-        <div class="advanced">
-          <div class="ui top attached tabular menu"><a class="item active">用海项目</a><a class="item">确权区域</a></div>
-          <div data-tab="first" class="ui bottom attached tab segment active"></div>
-          <div data-tab="second" class="ui bottom attached tab segment"></div>
-        </div>
-        <div id="searchResult" class="results transition">
+        <div class="advanced-search ui button basic">高级</div>
+        <div id="searchResult" class="results transition aligned">
           <div class="category results projects">
             <div class="name">用海项目</div>
           </div>
           <div class="category results zones">
             <div class="name">确权区域</div>
-          </div><a class="all-link hidden">查看所有<span class="result-count">0</span><span>结果</span></a>
-          <div class="download-results">下载:<a download="项目信息.csv" class="csv1 hidden download-link">项目信息.csv</a><a download="区域信息.csv" class="csv2 hidden download-link">区域信息.csv</a></div>
+          </div>
+          <!--a.all-link.hidden 查看所有
+          span.result-count 0
+          span 结果
+          -->
+          <div class="download-results">下载结果:<a download="项目信息.csv" class="csv1 hidden download-link">项目信息.csv</a><a download="区域信息.csv" class="csv2 hidden download-link">区域信息.csv</a></div>
         </div>
       </div>
-    </div>
-    <div id="bottom-left-view" class="hidden">
-      <div class="report-container hidden"></div>
-      <div class="chart-container hidden">
-        <div class="chartSelection">
-          <label>图表类型：</label>
-          <select name="chartType" class="ui dropdown small">
-            <option value="column2d">柱状</option>
-            <option value="column3d">柱状3D</option>
-            <option value="pie2d">饼状</option>
-            <option value="pie3d">饼状3D</option>
-            <option value="line">折线</option>
-          </select>
-          <div id="buttons">
-            <!--i.icon.undock.caret.up(title=undock)--><i onclick="$('#bottom-left-view').hide()" class="icon close"></i>
+      <div class="advanced">
+        <form id="search">
+          <div class="ui top attached tabular menu"><a data-tab="first" class="item">用海项目</a><a data-tab="second" class="item">确权区域</a></div>
+          <div data-tab="first" class="ui bottom attached tab segment">
+            <table class="ui table celled striped">
+              <tbody>
+                <tr>
+                  <td>项目名称</td>
+                  <td>
+                    <div class="ui input small">
+                      <input type="text" name="项目名称">
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>确权区域ID</td>
+                  <td>
+                    <div class="ui input small">
+                      <input type="text" name="确权区域ID">
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>项目进展情况</td>
+                  <td>
+                    <select name="项目进展情况" class="ui dropdown fluid">
+                      <option value="开工">开工</option>
+                      <option value="竣工">竣工</option>
+                      <option value="验收">验收</option>
+                    </select>
+                  </td>
+                </tr>
+                <tr>
+                  <td>填海情况</td>
+                  <td>
+                    <select name="填海情况" class="ui dropdown fluid">
+                      <option value="填海">填海</option>
+                      <option value="未填海">未填海</option>
+                    </select>
+                  </td>
+                </tr>
+                <tr>
+                  <td>填海超面积情况</td>
+                  <td>
+                    <select name="填海超面积情况" class="ui dropdown fluid">
+                      <option value="正常">正常</option>
+                      <option value="超面积">超面积</option>
+                    </select>
+                  </td>
+                </tr>
+                <tr>
+                  <td>海域使用上报情况</td>
+                  <td>
+                    <select name="海域使用上报情况" class="ui dropdown fluid">
+                      <option value="已上报">已上报</option>
+                      <option value="未上报">未上报</option>
+                    </select>
+                  </td>
+                </tr>
+                <tr>
+                  <td>动态监测情况</td>
+                  <td>
+                    <select name="动态监测情况" class="ui dropdown fluid">
+                      <option value="已监测">已监测</option>
+                      <option value="未监测">未监测</option>
+                    </select>
+                  </td>
+                </tr>
+                <tr>
+                  <td>违法情况</td>
+                  <td>
+                    <select name="违法情况" class="ui dropdown fluid">
+                      <option value="合法">合法</option>
+                      <option value="违法">违法</option>
+                    </select>
+                  </td>
+                </tr>
+                <tr>
+                  <td>用海调整情况</td>
+                  <td>
+                    <select name="用海调整情况" class="ui dropdown fluid">
+                      <option value="有调整">有调整</option>
+                      <option value="无调整">无调整</option>
+                    </select>
+                  </td>
+                </tr>
+                <tr>
+                  <td>调整上报情况</td>
+                  <td>
+                    <select name="调整上报情况" class="ui dropdown fluid">
+                      <option value="已上报">已上报</option>
+                      <option value="未上报">未上报</option>
+                    </select>
+                  </td>
+                </tr>
+                <tr>
+                  <td>调整上报审批情况</td>
+                  <td>
+                    <select name="调整上报审批情况" class="ui dropdown fluid">
+                      <option value="已通过">已通过</option>
+                      <option value="未通过">未通过</option>
+                    </select>
+                  </td>
+                </tr>
+                <tr>
+                  <td>确权发证情况</td>
+                  <td>
+                    <select name="确权发证情况" class="ui dropdown fluid">
+                      <option value="已发证">已发证</option>
+                      <option value="未发证">未发证</option>
+                    </select>
+                  </td>
+                </tr>
+                <tr>
+                  <td>受益方上报情况</td>
+                  <td>
+                    <select name="受益方上报情况" class="ui dropdown fluid">
+                      <option value="已上报">已上报</option>
+                      <option value="未上报">未上报</option>
+                    </select>
+                  </td>
+                </tr>
+                <tr>
+                  <td>受益方上报审批情况</td>
+                  <td>
+                    <select name="受益方上报审批情况" class="ui dropdown fluid">
+                      <option value="已通过">已通过</option>
+                      <option value="未通过">未通过</option>
+                    </select>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
+          <div data-tab="second" class="ui bottom attached tab segment">
+            <table class="ui table celled striped">
+              <tbody>
+                <tr>
+                  <td>配号来源</td>
+                  <td>
+                    <select name="配号来源" class="ui dropdown fluid">
+                      <option value="初始登记">初始登记</option>
+                      <option value="变更登记">变更登记</option>
+                    </select>
+                  </td>
+                </tr>
+                <tr>
+                  <td>用海一级类</td>
+                  <td>
+                    <div class="ui input small">用海一级类
+                      <input type="text" name="用海一级类">
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>用海二级类</td>
+                  <td>
+                    <div class="ui input small">用海二级类
+                      <input type="text" name="用海二级类">
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>用海方式</td>
+                  <td>
+                    <div class="ui input small">用海方式
+                      <input type="text" name="用海方式">
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div id="bottom-left-view">
+      <div id="buttons"><i title="放大" class="fa fa-expand expand"></i><i title="缩小" class="fa fa-compress compress"></i><i onclick="$('#bottom-left-view').hide()" class="icon close"></i></div>
+      <div class="chart-container hidden">
+        <div class="chart-Selection"><a class="chart-selection chart-type">
+            <label>图表类型：</label>
+            <select name="chartType" class="ui dropdown fluid">
+              <option value="column2d">柱状</option>
+              <option value="column3d">柱状3D</option>
+              <option value="stackedcolumn2d">层叠柱状</option>
+              <option value="stackedcolumn3d">层叠柱状3D</option>
+              <option value="pie2d">饼状</option>
+              <option value="pie3d">饼状3D</option>
+              <option value="line">折线</option>
+            </select></a>
+          <div class="chart-selection series-container"><a class="chart-selection series proj">
+              <label>二级分类：</label>
+              <select name="series" class="ui dropdown fluid">
+                <option value="项目进展情况">项目进展情况</option>
+                <option value="填海情况">填海情况</option>
+                <option value="填海超面积情况">填海超面积情况</option>
+                <option value="海域使用上报情况">海域使用上报情况</option>
+                <option value="动态监测情况">动态监测情况</option>
+                <option value="违法情况">违法情况</option>
+                <option value="用海调整情况">用海调整情况</option>
+                <option value="调整上报情况">调整上报情况</option>
+                <option value="调整上报审批情况">调整上报审批情况</option>
+                <option value="确权发证情况">确权发证情况</option>
+                <option value="受益方上报情况">受益方上报情况</option>
+                <option value="受益方上报审批情况">受益方上报审批情况</option>
+              </select></a><a class="chart-selection series auth">
+              <label>二级分类：</label>
+              <select name="series" class="ui dropdown fluid">
+                <option value="配号来源">配号来源</option>
+                <option value="用海一级类">用海一级类</option>
+                <option value="用海二级类">用海二级类</option>
+                <option value="用海方式">用海方式</option>
+              </select></a></div>
         </div>
         <div id="myChart" class="chart"></div>
         <!--#myChart2.chart-->
       </div>
     </div>
+    <div id="modal" class="ui modal"><i class="close fa fa-remove"></i></div>
     <script src="/javascripts/dist/jquery-2.1.4.min.js"></script>
     <script src="/arcgis_js_api/library/4.0/4.0/init.js"></script>
     <!--script(src='https://js.arcgis.com/4.0/')-->
